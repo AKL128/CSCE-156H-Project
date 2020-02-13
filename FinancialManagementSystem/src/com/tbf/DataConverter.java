@@ -22,7 +22,23 @@ public class DataConverter {
 				String id = tokens[1];
 				String label = tokens[2];
 				if(tokens[1].equals("D")) {
-					a = new Asset();
+					Double apr = tokens[3];
+					a = new DepositAccount(code, id, label, apr);
+				}
+				if(tokens[1].equals("S")) {
+					Double quarterlyDividend = tokens[3];
+					Double baseRateOfReturn = tokens[4];
+					Double betaMeasure = tokens[5];
+					String stockSymbol = tokens[6];
+					Double sharePrice = tokens[7];
+					a = new Stock(code, id, label, quarterlyDividend, baseRateOfReturn, betaMeasure, stockSymbol, sharePrice);
+				}
+				if(tokens[1].equals("P")) {
+					Double quarterlyDividend = tokens[3];
+					Double baseRateOfReturn = tokens[4];
+					Double baseOmegaMeasure = tokens[5];
+					Double totalValue = tokens[6];
+					a = new PrivateInvestment(code, id, label, quarterlyDividend, baseRateOfReturn, baseOmegaMeasure, totalValue);
 				}
 
 			}
