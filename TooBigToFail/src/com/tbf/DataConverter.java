@@ -54,10 +54,10 @@ public class DataConverter {
 		}
 		return result;
   }
-	public static List<Person> parseDataFile() {
+	public static List<Person> parseDataFile2() {
 		List<Person> result2 = new ArrayList<Person>();
 		File p = new File("data/Persons.dat");
-		Scanner s;
+		Scanner p;
 		try {
 			s = new Scanner(p);
 		} catch(FileNotFoundException fnfe) {
@@ -72,9 +72,19 @@ public class DataConverter {
 				String tokens[] = line.split(";");
 				String personCode = tokens[0];
 				String brokerData = tokens[1];
-				Name name = tokens[2];
-				Address address = tokens[3];
+				String PersonName[] = line.split(",");
+				String lastName = b.getLastName().setLastName(personName[0]);
+				String firstName = b.getFirstName().setFirstName(personName[1]);
+				Name name = new Name(lastName, firstName);
+				String addressData[] = line.split(",");
+				String street = b.getStreet().setStreet(addressData[0]);
+				String city = b.getCity.setCity(addressData[1]);
+				String state = b.getState().setState(addressData[2]);
+				int zip = b.getZip().setZip(addressData[3]);
+				String country = b.getCountry().setCountry(addressData[4]);
+				Address address = new Address(street, city, state, zip, country);
 				String email = tokens[4];
+				b = new Person(personCode, brokerData, name, address, email)
 				result2.add(b);
 			}
 		}
