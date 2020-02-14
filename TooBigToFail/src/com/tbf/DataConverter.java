@@ -52,41 +52,65 @@ public class DataConverter {
 				result.add(a);
 			}
 		}
-
 		return result;
-    }
-	
-	
+  }
+	public static List<Person> parseDataFile() {
+		List<Person> result2 = new ArrayList<Person>();
+		File p = new File("data/Persons.dat");
+		Scanner s;
+		try {
+			s = new Scanner(p);
+		} catch(FileNotFoundException fnfe) {
+			throw new RuntimeException(fnfe);
+		}
+		String firstLine = p.nextLine();
+		Double number = Double.parseDouble(firstLine);
+		for(int j; j < number; j++) {
+			String line = p.nextLine();
+			if(!line.trim().isEmpty()) {
+				Person a = null;
+				String tokens[] = line.split(";");
+				String personCode = tokens[0];
+				String brokerData = tokens[1];
+				Name name = tokens[2];
+				Address address = tokens[3];
+				String email = tokens[4];
+				result2.add(a);
+			}
+		}
+		return result2;
+	}
+
 	public static void main(String args[]) {
-		
+
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
 		List<Asset> port = parseDataFile();
-		
+
 		for(Asset a : port) {
 			String json = gson.toJson(a);
 			System.out.printf("%s\n", json);
 		}
-		
+
 		try {
 			File output = new File("data/Assets.json");
 			PrintWriter pw = new PrintWriter(output);
-			
+
 			for(Asset a : port) {
 				String json = gson.toJson(a);
 				pw.printf("%s\n", json);
 			}
-			
+
 			pw.close();
 		} catch(FileNotFoundException fnfe) {
 			throw new RuntimeException(fnfe);
 		}
-		
-		
-		
-		
 
-		
+
+
+
+
+
 	}
 
 }
