@@ -2,9 +2,13 @@ package com.tbf;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class DataConverter {
 	public static List<Asset> parseDataFile(){
@@ -54,22 +58,35 @@ public class DataConverter {
 	
 	
 	public static void main(String args[]) {
+		
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
 		List<Asset> port = parseDataFile();
-
-		StringBuilder sb = new StringBuilder();
 		
-		sb.append(String.format("%-8s %-20s %-10s %-30s %9s %9s %9s\n", 
-				"ID", "Name", "Type", "Title", "Gross", "Taxes", "Net"));
-
-		//for each employee
-//		for(Asset a : port) {
-//			//format their information
-//			sb.append(String.format("%-8s %-20s %-10s %-30s $%8.2f $%8.2f $%8.2f\n", 
-//					e.getId(), e.getFirstName(), e.getType(), e.getTitle(), e.getGrossPay(), e.getTaxes(), e.getNetPay())); //TODO: replace these
-//		}
+		for(Asset a : port) {
+			String json = gson.toJson(a);
+			System.out.printf("%s\n", json);
+		}
 		
-		System.out.println(sb);
+		try {
+			File output = new File("data/Assets.json");
+			PrintWriter pw = new PrintWriter(output);
+			
+			for(Asset a : port) {
+				String json = gson.toJson(a);
+				pw.printf("%s\n", json);
+			}
+			
+			pw.close();
+		} catch(FileNotFoundException fnfe) {
+			throw new RuntimeException(fnfe);
+		}
+		
+		
+		
+		
+
+		
 	}
 
 }
