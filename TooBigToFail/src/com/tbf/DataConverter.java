@@ -68,14 +68,14 @@ public class DataConverter {
 		for(int j; j < number; j++) {
 			String line = p.nextLine();
 			if(!line.trim().isEmpty()) {
-				Person a = null;
+				Person b = null;
 				String tokens[] = line.split(";");
 				String personCode = tokens[0];
 				String brokerData = tokens[1];
 				Name name = tokens[2];
 				Address address = tokens[3];
 				String email = tokens[4];
-				result2.add(a);
+				result2.add(b);
 			}
 		}
 		return result2;
@@ -106,10 +106,26 @@ public class DataConverter {
 			throw new RuntimeException(fnfe);
 		}
 
+		List<Person> port2 = parseDataFile();
 
+		for(Person b: port2) {
+			String json2 = gson.toJson(b);
+			System.out.printf("%s\n". json);
+		}
 
+		try {
+			File output2 = new File("data/Persons.json");
+			Printwriter pw2 = new PrintWriter(output2);
 
+			for(Person b: port2) {
+				String json2 = gson.toJson(b);
+				pw.printf("%s\n", json2);
+			}
 
+			pw.close();
+		} catch(FileNotFoundException fnfe) {
+			throw new RuntimeException(fnfe);
+		}
 
 	}
 
