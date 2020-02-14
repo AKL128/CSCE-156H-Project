@@ -4,11 +4,11 @@ public class Stock extends Asset{
 	private double quarterlyDividend;
 	private double baseRateOfReturn;
 	private double betaMeasure;
-	private double stockSymbol;
+	private String stockSymbol;
 	private double sharePrice;
 	
 	public Stock(String code, String id, String label, double quarterlyDividend
-			, double baseRateOfReturn, double betaMeasure, double stockSymbol, double sharePrice) {
+			, double baseRateOfReturn, double betaMeasure, String stockSymbol, double sharePrice) {
 		super(code, id, label);
 		this.quarterlyDividend = quarterlyDividend;
 		this.baseRateOfReturn = baseRateOfReturn;
@@ -29,7 +29,7 @@ public class Stock extends Asset{
 		return betaMeasure;
 	}
 	
-	public double getStockSymbol() {
+	public String getStockSymbol() {
 		return stockSymbol;
 	}
 	
