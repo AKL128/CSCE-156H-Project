@@ -4,10 +4,10 @@ public class Address {
 	private String street;
 	private String city;
 	private String state;
-	private int zip;
+	private String zip;
 	private String country;
 	
-	public Address(String steet, String city, String state, int zip, String coutnry) {
+	public Address(String street, String city, String state, String zip, String country) {
 		super();
 		this.street = street;
 		this.city = city;
@@ -28,11 +28,12 @@ public class Address {
 		return state;
 	}
 	
-	public int getZip() {
+	public String getZip() {
 		return zip;
 	}
 	
 	public String getCountry() {
 		return country;
 	}
+	
 }

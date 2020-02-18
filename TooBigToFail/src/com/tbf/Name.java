@@ -9,7 +9,7 @@ public class Name {
 		this.lastName = lastName;
 		this.firstName = firstName;
 	}
-	
+
 	public String getLastName() {
 		return lastName;
 	}
@@ -17,4 +17,5 @@ public class Name {
 	public String getFirstName() {
 		return firstName;
 	}
+	
 }
