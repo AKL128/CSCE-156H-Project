@@ -1,5 +1,9 @@
 package com.tbf;
+
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class DataConverter {
@@ -12,7 +16,8 @@ public class DataConverter {
 		} catch(FileNotFoundException fnfe) {
 			throw new RuntimeException(fnfe);
 		}
-		int number = s.hasNext();
+		String firstLine = s.nextLine();
+		double number = Double.parseDouble(firstLine);
 		for(int i=0; i < number; i++) {
 			String line = s.nextLine();
 			if(!line.trim().isEmpty()) {
@@ -22,22 +27,22 @@ public class DataConverter {
 				String id = tokens[1];
 				String label = tokens[2];
 				if(tokens[1].equals("D")) {
-					Double apr = tokens[3];
+					double apr = Double.parseDouble(tokens[3]);
 					a = new DepositAccount(code, id, label, apr);
 				}
 				if(tokens[1].equals("S")) {
-					Double quarterlyDividend = tokens[3];
-					Double baseRateOfReturn = tokens[4];
-					Double betaMeasure = tokens[5];
+					double quarterlyDividend = Double.parseDouble(tokens[3]);
+					double baseRateOfReturn = Double.parseDouble(tokens[4]);
+					double betaMeasure = Double.parseDouble(tokens[5]);
 					String stockSymbol = tokens[6];
-					Double sharePrice = tokens[7];
+					double sharePrice = Double.parseDouble(tokens[7]);
 					a = new Stock(code, id, label, quarterlyDividend, baseRateOfReturn, betaMeasure, stockSymbol, sharePrice);
 				}
 				if(tokens[1].equals("P")) {
-					Double quarterlyDividend = tokens[3];
-					Double baseRateOfReturn = tokens[4];
-					Double baseOmegaMeasure = tokens[5];
-					Double totalValue = tokens[6];
+					double quarterlyDividend = Double.parseDouble(tokens[3]);
+					double baseRateOfReturn = Double.parseDouble(tokens[4]);
+					double baseOmegaMeasure = Double.parseDouble(tokens[5]);
+					double totalValue = Double.parseDouble(tokens[6]);
 					a = new PrivateInvestment(code, id, label, quarterlyDividend, baseRateOfReturn, baseOmegaMeasure, totalValue);
 				}
 				result.add(a);
