@@ -40,11 +40,12 @@ public class DataConverter {
 					Double totalValue = tokens[6];
 					a = new PrivateInvestment(code, id, label, quarterlyDividend, baseRateOfReturn, baseOmegaMeasure, totalValue);
 				}
-
+				result.add(a);
 			}
 		}
 
+		return result;
+  }
 
-    }
 
 }
