@@ -4,15 +4,15 @@ public class PrivateInvestment extends Asset{
 	private double quarterlyDividend;
 	private double baseRateOfReturn;
 	private double baseOmegaMeasure;
-	private double value;
+	private double totalValue;
 	
 	public PrivateInvestment(String code, String id, String label, double quarterlyDividend
-							, double baseRateOfReturn, double baseOmegaMeasure, double value) {
+							, double baseRateOfReturn, double baseOmegaMeasure, double totalValue) {
 		super(code, id, label);
 		this.quarterlyDividend = quarterlyDividend;
 		this.baseRateOfReturn = baseRateOfReturn;
 		this.baseOmegaMeasure = baseOmegaMeasure;
-		this.value = value;
+		this.totalValue = totalValue;
 	}
 	
 	public double getQuarterlyDividend() {
@@ -27,7 +27,11 @@ public class PrivateInvestment extends Asset{
 		return baseOmegaMeasure;
 	}
 	
-	public double getValue() {
-		return value;
+	public double getTotalValue() {
+		return totalValue;
 	}
+	
+//	public double getAnnualReturn() {
+//		return (totalValue * baseRateOfReturn + (4 * quarterlyDividend));
+//	}
 }

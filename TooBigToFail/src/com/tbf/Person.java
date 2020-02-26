@@ -1,17 +1,22 @@
 package com.tbf;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Person {
 	private String personCode;
 	private String brokerData;
-	private Name name;
+	private String firstName;
+	private String lastName;
 	private Address address;
-	private String email;
+	private ArrayList<String> email;
 
-	public Person(String personCode, String brokerData, Name name, Address address, String email) {
+	public Person(String personCode, String brokerData, String firstName, String lastName, Address address, ArrayList<String> email) {
 		super();
 		this.personCode = personCode;
 		this.brokerData = brokerData;
-		this.name = name;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.address = address;
 		this.email = email;
 	}
@@ -20,39 +25,27 @@ public class Person {
 		return personCode;
 	}
 
-	public void setPersonCode(String newPersonCode) {
-		this.personCode = newPersonCode;
-	}
 
 	public String getBrokerData() {
 		return brokerData;
 	}
 
-	public void setBrokerData(String newBrokerData) {
-		this.brokerData = newBrokerData;
+	public String getFirstName() {
+		return firstName;
 	}
-
-	public Name getName() {
-		return name;
-	}
-
-	public void setName(Name newName) {
-		this.name = newName;
+	
+	public String getLastName() {
+		return lastName;
 	}
 
 	public Address getAddress() {
 		return address;
 	}
 
-	public void setAddress(Address newAddress) {
-		this.address = newAddress;
-	}
 
-	public String getEmail() {
+	public ArrayList<String> getEmail() {
 		return email;
 	}
 
-	public void setEmail(String newEmail) {
-		this.email = newEmail;
-	}
+
 }

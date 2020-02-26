@@ -34,7 +34,7 @@ public class Portfolio {
 		return beneficiary;
 	}
 
-	public ArrayList<Asset> getAsset() {
+	public ArrayList<Asset> getAssetList() {
 		return assetList;
 	}
 }

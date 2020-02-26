@@ -12,4 +12,8 @@ public class DepositAccount extends Asset{
 	public double getApr() {
 		return apr;
 	}
+	
+	public double getTotalBalance() {
+		return 0;
+	}
 }

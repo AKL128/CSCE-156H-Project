@@ -1,6 +1,6 @@
 package com.tbf;
 
-public abstract class Asset {
+public abstract class Asset implements AnnualReturn{
 	protected String code;
 	protected String id;
 	protected String label;
@@ -22,5 +22,19 @@ public abstract class Asset {
 
 	public String getLabel() {
 		return label;
+	}
+	
+	public double getAnnualReturn() {
+		return 0;
+	}
+	
+	public double getTotalBalance() {
+		return 0;
+	}
+	public double getShares() {
+		return 0;
+	}
+	public double getStake() {
+		return 0;
 	}
 }
