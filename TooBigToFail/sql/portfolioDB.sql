@@ -52,9 +52,9 @@ create table Asset(
 
 create table Portfolio (
   portCode int not null primary key auto_increment,
-  ownerId varchar(255),
-  managerId varchar(255),
-  beneficiaryId varchar(255)
+  ownerId int,
+  managerId int,
+  beneficiaryId int,
   foreign key (ownerId) references Person(personId),
   foreign key (managerId) references Person(personId),
   foreign key (beneficiaryId) references Person(personId)
