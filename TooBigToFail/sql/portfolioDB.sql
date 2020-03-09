@@ -4,12 +4,10 @@ drop table if exists Person;
 drop table if exists Address;
 drop table if exists State;
 drop table if exists Country;
-drop table if exists Stock;
-drop table if exists DepositAccount;
-drop table if exists PrivateInvestment;
+drop table if exists Asset;
 
 create table Person (
-  personId varchar(255) not null primary key auto_increment,
+  personId int not null primary key auto_increment,
   brokerData varchar(255) not null,
   firstName varchar(255),
   lastName varchar(255),
@@ -27,46 +25,33 @@ create table Address (
 )engine=InnoDB,collate=latin1_general_cs;
 
 create table State (
-  stateId varchar(255) not null primary key auto_increment,
+  stateId int not null primary key auto_increment,
   stateName varchar(255) not null
 )engine=InnoDB,collate=latin1_general_cs;
 
 create table Country (
-  countryId varchar(255) not null primary key auto_increment,
+  countryId int not null primary key auto_increment,
   countryName varchar(255) not null
 )engine=InnoDB,collate=latin1_general_cs;
 
-create table Stock (
-  assetId varchar(255) not null primary key auto_increment,
-  ownerId varchar(255),
+create table Asset(
+  assetId int not null primary key auto_increment,
+  assetCode varchar(255) not null,
+  assetType char not null,
+  assetLabel varchar(255) not null,
+  apr float,
+  balance float,
   quarterlyDividend float,
   baseRateOfReturn float,
   betaMeasure float,
   stockSymbol varchar(255),
   sharePrice float,
-  foreign key (ownerId) references Person(personId)
-)engine=InnoDB,collate=latin1_general_cs;
-
-create table DepositAccount (
-  assetId varchar(255) not null primary key auto_increment,
-  ownerId varchar(255),
-  apr float,
-  balance float,
-  foreign key (ownerId) references Person(personId)
-)engine=InnoDB,collate=latin1_general_cs;
-
-create table PrivateInvestment (
-  assetId varchar(255) not null primary key auto_increment,
-  ownerId varchar(255),
-  quarterlyDividend float,
-  baseRateOfReturn float,
   baseOmegaMeasure float,
-  totalValue float,
-  foreign key (ownerId) references Person(personId)
+  totalValue float
 )engine=InnoDB,collate=latin1_general_cs;
 
 create table Portfolio (
-  portCode varchar(255) not null primary key auto_increment,
+  portCode int not null primary key auto_increment,
   ownerId varchar(255),
   managerId varchar(255),
   beneficiaryId varchar(255)
