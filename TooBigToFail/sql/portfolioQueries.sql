@@ -1,0 +1,2 @@
+-- This file contains queries for retrieving data stored in the tables
+-- in our database.
