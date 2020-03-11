@@ -12,7 +12,7 @@ create table Person (
   firstName varchar(255),
   lastName varchar(255),
   addressId int not null,
-  emailId varchar(255) not null
+  emailId int not null
 )engine=InnoDB,collate=latin1_general_cs;
 
 create table Address (
@@ -36,6 +36,7 @@ create table Country (
 
 create table Asset(
   assetId int not null primary key auto_increment,
+  ownerId int,
   assetCode varchar(255) not null,
   assetType char not null,
   assetLabel varchar(255) not null,
@@ -47,7 +48,8 @@ create table Asset(
   stockSymbol varchar(255),
   sharePrice float,
   baseOmegaMeasure float,
-  totalValue float
+  totalValue float,
+  foreign key (ownerId) references Person(personId)
 )engine=InnoDB,collate=latin1_general_cs;
 
 create table Portfolio (
@@ -145,7 +147,14 @@ insert into Asset (assetId, assetCode, assetType, assetLabel, apr, balance, quar
 insert into Asset (assetId, assetCode, assetType, assetLabel, apr, balance, quarterlyDividend, baseRateOfReturn, betaMeasure, stockSymbol, sharePrice, baseOmegaMeasure, totalValue) values (430, 'LS30qQV5', 'P', 'Wordify', null, 8041050.18, 34.4, null, null, null, 0.03922, 9126317.0);
 
 --- Portfolios
-
+insert into Portfolio (portCode, ownerId, managerId, beneficiaryId) values (501, 1, 2, null); 
+insert into Portfolio (portCode, ownerId, managerId, beneficiaryId) values (502, 3, 4, null); 
+insert into Portfolio (portCode, ownerId, managerId, beneficiaryId) values (503, 5, 1, null); 
+insert into Portfolio (portCode, ownerId, managerId, beneficiaryId) values (504, 6, 7, null); 
+insert into Portfolio (portCode, ownerId, managerId, beneficiaryId) values (505, 8, 9, null); 
+insert into Portfolio (portCode, ownerId, managerId, beneficiaryId) values (506, 10, 11, null); 
+insert into Portfolio (portCode, ownerId, managerId, beneficiaryId) values (507, 12, 14, null); 
+insert into Portfolio (portCode, ownerId, managerId, beneficiaryId) values (508, 15, 16, null); 
 
 
 
