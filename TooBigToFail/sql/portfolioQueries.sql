@@ -16,7 +16,7 @@ INSERT INTO Email (personId, emailName) VALUES ((SELECT personId FROM Person WHE
 												, 'AddedEmail@gmail.com');
 
 -- 4
-UPDATE Email SET emailName = "changedEmail@what.com"
+UPDATE Email SET emailName = "changedEmail@what.com" 
 WHERE emailId = 500 AND emailName = 'bcalcutf@shutterfly.com';
 
 -- 5
@@ -45,11 +45,11 @@ WHERE p.firstName = 'Brand' AND p.lastName = 'Calcut';
 -- 9
 INSERT INTO Asset (assetCode, assetType, assetLabel, apr, balance, quarterlyDividend, baseRateOfReturn, betaMeasure, stockSymbol, sharePrice, baseOmegaMeasure, totalValue) values
 	('assetCode123', 'S', 'THE STONK', null, 120000.35, 63.02, 0.244, 50, 'STONK', 10000.57, null, null);
-
+    
 -- 10
 INSERT INTO Portfolio (portCode, ownerId, managerId, beneficiaryId) values
-	('P999', 2, 3, 4);
-
+	('P999', 2, 500, 3);
+    
 -- 11
 INSERT INTO PortfolioAsset (portfolioId, assetId) values
 	((SELECT portfolioId FROM Portfolio WHERE portCode = 'PZ002'),(SELECT assetId FROM Asset WHERE assetCode = 'zUcSIYPE'));
