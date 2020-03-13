@@ -1,4 +1,5 @@
 start transaction;
+use aluu;
 
 drop table if exists PortfolioAsset;
 drop table if exists Asset;
@@ -87,7 +88,7 @@ create table if not exists PortfolioAsset (
 insert into Country (countryName) values ('United States');
 
 -- States
-insert into State (stateName) values
+insert into State (stateName) values 
 	('Virginia'),
     ('California'),
     ('Texas'),
@@ -101,7 +102,7 @@ insert into State (stateName) values
     ('Washington');
 
 -- Addresses
-insert into Address (street, city, stateId, zipCode, countryId) values
+insert into Address (street, city, stateId, zipCode, countryId) values 
 	('24624 Glacier Hill Alley', 'Springfield', (SELECT stateId FROM State WHERE stateName = "Virginia"), '22156', (SELECT countryId FROM Country WHERE countryName = "United States")),
     ('04 Talmadge Crossing', 'Hampton', (SELECT stateId FROM State WHERE stateName = "Virginia"), '23663', (SELECT countryId FROM Country WHERE countryName = "United States")),
     ('0 Autumn Leaf Plaza', 'Los Angeles', (SELECT stateId FROM State WHERE stateName = "California"), '90045', (SELECT countryId FROM Country WHERE countryName = "United States")),
@@ -118,16 +119,16 @@ insert into Address (street, city, stateId, zipCode, countryId) values
     ('09 Cascade Plaza', 'Visalia', (SELECT stateId FROM State WHERE stateName = "Iowa"), '93291', (SELECT countryId FROM Country WHERE countryName = "United States")),
     ('5 Oakridge Pass', 'Yakima', (SELECT stateId FROM State WHERE stateName = "Washington"), '98907', (SELECT countryId FROM Country WHERE countryName = "United States")),
     ('9 Colorado Alley', 'Phoenix', (SELECT stateId FROM State WHERE stateName = "Nebraska"), '85015', (SELECT countryId FROM Country WHERE countryName = "United States"));
-
+    
 -- Specific Person for queries
 INSERT INTO Person(personId, personCode, brokerData, firstName, lastName, addressId) values
 	(1, 'VB76HV', 'E,sec725', 'Amara', 'Deeson', (SELECT addressId FROM Address WHERE street = '24624 Glacier Hill Alley')),
+    (2, 'CWQ9R0', 'J,sec368', 'Fred', 'Biffin', (SELECT addressId FROM Address WHERE street = '04 Talmadge Crossing')),
+    (3, 'BASMCU', null, 'Sergei', 'Rignoldes', (SELECT addressId FROM Address WHERE street = '0 Autumn Leaf Plaza')),
 	(500, '8H1DJB', 'J,sec020', 'Brand', 'Calcut', (SELECT addressId FROM Address WHERE street = '9 Colorado Alley'));
-
+    
 -- Persons
-insert into Person (personCode, brokerData, firstName, lastName, addressId) values
-	('CWQ9R0', 'J,sec368', 'Fred', 'Biffin', (SELECT addressId FROM Address WHERE street = '04 Talmadge Crossing')),
-	('BASMCU', null, 'Sergei', 'Rignoldes', (SELECT addressId FROM Address WHERE street = '0 Autumn Leaf Plaza')),
+insert into Person (personCode, brokerData, firstName, lastName, addressId) values 
 	('B034B9', null, 'Tamiko', 'Ropartz', (SELECT addressId FROM Address WHERE street = '796 Grover Crossing')),
 	('K26CR3', 'E,sec564', 'Opaline', 'Lacaze', (SELECT addressId FROM Address WHERE street = '18169 Knutson Point')),
 	('NA2V3T', null, 'Dag', 'McAllen', (SELECT addressId FROM Address WHERE street = '00 Esker Road')),
@@ -142,9 +143,9 @@ insert into Person (personCode, brokerData, firstName, lastName, addressId) valu
 	('AI4H73', 'J,sec324', 'Ikey', 'Shelborne', (SELECT addressId FROM Address WHERE street = '5 Oakridge Pass'));
 
 
-
+    
 --- Emails
-insert into Email (emailName, personId) values
+insert into Email (emailName, personId) values 
 	('adeeson0@4shared.com', (SELECT personId FROM Person WHERE lastName = 'Deeson' AND firstName = 'Amara')),
     ('NOTadeeson0@4shared.com', (SELECT personId FROM Person WHERE lastName = 'Deeson' AND firstName = 'Amara')),
     ('ANOTHERadeeson0@4shared.com', (SELECT personId FROM Person WHERE lastName = 'Deeson' AND firstName = 'Amara')),
@@ -162,7 +163,7 @@ insert into Email (emailName, personId) values
     ('mseabrookec@live.com', (SELECT personId FROM Person WHERE lastName = 'Seabrooke' AND firstName = 'Minna')),
     ('mgassond@cmu.edu', (SELECT personId FROM Person WHERE lastName = 'Gasson' AND firstName = 'Marco')),
     ('ishelbornee@digg.com', (SELECT personId FROM Person WHERE lastName = 'Shelborne' AND firstName = 'Ikey'));
-
+    
 -- Specific email for queries
 INSERT INTO Email (emailId, emailName, personId) values
 	(500, 'bcalcutf@shutterfly.com', (SELECT personId FROM Person WHERE lastName = 'Calcut' AND firstName = 'Brand'));
@@ -170,7 +171,7 @@ INSERT INTO Email (emailId, emailName, personId) values
 insert into Email (emailName) values
 	('randomEmail@4shared.com');
 --- Assets
-insert into Asset (assetCode, assetType, assetLabel, apr, balance, quarterlyDividend, baseRateOfReturn, betaMeasure, stockSymbol, sharePrice, baseOmegaMeasure, totalValue) values
+insert into Asset (assetCode, assetType, assetLabel, apr, balance, quarterlyDividend, baseRateOfReturn, betaMeasure, stockSymbol, sharePrice, baseOmegaMeasure, totalValue) values 
 	('YMj2jjQt', 'D', 'Photobug', 83.89, null, null, null, null, null, null, null, null),
 	('FSacHJRA', 'D', 'Minyx', 36.5, null, null, null, null, null, null, null, null),
 	('TTAVkJ1z', 'D', 'Kimia', 80.46, null, null, null, null, null, null, null, null),
@@ -201,10 +202,10 @@ insert into Asset (assetCode, assetType, assetLabel, apr, balance, quarterlyDivi
 	('D6j50RPV', 'P', 'Zoozzy', null, 9500256.0, 21.91, null, null, null, null, 0.62879, 8101357.0),
 	('bC51jaAV', 'P', 'Tagchat', null, 5180527.3, 11.15, null, null, null, null, 0.35742, 7391383.09),
 	('LS30qQV5', 'P', 'Wordify', null, 8041050.18, 34.4, null, null, null, null, 0.03922, 9126317.0);
-
-
+    
+    
 -- Portfolios
-insert into Portfolio (portCode, ownerId, managerId, beneficiaryId) values
+insert into Portfolio (portCode, ownerId, managerId, beneficiaryId) values 
 	('PD111', (SELECT personId FROM Person WHERE lastName = 'Deeson' AND firstName = 'Amara'), (SELECT personId FROM Person WHERE lastName = 'Biffin' AND firstName = 'Fred'), null),
     ('PT001', (SELECT personId FROM Person WHERE lastName = 'Rignoldes' AND firstName = 'Sergei'), (SELECT personId FROM Person WHERE lastName = 'Ropartz' AND firstName = 'Tamiko'), null),
     ('PF001', (SELECT personId FROM Person WHERE lastName = 'Lacaze' AND firstName = 'Opaline'), (SELECT personId FROM Person WHERE lastName = 'McAllen' AND firstName = 'Dag'), null),
@@ -212,10 +213,11 @@ insert into Portfolio (portCode, ownerId, managerId, beneficiaryId) values
     ('PF002', (SELECT personId FROM Person WHERE lastName = 'Mansour' AND firstName = 'Barton'), (SELECT personId FROM Person WHERE lastName = 'Brant' AND firstName = 'Simona'), null),
     ('PD001', (SELECT personId FROM Person WHERE lastName = 'Grevel' AND firstName = 'Alano'), (SELECT personId FROM Person WHERE lastName = 'Schirach' AND firstName = 'Emera'), null),
     ('PZ001', (SELECT personId FROM Person WHERE lastName = 'Calcut' AND firstName = 'Brand'), (SELECT personId FROM Person WHERE lastName = 'Gasson' AND firstName = 'Marco'), null),
-    ('PZ002', (SELECT personId FROM Person WHERE lastName = 'Shelborne' AND firstName = 'Ikey'), (SELECT personId FROM Person WHERE lastName = 'Calcut' AND firstName = 'Brand'), null);
+    ('PZ002', (SELECT personId FROM Person WHERE lastName = 'Shelborne' AND firstName = 'Ikey'), (SELECT personId FROM Person WHERE lastName = 'Calcut' AND firstName = 'Brand'), null),
+    ('PZ003', (SELECT personId FROM Person WHERE lastName = 'Shelborne' AND firstName = 'Ikey'), (SELECT personId FROM Person WHERE lastName = 'Brant' AND firstName = 'Simona'), null);
 
 -- Portfolio Assets
-insert into PortfolioAsset (portfolioId, assetId, assetAmount) values
+insert into PortfolioAsset (portfolioId, assetId, assetAmount) values 
 	((SELECT portfolioId FROM Portfolio WHERE portCode = 'PD111'), (SELECT assetId FROM Asset WHERE assetCode = 'YMj2jjQt'), 10120.23),
     ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PD111'), (SELECT assetId FROM Asset WHERE assetCode = '89uKEpsi'), 400),
     ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PD111'), (SELECT assetId FROM Asset WHERE assetCode = 'ZEnSzfbI'), 50),
@@ -252,3 +254,4 @@ insert into PortfolioAsset (portfolioId, assetId, assetAmount) values
     ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PZ002'), (SELECT assetId FROM Asset WHERE assetCode = 'bC51jaAV'), 43),
 	((SELECT portfolioId FROM Portfolio WHERE portCode = 'PZ002'), (SELECT assetId FROM Asset WHERE assetCode = 'tAceWN9L'), 74),
 	((SELECT portfolioId FROM Portfolio WHERE portCode = 'PZ002'), (SELECT assetId FROM Asset WHERE assetCode = 'LS30qQV5'), 123.32);
+
