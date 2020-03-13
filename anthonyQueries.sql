@@ -65,4 +65,13 @@ LEFT JOIN Portfolio po ON p.personId = po.managerId
 WHERE p.firstName = 'Simona' AND p.lastName = 'Brant';
 
 -- 14
-SELECT SUM(a.sharePrice * )
+SELECT p.portCode, ROUND(SUM(a.sharePrice * pa.assetAmount), 2) FROM Portfolio p
+JOIN PortfolioAsset pa ON p.portfolioId = pa.portfolioId
+JOIN Asset a ON pa.assetId = a.assetId
+WHERE a.assetType = 'S'
+GROUP BY p.portCode;
+
+-- 15
+SELECT a.assetCode, pa.assetAmount FROM Asset a
+JOIN PortfolioAsset pa ON a.assetId = pa.assetId
+WHERE pa.assetAmount > 100 AND a.assetType = 'P';
