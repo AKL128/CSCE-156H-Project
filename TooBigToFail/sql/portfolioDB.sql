@@ -1,17 +1,19 @@
 start transaction;
-use aluu;
+use bberg;
 
-drop table if exists State;
-drop table if exists Country;
-drop table if exists Email;
-drop table if exists Address;
-drop table if exists Person;
 drop table if exists PortfolioAsset;
 drop table if exists Asset;
 drop table if exists Portfolio;
+drop table if exists PersonEmail;
+drop table if exists Person;
+drop table if exists Address;
+drop table if exists State;
+drop table if exists Country;
+drop table if exists Email;
 
 create table if not exists Email (
 	emailId int not null primary key auto_increment,
+    personId int not null,
     emailName varchar(255) not null
     )engine=InnoDB,collate=latin1_general_cs;
 
@@ -45,14 +47,6 @@ create table if not exists Person (
   addressId int not null,
   foreign key (addressId) references Address(addressId)
 )engine=InnoDB,collate=latin1_general_cs;
-
-create table if not exists PersonEmail (
-	personEmailId int not null primary key auto_increment,
-    personId int,
-    emailId int,
-    foreign key (personId) references Person(personId),
-    foreign key (emailId) references Email(emailId)
-    )engine=InnoDB,collate=latin1_general_cs;
 
 create table if not exists Asset(
   assetId int not null primary key auto_increment,
@@ -127,23 +121,23 @@ insert into Address (street, city, stateId, zipCode, countryId) values
     ('9 Colorado Alley', 'Phoenix', (SELECT stateId FROM State WHERE stateName = "Nebraska"), '85015', (SELECT countryId FROM Country WHERE countryName = "United States"));
     
 --- Emails
-insert into Email (emailName) values 
-	('adeeson0@4shared.com'),
-    ('fbiffin1@shutterfly.com'),
-    ('srignoldes2@hhs.gov'),
-    ('tropartz3@ox.ac.uk'),
-    ('olacaze4@blogtalkradio.com'),
-    ('dmcallen5@dagondesign.com'),
-    ('gapplegate6@si.edu'),
-    ('sbrant7@mayoclinic.com'),
-    ('bmansour8@e-recht24.de'),
-    ('llowbridge9@trellian.com'),
-    ('agrevela@earthlink.net'),
-    ('eschirachb@abc.net.au'),
-    ('mseabrookec@live.com'),
-    ('mgassond@cmu.edu'),
-    ('ishelbornee@digg.com'),
-    ('bcalcutf@shutterfly.com');
+insert into Email (personId, emailName) values 
+	(1, 'adeeson0@4shared.com'),
+    (2, 'fbiffin1@shutterfly.com'),
+    (3, 'srignoldes2@hhs.gov'),
+    (4, 'tropartz3@ox.ac.uk'),
+    (5, 'olacaze4@blogtalkradio.com'),
+    (6, 'dmcallen5@dagondesign.com'),
+    (7, 'gapplegate6@si.edu'),
+    (8, 'sbrant7@mayoclinic.com'),
+    (9, 'bmansour8@e-recht24.de'),
+    (10, 'llowbridge9@trellian.com'),
+    (11, 'agrevela@earthlink.net'),
+    (12, 'eschirachb@abc.net.au'),
+    (13, 'mseabrookec@live.com'),
+    (14, 'mgassond@cmu.edu'),
+    (15, 'ishelbornee@digg.com'),
+    (16, 'bcalcutf@shutterfly.com');
     
 --- Persons
 insert into Person (personCode, brokerData, firstName, lastName, addressId) values 
@@ -166,7 +160,7 @@ insert into Person (personCode, brokerData, firstName, lastName, addressId) valu
 
 
 --- Assets
-insert into Asset (assetId, assetCode, assetType, assetLabel, apr, balance, quarterlyDividend, baseRateOfReturn, betaMeasure, stockSymbol, sharePrice, baseOmegaMeasure, totalValue) values 
+insert into Asset (assetCode, assetType, assetLabel, apr, balance, quarterlyDividend, baseRateOfReturn, betaMeasure, stockSymbol, sharePrice, baseOmegaMeasure, totalValue) values 
 	('YMj2jjQt', 'D', 'Photobug', 83.89, null, null, null, null, null, null, null, null),
 	('FSacHJRA', 'D', 'Minyx', 36.5, null, null, null, null, null, null, null, null),
 	('TTAVkJ1z', 'D', 'Kimia', 80.46, null, null, null, null, null, null, null, null),
@@ -216,36 +210,36 @@ insert into PortfolioAsset (portfolioId, assetId, assetAmount) values
     ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PD111'), (SELECT assetId FROM Asset WHERE assetCode = '89uKEpsi'), 400),
     ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PD111'), (SELECT assetId FROM Asset WHERE assetCode = 'ZEnSzfbI'), 50),
     ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PD111'), (SELECT assetId FROM Asset WHERE assetCode = 'FSacHJRA'), 89),
-    (502, 402, 54321.01),
-    (502, 412, 98),
-    (502, 413, 64),
-    (502, 422, 55),
-    (502, 421, 10),
-    (503, 403, 12455.68),
-    (503, 404, 97979.10),
-    (503, 401, 80900.50),
-    (503, 414, 30),
-    (503, 423, 77),
-	(504, 421, 33),
-    (504, 427, 43),
-    (504, 430, 68),
-    (504, 418, 30),
-    (504, 410, 10100203.10),
-    (505, 416, 20),
-    (505, 417, 44),
-    (505, 418, 50),
-    (505, 411, 30),
-    (505, 410, 10.12),
-    (506, 408, 5.00),
-    (506, 409, 43431243.10),
-    (506, 402, 43021.12),
-    (506, 403, 981765.00),
-    (507, 417, 40),
-    (507, 415, 20),
-    (507, 424, 43),
-	(507, 421, 63),
-    (508, 430, 23),
-    (508, 426, 43),
-	(508, 423, 74),
-	(508, 410, 123.32);
+    (2, 2, 54321.01),
+    (2, 12, 98),
+    (2, 13, 64),
+    (2, 22, 55),
+    (2, 21, 10),
+    (3, 3, 12455.68),
+    (3, 4, 97979.10),
+    (3, 1, 80900.50),
+    (3, 14, 30),
+    (3, 23, 77),
+	(4, 21, 33),
+    (4, 27, 43),
+    (4, 30, 68),
+    (4, 18, 30),
+    (4, 10, 10100203.10),
+    (5, 16, 20),
+    (5, 17, 44),
+    (5, 18, 50),
+    (5, 11, 30),
+    (5, 10, 10.12),
+    (6, 8, 5.00),
+    (6, 9, 43431243.10),
+    (6, 2, 43021.12),
+    (6, 3, 981765.00),
+    (6, 17, 40),
+    (7, 15, 20),
+    (7, 24, 43),
+	(7, 21, 63),
+    (8, 30, 23),
+    (8, 26, 43),
+	(8, 23, 74),
+	(8, 10, 123.32);
 
