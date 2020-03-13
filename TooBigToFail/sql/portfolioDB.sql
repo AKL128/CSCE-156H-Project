@@ -1,5 +1,4 @@
 start transaction;
-use aluu;
 
 drop table if exists PortfolioAsset;
 drop table if exists Asset;
