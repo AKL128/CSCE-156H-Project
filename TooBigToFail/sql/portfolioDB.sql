@@ -77,7 +77,7 @@ create table if not exists Portfolio (
 create table if not exists PortfolioAsset (
   portAssetId int not null primary key auto_increment,
   portfolioId int not null,
-  assetId int not null,
+  assetId int,
   assetAmount float,
   foreign key (portfolioId) references Portfolio(portfolioId),
   foreign key (assetId) references Asset(assetId),
@@ -245,7 +245,7 @@ insert into PortfolioAsset (portfolioId, assetId, assetAmount) values
     ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PD001'), (SELECT assetId FROM Asset WHERE assetCode = 'N4ujtpKT'), 5.00),
     ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PD001'), (SELECT assetId FROM Asset WHERE assetCode = 'zd68EsoK'), 43431243.10),
     ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PD001'), (SELECT assetId FROM Asset WHERE assetCode = 'CvGUIwRO'), 43021.12),
-    ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PD001'), (SELECT assetId FROM Asset WHERE assetCode = 'N4ujtpKT'), 981765.00),
+    ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PD001'), (SELECT assetId FROM Asset WHERE assetCode = 'TTAVkJ1z'), 981765.00),
     ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PZ001'), (SELECT assetId FROM Asset WHERE assetCode = '4WDyHL0t'), 40),
     ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PZ001'), (SELECT assetId FROM Asset WHERE assetCode = 'TTAVkJ1z'), 20),
     ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PZ001'), (SELECT assetId FROM Asset WHERE assetCode = 'giff6C5r'), 43),
