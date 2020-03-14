@@ -59,9 +59,13 @@ INSERT INTO PortfolioAsset (portfolioId, assetId) values
 	((SELECT portfolioId FROM Portfolio WHERE portCode = 'PZ002'),(SELECT assetId FROM Asset WHERE assetCode = 'zUcSIYPE'));
 
 -- 12
-SELECT p.firstName, p.lastName, count(po.portfolioId) FROM Person p
+SELECT p.firstName, p.lastName, count(po.portfolioId) as NumberOfPortfolios FROM Person p
 LEFT JOIN Portfolio po ON p.personId = po.ownerId
 WHERE p.firstName = 'Fred' AND p.lastName = 'Biffin';
+
+SELECT p.firstName, p.lastName, count(po.portfolioId) as NumberOfPortfolios FROM Person p
+LEFT JOIN Portfolio po ON p.personId = po.ownerId
+WHERE p.firstName = 'Ikey' AND p.lastName = 'Shelborne';
 
 -- 13
 SELECT p.firstName, p.lastName, count(po.portfolioId) FROM Person p
