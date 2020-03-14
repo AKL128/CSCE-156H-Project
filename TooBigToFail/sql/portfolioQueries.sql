@@ -27,7 +27,9 @@ DELETE FROM Person WHERE personCode = 'VB76HV' AND personId = 1;
 
 -- 6
 INSERT INTO Person (personCode, brokerData, firstName, lastName, addressId) values
-	('code123', 'E,sec700', 'Anthony', 'Luu', 1);
+	('code123', 'E,sec700', 'Anthony', 'Luu', 1),
+    ('bberg123', 'J,sec398', 'Brett', 'Berg', 2),
+    ('poggers123', null, 'twitch', 'chat', 3);
 
 -- 7
 SELECT  a.* FROM Portfolio p
@@ -44,7 +46,9 @@ WHERE p.firstName = 'Brand' AND p.lastName = 'Calcut';
 
 -- 9
 INSERT INTO Asset (assetCode, assetType, assetLabel, apr, balance, quarterlyDividend, baseRateOfReturn, betaMeasure, stockSymbol, sharePrice, baseOmegaMeasure, totalValue) values
-	('assetCode123', 'S', 'THE STONK', null, 120000.35, 63.02, 0.244, 50, 'STONK', 10000.57, null, null);
+	('assetCode123', 'S', 'THE STONK', null, 120000.35, 63.02, 0.244, 50, 'STONK', 10000.57, null, null),
+    ('weirdCode123', 'P', 'WEIRDO', null, 123.2, 32.3, null, null, null, null, 1344.2, 12.3),
+    ('collegeSavings', 'D', 'RIP ME', 0.01, 50, null, null, null, null, null, null, null);
     
 -- 10
 INSERT INTO Portfolio (portCode, ownerId, managerId, beneficiaryId) values
@@ -72,6 +76,6 @@ WHERE a.assetType = 'S'
 GROUP BY p.portCode;
 
 -- 15
-SELECT a.assetCode, pa.assetAmount FROM Asset a
+SELECT pa.portfolioId, a.assetCode, pa.assetAmount as stake FROM Asset a
 JOIN PortfolioAsset pa ON a.assetId = pa.assetId
 WHERE pa.assetAmount > 100 AND a.assetType = 'P';
