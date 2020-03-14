@@ -11,28 +11,28 @@ drop table if exists Country;
 
 create table if not exists State (
   stateId int not null primary key auto_increment,
-  stateName varchar(255) not null
+  stateName varchar(255) not null unique key
 )engine=InnoDB,collate=latin1_general_cs;
 
 create table if not exists Country (
   countryId int not null primary key auto_increment,
-  countryName varchar(255) not null
+  countryName varchar(255) not null unique key
 )engine=InnoDB,collate=latin1_general_cs;
 
 create table if not exists Address (
   addressId int not null primary key auto_increment,
-  street varchar(255),
+  street varchar(255) unique key,
   city varchar(255),
-  stateId int,
+  stateId int not null,
   zipCode varchar(255),
-  countryId int,
+  countryId int not null,
   foreign key (stateId) references State(stateId),
   foreign key (countryId) references Country(countryId)
 )engine=InnoDB,collate=latin1_general_cs;
 
 create table if not exists Person (
   personId int not null primary key auto_increment,
-  personCode varchar(255) not null,
+  personCode varchar(255) not null unique key,
   brokerData varchar(255),
   firstName varchar(255),
   lastName varchar(255),
@@ -42,14 +42,14 @@ create table if not exists Person (
 
 create table if not exists Email (
 	emailId int not null primary key auto_increment,
-    emailName varchar(255) not null,
+    emailName varchar(255) not null unique key,
     personId int,
     foreign key (personId) references Person(personId)
     )engine=InnoDB,collate=latin1_general_cs;
 
 create table if not exists Asset(
   assetId int not null primary key auto_increment,
-  assetCode varchar(255) not null,
+  assetCode varchar(255) not null unique key,
   assetType char not null,
   assetLabel varchar(255) not null,
   apr float,
@@ -65,8 +65,8 @@ create table if not exists Asset(
 
 create table if not exists Portfolio (
   portfolioId int not null primary key auto_increment,
-  portCode varchar(255) not null,
-  ownerId int,
+  portCode varchar(255) not null unique key,
+  ownerId int not null,
   managerId int,
   beneficiaryId int,
   foreign key (ownerId) references Person(personId),
@@ -76,11 +76,12 @@ create table if not exists Portfolio (
 
 create table if not exists PortfolioAsset (
   portAssetId int not null primary key auto_increment,
-  portfolioId int,
-  assetId int,
+  portfolioId int not null,
+  assetId int not null,
   assetAmount float,
   foreign key (portfolioId) references Portfolio(portfolioId),
-  foreign key (assetId) references Asset(assetId)
+  foreign key (assetId) references Asset(assetId),
+  constraint `UniqueAsset` unique(portfolioId, assetId)
 )engine=InnoDB,collate=latin1_general_cs;
 
 -- Countries
@@ -252,5 +253,6 @@ insert into PortfolioAsset (portfolioId, assetId, assetAmount) values
     ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PZ002'), (SELECT assetId FROM Asset WHERE assetCode = 'un1qqk3u'), 23),
     ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PZ002'), (SELECT assetId FROM Asset WHERE assetCode = 'bC51jaAV'), 43),
 	((SELECT portfolioId FROM Portfolio WHERE portCode = 'PZ002'), (SELECT assetId FROM Asset WHERE assetCode = 'tAceWN9L'), 74),
-	((SELECT portfolioId FROM Portfolio WHERE portCode = 'PZ002'), (SELECT assetId FROM Asset WHERE assetCode = 'LS30qQV5'), 123.32);
+	((SELECT portfolioId FROM Portfolio WHERE portCode = 'PZ002'), (SELECT assetId FROM Asset WHERE assetCode = 'LS30qQV5'), 123.51),
+    ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PZ003'), null, null);
 

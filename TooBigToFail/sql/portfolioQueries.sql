@@ -69,7 +69,7 @@ LEFT JOIN Portfolio po ON p.personId = po.managerId
 WHERE p.firstName = 'Simona' AND p.lastName = 'Brant';
 
 -- 14
-SELECT p.portCode, ROUND(SUM(a.sharePrice * pa.assetAmount), 2) FROM Portfolio p
+SELECT p.portCode, ROUND(SUM(a.sharePrice * pa.assetAmount), 2) as StockTotal FROM Portfolio p
 JOIN PortfolioAsset pa ON p.portfolioId = pa.portfolioId
 JOIN Asset a ON pa.assetId = a.assetId
 WHERE a.assetType = 'S'
