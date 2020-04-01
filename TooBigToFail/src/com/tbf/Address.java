@@ -3,25 +3,31 @@
  * Date: 2020/2/28
  *
  * This is a class for Address that holds all data for a full address.
- * 
+ *
  */
 
 package com.tbf;
 
 public class Address {
+	private int addressId;
 	private String street;
 	private String city;
 	private String state;
 	private String zip;
 	private String country;
 
-	public Address(String street, String city, String state, String zip, String country) {
+	public Address(int addressId, String street, String city, String state, String zip, String country) {
 		super();
+		this.addressId = addressId;
 		this.street = street;
 		this.city = city;
 		this.state = state;
 		this.zip = zip;
 		this.country = country;
+	}
+
+	public int getAddressId() {
+		return addressId;
 	}
 
 	public String getStreet() {
@@ -43,7 +49,7 @@ public class Address {
 	public String getCountry() {
 		return country;
 	}
-	
+
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(String.format("%s, %s, %s, %s, %s", street, city, state, zip, country));
