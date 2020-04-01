@@ -14,6 +14,7 @@
     <string>scastro@cubs.com</string>
     <string>starlin_castro13@gmail.com</string>
   </email>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>306a</personCode>
   <brokerData></brokerData>
@@ -30,6 +31,7 @@
     <string>brock_f_sampson@gmail.com</string>
     <string>bsampson@venture.com</string>
   </email>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>2342</personCode>
   <brokerData></brokerData>
@@ -42,6 +44,7 @@
     <zip>K1A 0G9</zip>
     <country>Canada</country>
   </address>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>aef1</personCode>
   <brokerData>E,sec001</brokerData>
@@ -54,6 +57,7 @@
     <zip>10005-0012</zip>
     <country>USA</country>
   </address>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>321f</personCode>
   <brokerData>J,sec991</brokerData>
@@ -70,6 +74,7 @@
     <string>bfox@gmail.com</string>
     <string>csheen@crazy.net</string>
   </email>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>ma12</personCode>
   <brokerData></brokerData>
@@ -85,6 +90,7 @@
   <email>
     <string>sveum@cubs.com</string>
   </email>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>321nd</personCode>
   <brokerData></brokerData>
@@ -101,6 +107,7 @@
     <string>whartnell@doctors.com</string>
     <string>dr@who.com</string>
   </email>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>nf32a</personCode>
   <brokerData></brokerData>
@@ -117,6 +124,7 @@
     <string>ptroug@cse.unl.edu</string>
     <string>ptrou32@unl.edu</string>
   </email>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>321na</personCode>
   <brokerData>E,sec125</brokerData>
@@ -132,6 +140,7 @@
   <email>
     <string>jpet@whofan.com</string>
   </email>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>231</personCode>
   <brokerData>E,sec221</brokerData>
@@ -150,6 +159,7 @@
     <string>mostfamous@whovian.com</string>
     <string>thedoctor@bbc.com</string>
   </email>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>doc05</personCode>
   <brokerData></brokerData>
@@ -162,6 +172,7 @@
     <zip></zip>
     <country> Mexico</country>
   </address>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>6doc</personCode>
   <brokerData>J,sec982</brokerData>
@@ -178,6 +189,7 @@
     <string>rhurndall@cse.unl.edu</string>
     <string>richard@unl.edu</string>
   </email>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>321dr</personCode>
   <brokerData>J,sec543</brokerData>
@@ -193,6 +205,7 @@
   <email>
     <string>dr@baker.com</string>
   </email>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>1svndr</personCode>
   <brokerData></brokerData>
@@ -209,6 +222,7 @@
     <string>slyguy@hotmail.com</string>
     <string>mccoy@whofan.com</string>
   </email>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>123lst</personCode>
   <brokerData>E,sec31x</brokerData>
@@ -226,6 +240,7 @@
     <string>foo@bar.com</string>
     <string>pmc@unl.edu</string>
   </email>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>nwdoc1</personCode>
   <brokerData>J,sec953</brokerData>
@@ -241,6 +256,7 @@
   <email>
     <string>newguy@whovian.com</string>
   </email>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>2ndbestd</personCode>
   <brokerData></brokerData>
@@ -257,6 +273,7 @@
     <string>actor@shakespeare.com</string>
     <string>tdavid@unl.edu</string>
   </email>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>wrddoc</personCode>
   <brokerData></brokerData>
@@ -273,6 +290,7 @@
     <string>msmith@who.com</string>
     <string>thedoc@cse.unl.edu</string>
   </email>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>bbchar</personCode>
   <brokerData></brokerData>
@@ -285,6 +303,7 @@
     <zip> 87105</zip>
     <country>USA</country>
   </address>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>0102</personCode>
   <brokerData></brokerData>
@@ -300,6 +319,7 @@
   <email>
     <string>fcastro@socialist.gov</string>
   </email>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>2PAC</personCode>
   <brokerData></brokerData>
@@ -312,6 +332,7 @@
     <zip>90210</zip>
     <country>USA</country>
   </address>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>8008</personCode>
   <brokerData></brokerData>
@@ -324,6 +345,7 @@
     <zip>10005</zip>
     <country>USA</country>
   </address>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>LEAF</personCode>
   <brokerData></brokerData>
@@ -339,6 +361,7 @@
   <email>
     <string>heisenburg@savewalter.com</string>
   </email>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>ANY1</personCode>
   <brokerData></brokerData>
@@ -355,6 +378,7 @@
     <string>ezpleazin@iamnotvanillaicethanks.net</string>
     <string>neverforgetthatiamnotvanillaice@jokesonyou.edu</string>
   </email>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>NUID</personCode>
   <brokerData></brokerData>
@@ -371,6 +395,7 @@
     <string>tommy.frazier@unl.edu</string>
     <string>tpayne@history.gov</string>
   </email>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>NTAC</personCode>
   <brokerData>E,sec867</brokerData>
@@ -387,6 +412,7 @@
     <string>damnu@tommytutone.edu</string>
     <string>gummybears@myspace.com</string>
   </email>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>L337</personCode>
   <brokerData>E,sec007</brokerData>
@@ -399,6 +425,7 @@
     <zip>34345</zip>
     <country>USA</country>
   </address>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>M1LF</personCode>
   <brokerData>J,sec666</brokerData>
@@ -414,6 +441,7 @@
   <email>
     <string>takeoffthatbraziermydear@thisisbarry.edu</string>
   </email>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>URAD</personCode>
   <brokerData>J,sec530</brokerData>
@@ -430,6 +458,7 @@
     <string>spooky@fbi.gov</string>
     <string>iwnt2bleve@yahoo.com</string>
   </email>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>2kj3o</personCode>
   <brokerData></brokerData>
@@ -445,6 +474,7 @@
   <email>
     <string>cfalcon@fzero.com</string>
   </email>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>0fi323</personCode>
   <brokerData>E,sec385</brokerData>
@@ -457,6 +487,7 @@
     <zip></zip>
     <country>Japan</country>
   </address>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>kd93n</personCode>
   <brokerData>J,sec928</brokerData>
@@ -473,6 +504,7 @@
     <string>jjohnson@somewhere.com</string>
     <string>averagejoe@someplace.com</string>
   </email>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>2h54gw</personCode>
   <brokerData>J,sec111</brokerData>
@@ -488,6 +520,7 @@
   <email>
     <string>barak@obama.com</string>
   </email>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>2h45</personCode>
   <brokerData></brokerData>
@@ -503,6 +536,7 @@
   <email>
     <string>george@bush.com</string>
   </email>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>h6455ey</personCode>
   <brokerData>E,sec232</brokerData>
@@ -515,6 +549,7 @@
     <zip> NE</zip>
     <country> 12122</country>
   </address>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>ej556</personCode>
   <brokerData></brokerData>
@@ -532,6 +567,7 @@
     <string> bush@whitehouse.com</string>
     <string> bush@taxas.gov</string>
   </email>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>ej6h65e</personCode>
   <brokerData></brokerData>
@@ -544,6 +580,7 @@
     <zip>M5V 1G3</zip>
     <country> Canada</country>
   </address>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>23fs</personCode>
   <brokerData>J,sec532</brokerData>
@@ -559,6 +596,7 @@
   <email>
     <string>jimmy@carter.com</string>
   </email>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>23fre</personCode>
   <brokerData></brokerData>
@@ -574,6 +612,7 @@
   <email>
     <string>bobsmith2343@gmail.com</string>
   </email>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>1234a</personCode>
   <brokerData></brokerData>
@@ -589,6 +628,7 @@
   <email>
     <string>aj@gmail.com</string>
   </email>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>34tas8</personCode>
   <brokerData></brokerData>
@@ -604,6 +644,7 @@
   <email>
     <string>jr1834@hotmail.com</string>
   </email>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>mar59</personCode>
   <brokerData></brokerData>
@@ -620,6 +661,7 @@
     <string>wc345@gmail.com</string>
     <string>wc345@who.com</string>
   </email>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>sus12</personCode>
   <brokerData></brokerData>
@@ -632,6 +674,7 @@
     <zip>14520</zip>
     <country>USA</country>
   </address>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>dot105</personCode>
   <brokerData></brokerData>
@@ -644,6 +687,7 @@
     <zip> </zip>
     <country> Mexico</country>
   </address>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>usp12</personCode>
   <brokerData></brokerData>
@@ -659,6 +703,7 @@
   <email>
     <string>123@gwoo.com</string>
   </email>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>weo123</personCode>
   <brokerData></brokerData>
@@ -674,6 +719,7 @@
   <email>
     <string>wweiz2@gmail.com</string>
   </email>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>qwer4</personCode>
   <brokerData></brokerData>
@@ -686,6 +732,7 @@
     <zip>68501</zip>
     <country>USA</country>
   </address>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>wetet23</personCode>
   <brokerData></brokerData>
@@ -701,6 +748,7 @@
   <email>
     <string>fj2@zoo.com</string>
   </email>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>wsy62</personCode>
   <brokerData>J,sec123</brokerData>
@@ -716,6 +764,7 @@
   <email>
     <string>tadison@unl.edu</string>
   </email>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>twuox2</personCode>
   <brokerData>J,sec290</brokerData>
@@ -732,6 +781,7 @@
     <string>ps1991@huskers.unl.edu</string>
     <string>ps1991@gmail.com</string>
   </email>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>xc908iy</personCode>
   <brokerData>J,sec324</brokerData>
@@ -747,6 +797,7 @@
   <email>
     <string>gfrank001@huskers.unl.edu</string>
   </email>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>r3wo12s</personCode>
   <brokerData>E,sec781</brokerData>
@@ -763,6 +814,7 @@
     <string>emike@hotmail.com</string>
     <string>emike2@yahoo.com</string>
   </email>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>vtw9io</personCode>
   <brokerData>E,sec963</brokerData>
@@ -778,6 +830,7 @@
   <email>
     <string>tpaul@who.com</string>
   </email>
+  <portList/>
 </com.tbf.Person><com.tbf.Person>
   <personCode>pautw87st</personCode>
   <brokerData>E,sec856</brokerData>
@@ -794,4 +847,5 @@
     <string>davidhunter@yahoo.com</string>
     <string>dv123@who.com</string>
   </email>
+  <portList/>
 </com.tbf.Person>

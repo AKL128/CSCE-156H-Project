@@ -1,3 +1,11 @@
+/**
+ * Author: Anthony luu, and Brett Berg
+ * Date: 2020/2/28
+ *
+ * This is a program that holds methods that converts the data of Person and Asset to XML.
+ * 
+ */
+
 package com.tbf;
 
 import java.io.File;
@@ -11,8 +19,9 @@ import com.thoughtworks.xstream.io.xml.StaxDriver;
 
 public class toXML {
 	
+	//This writes the data into xml format for Persons.xml
 	public static void personXML() {
-
+		
 		try {
 			XStream xs = new XStream();			
 			List<Person> pList = DataConverter.parsePersonFile();
@@ -34,6 +43,7 @@ public class toXML {
 		
 	}
 	
+	//This writes the data into xml format for Assets.xml
 	public static void assetXML() {
 
 		try {

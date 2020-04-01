@@ -1,3 +1,11 @@
+/**
+ * Author: Anthony luu, and Brett Berg
+ * Date: 2020/2/28
+ *
+ * This is a subclass of class Asset that holds appropriate methods and data that defines a Stock.
+ * 
+ */
+
 package com.tbf;
 
 public class Stock extends Asset{
@@ -6,7 +14,8 @@ public class Stock extends Asset{
 	private double betaMeasure;
 	private String stockSymbol;
 	private double sharePrice;
-	
+	private double shareNumber;
+
 	public Stock(String code, String id, String label, double quarterlyDividend
 			, double baseRateOfReturn, double betaMeasure, String stockSymbol, double sharePrice) {
 		super(code, id, label);
@@ -15,6 +24,15 @@ public class Stock extends Asset{
 		this.betaMeasure = betaMeasure;
 		this.stockSymbol = stockSymbol;
 		this.sharePrice = sharePrice;
+	}
+	
+	Stock(Stock s) {
+		super(s);
+		quarterlyDividend = s.quarterlyDividend;
+		baseRateOfReturn = s.baseRateOfReturn;
+		betaMeasure = s.betaMeasure;
+		stockSymbol = s.stockSymbol;
+		sharePrice = s.sharePrice;
 	}
 	
 	public double getQuarterlyDividend() {
@@ -35,5 +53,29 @@ public class Stock extends Asset{
 	
 	public double getSharePrice() {
 		return sharePrice;
+	}
+	
+	public double getShareNumber() {
+		return shareNumber;
+	}
+	
+	public double getAnnualReturn() {
+		return ((getValue() * (baseRateOfReturn / 100)) + (4 * quarterlyDividend) * shareNumber);
+	}
+	
+	public double getReturnRate() {
+		return (getAnnualReturn() / getValue()) * 100;
+	}
+	
+	public void setPortValue(double portValue) {
+		this.shareNumber = portValue;
+	}
+	
+	public double getRisk() {
+		return betaMeasure;
+	}
+	
+	public double getValue() {
+		return sharePrice * shareNumber;
 	}
 }

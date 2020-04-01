@@ -1,6 +1,14 @@
+/**
+ * Author: Anthony luu, and Brett Berg
+ * Date: 2020/2/28
+ *
+ * This is a abstract super class for Asset that is a parent class that holds all common data between subclasses of Asset.
+ * 
+ */
+
 package com.tbf;
 
-public abstract class Asset implements AnnualReturn{
+public abstract class Asset{
 	protected String code;
 	protected String id;
 	protected String label;
@@ -10,6 +18,12 @@ public abstract class Asset implements AnnualReturn{
 		this.code = code;
 		this.id = id;
 		this.label = label;
+	}
+	
+	Asset(Asset a) {
+		code = a.code;
+		id = a.id;
+		label = a.label;
 	}
 
 	public String getCode() {
@@ -23,18 +37,21 @@ public abstract class Asset implements AnnualReturn{
 	public String getLabel() {
 		return label;
 	}
+
+	public abstract double getAnnualReturn();
 	
-	public double getAnnualReturn() {
+	public abstract double getReturnRate();
+	
+	public abstract void setPortValue(double portValue);
+	
+	public double getRisk() {
+		return 0.0;
+	}
+
+	public double getValue() {
 		return 0;
 	}
 	
-	public double getTotalBalance() {
-		return 0;
-	}
-	public double getShares() {
-		return 0;
-	}
-	public double getStake() {
-		return 0;
-	}
+	
+
 }

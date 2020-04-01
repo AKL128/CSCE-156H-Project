@@ -1,3 +1,11 @@
+/**
+ * Author: Anthony luu, and Brett Berg
+ * Date: 2020/2/28
+ *
+ * This is a program that holds methods that converts the data of Person and Asset to Json.
+ * 
+ */
+
 package com.tbf;
 
 import java.io.File;
@@ -10,12 +18,12 @@ import com.google.gson.GsonBuilder;
 
 public class toJson {
 	
+	//This writes the data into json format for Persons.json
 	public static void personJson() {
 		Gson gsonP = new GsonBuilder().setPrettyPrinting().create();
 
 		List<Person> pList = DataConverter.parsePersonFile();
 
-		//This writes the data into json format for Persons.json
 		try {
 
 			File outputPerson = new File("data/Persons.json");
@@ -45,12 +53,12 @@ public class toJson {
 		}
 	}
 	
+	//This writes the data into json format for Assets.json
 	public static void assetJson() {
 		Gson gsonA = new GsonBuilder().setPrettyPrinting().create();
 
 		List<Asset> aList = DataConverter.parseAssetFile();
 
-		//This writes the data into json format for Assets.json
 		try {
 			File outputAsset = new File("data/Assets.json");
 

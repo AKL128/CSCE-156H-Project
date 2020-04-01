@@ -1,3 +1,11 @@
+/**
+ * Author: Anthony luu, and Brett Berg
+ * Date: 2020/2/28
+ *
+ * This is a class for Address that holds all data for a full address.
+ * 
+ */
+
 package com.tbf;
 
 public class Address {
@@ -34,6 +42,12 @@ public class Address {
 
 	public String getCountry() {
 		return country;
+	}
+	
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(String.format("%s, %s, %s, %s, %s", street, city, state, zip, country));
+		return sb.toString();
 	}
 
 }
