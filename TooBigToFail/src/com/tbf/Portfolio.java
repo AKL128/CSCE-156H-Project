@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class Portfolio implements Comparable<Portfolio>{
 	private String portCode;
 	private Person owner;
-	private Person manager;
+	private Broker manager;
 	private Person beneficiary;
 	private ArrayList<Asset> assetList;
 	
@@ -21,7 +21,7 @@ public class Portfolio implements Comparable<Portfolio>{
 		return this.getOwner().getLastName().compareTo(that.getOwner().getLastName());
 	}
 
-	public Portfolio(String portCode, Person owner, Person manager,
+	public Portfolio(String portCode, Person owner, Broker manager,
 	 Person beneficiary, ArrayList<Asset> assetList) {
 		 this.portCode = portCode;
 		 this.owner = owner;
@@ -38,7 +38,7 @@ public class Portfolio implements Comparable<Portfolio>{
 		return owner;
 	}
 
-	public Person getManager() {
+	public Broker getManager() {
 		return manager;
 	}
 

@@ -109,7 +109,7 @@ public class DataConverter {
 				} else if(brokerToken[0].contains("J")) {
 					b = new JuniorBroker(personCode, brokerData, firstName, lastName, address, email);
 				} else {
-					b = new NotBroker(personCode, brokerData, firstName, lastName, address, email);
+					b = new Person(personCode, brokerData, firstName, lastName, address, email);
 				}
 				
 				result.add(b);
@@ -144,7 +144,7 @@ public class DataConverter {
 			if(!line.trim().isEmpty()) {
 				Portfolio c = null;
 				Person owner = null;
-				Person manager = null;
+				Broker manager = null;
 				Person beneficiary = null;
 				
 				String tokens[] = line.split(";", -1);
@@ -157,13 +157,15 @@ public class DataConverter {
 					if(p.getPersonCode().equals(ownerString)) {
 						owner = p;
 					}
-					if(p.getPersonCode().equals(managerString)) {
-						manager = p;
+					if(p.getPersonCode().equals(managerString) && managerString != null) {
+						manager = (Broker) p;
 					}
 					if(p.getPersonCode().equals(beneficiaryString)) {
 						beneficiary = p;
 					}
  				}
+				
+				
 				ArrayList<Asset> assetDataList = new ArrayList<Asset>();
 				String assetData[] = tokens[4].split(",");
 				int counter = 0;

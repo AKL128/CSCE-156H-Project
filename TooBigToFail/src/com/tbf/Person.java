@@ -11,7 +11,7 @@ package com.tbf;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Person {
+public class Person {
 	protected String personCode;
 	protected String brokerData;
 	protected String firstName;
@@ -20,8 +20,8 @@ public abstract class Person {
 	protected ArrayList<String> email;
 	protected List<Portfolio> portList;
 	
-	protected double numberOfAsset;
-	protected double totalAnnualReturn;
+//	protected double numberOfAsset;
+//	protected double totalAnnualReturn;
 
 	public Person(String personCode, String brokerData, String firstName, String lastName, Address address, ArrayList<String> email) {
 		super();
@@ -42,7 +42,6 @@ public abstract class Person {
 	public String getPersonCode() {
 		return personCode;
 	}
-
 
 	public String getBrokerData() {
 		return brokerData;
@@ -78,12 +77,12 @@ public abstract class Person {
 		return sb.toString();
 	}
 	
-	public abstract double getFee();
-	
-	public abstract double getCommission();
-	
-	public abstract void setNumberOfAsset(double asset);
-	
-	public abstract void setTotalAnnualReturn(double totalAnnualReturn);
+//	public abstract double getFee();
+//	
+//	public abstract double getCommission();
+//	
+//	public abstract void setNumberOfAsset(double asset);
+//	
+//	public abstract void setTotalAnnualReturn(double totalAnnualReturn);
 
 }

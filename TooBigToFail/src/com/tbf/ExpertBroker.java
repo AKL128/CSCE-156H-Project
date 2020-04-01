@@ -10,7 +10,9 @@ package com.tbf;
 
 import java.util.ArrayList;
 
-public class ExpertBroker extends Person{
+public class ExpertBroker extends Broker{
+	
+	private static final double feeRate = 0.0375;
 
 	public ExpertBroker(String personCode, String brokerData, String firstName, String lastName, Address address,
 			ArrayList<String> email) {
@@ -22,7 +24,7 @@ public class ExpertBroker extends Person{
 	}
 	
 	public double getCommission() {
-		return totalAnnualReturn * 0.0375;
+		return totalAnnualReturn * feeRate;
 	}
 	
 	public void setNumberOfAsset(double assetNumber) {

@@ -1,0 +1,475 @@
+Portfolio Summary Report
+=================================================================================
+Portfolio Owner                         Manager             Fees      Commissions    Weighted Risk           Return            Total
+PS205    Adam, Lee              Peter,  Smiths           150.00           739.41          0.62293         59152.73        301679.98
+PT114    Alden,  John             Tom,  Adison           150.00            61.17          0.98490          4893.86        225504.94
+PD102    Baker,  C.                  Fox,  Bud           150.00           895.39          1.06290         71631.25        544375.00
+PF007    Baker, Tom                 Baker, Tom             0.00         14138.43          1.06795        377024.79       2879363.50
+PQ145    Brittany, Cherry          Tony,  Paul             0.00          1010.24          0.55080         26939.62        228795.85
+PT001    Castro,  Starlin       Gekko,  Gordon             0.00           202.14          0.04086          5390.28         42203.78
+BPF001   Castro,  Fidel           Mulder,  Fox           225.00            35.51         -0.01836          2841.16         29417.60
+BPF005   Castro,  Fidel          Tutone, Tommy             0.00            55.62          0.00197          1483.16         12455.00
+BPF002   Cube,  Ice               Mulder,  Fox            75.00             0.00          0.00000             0.25           100.99
+PF178    Davison,  Peter         Gorge,  Frank             0.00             0.00          0.00000             0.00             0.00
+PT986    Frank, John             Gorge,  Frank           150.00           519.61          0.02163         41568.69        175432.50
+BPF007   Frazier,  Tommy         Gordon,  Jeff             0.00             0.00          0.00000             0.00             1.01
+PF200    Hurndall,  Richard   Eccleston,  Chris             0.00             0.00          0.00000             0.00             0.00
+PF312    Jenny,  Roam            Gorge,  Frank           150.00            94.53          0.01679          7562.27         76731.00
+PF713    John, Sim                 Tony,  Paul             0.00           831.24          1.00439         22166.35        372699.84
+CPF001   Johnson,  Joe           Johnson,  Joe           375.00           304.77          0.99040         24381.46        781493.35
+CPF003   Johnson,  Joe          Yagami,  Light             0.00           376.54          0.08301         10041.01         80857.83
+PF006    McCoy, Sylvester           Baker, Tom             0.00         14138.43          0.00000             0.00             0.00
+PF300    McCoy, Sylvester     Hurndall,  Richard           525.00          2181.55          0.42448        174524.37       1973104.05
+BPF003   Mulder,  Fox             Mulder,  Fox           150.00            29.83         -0.04014          2386.74         50735.40
+PF001    O'Brien,  Miles        Gekko,  Gordon             0.00           303.51         -0.09989          8093.54        112516.32
+BPF009   O'Brien,  Conan         Tutone, Tommy             0.00             2.24          0.00000            59.62         11000.00
+PD111    Regant,  Ronald        Clinton,  Bill             0.00           287.26          1.06624          7660.25       1174659.23
+BPF004   Shakura,  Trey          Gordon,  Jeff             0.00           184.74          0.00000          4926.27          8718.71
+PF002    Smith,  Matt               Baker, Tom             0.00            22.06          0.07500           588.37          1047.54
+PF003    Tennant,  David            Baker, Tom             0.00             0.35          0.08000             9.29           743.40
+PF004    Tennant,  David      Hurndall,  Richard            75.00             0.45          0.00000            35.70          1032.12
+BPF006   Tutone, Tommy           Gordon,  Jeff             0.00             3.62          0.00000            96.57         23200.01
+PF489    Waston,  Chrik           Ellen,  Mike             0.00           370.77          1.00646          9887.31        451855.68
+PF473    Wei, Wang              David,  Hunter             0.00            32.23          0.00000           859.39         47852.00
+BPF008   White,  Barry           Gordon,  Jeff             0.00           231.00         -0.02379          6159.96         31425.00
+BPF010   White,  Walter          White,  Barry           525.00           231.91         -0.04105         18553.05        150886.78
+CPF002   Yagami,  Light          Johnson,  Joe             0.00           304.77          0.00000             0.00             0.00
+Portfolio PS205
+Owner:
+Adam, Lee
+null
+511 Avery Hall, Denver, CO, 14520, USA
+---------------------------------------------
+Manager:
+Peter,  Smiths
+[ps1991@huskers.unl.edu, ps1991@gmail.com]
+1596 Apple Street, Flushing, NY, 10451, USA
+---------------------------------------------
+Beneficiary:
+Alden,  John
+[aj@gmail.com]
+1243 West O Street, Lincoln, NE, 68415, USA
+---------------------------------------------
+Assets
+Code     Asset                     Return Rate             Risk    Annual Return            Value
+PWES912  PEPSI INC                       32.16%             0.03         31261.24         97196.50
+TEWS4A1MO AMAZON                          13.64%             0.90         27891.50        204483.48
+-----------------------------------------------------------------------------------------------
+                                                         0.62293         59152.73        301679.98
+Portfolio PT114
+Owner:
+Alden,  John
+[aj@gmail.com]
+1243 West O Street, Lincoln, NE, 68415, USA
+---------------------------------------------
+Manager:
+Tom,  Adison
+[tadison@unl.edu]
+7814 Jordan Street, Denver, CO, 65203, USA
+---------------------------------------------
+Beneficiary:
+Waston,  Chrik
+[wc345@gmail.com, wc345@who.com]
+321 Lemon Street, New York, NY, 10012, USA
+---------------------------------------------
+Assets
+Code     Asset                     Return Rate             Risk    Annual Return            Value
+SEARCH8  Yahoo                            1.35%             0.00           195.62         14501.00
+YUOPCT   WALMART                          2.23%             1.05          4698.24        211003.94
+-----------------------------------------------------------------------------------------------
+                                                         0.98490          4893.86        225504.94
+Portfolio PD102
+Owner:
+Baker,  C.
+[dr@baker.com]
+Avery Hall, Lincoln, NE, 68503, USA
+---------------------------------------------
+Manager:
+Fox,  Bud
+[bfox@gmail.com, csheen@crazy.net]
+321 Bronx Street, New York, NY, 10004, USA
+---------------------------------------------
+Beneficiary:
+Gekko,  Gordon
+null
+1 Wall Street, New York, NY, 10005-0012, USA
+---------------------------------------------
+Assets
+Code     Asset                     Return Rate             Risk    Annual Return            Value
+RENT445  Rental Property                  8.25%             0.50          9900.00        120000.00
+FOOD12   Cluckin's restaurant chain            14.55%             1.22         61731.25        424375.00
+-----------------------------------------------------------------------------------------------
+                                                         1.06290         71631.25        544375.00
+Portfolio PF007
+Owner:
+Baker, Tom
+[famousdoc@who.com, tbaker@cse.unl.edu, mostfamous@whovian.com, thedoctor@bbc.com]
+1 Blue Jays Way,  Toronto,  ON,  M5V 1J1,  Canada
+---------------------------------------------
+Manager:
+Baker, Tom
+[famousdoc@who.com, tbaker@cse.unl.edu, mostfamous@whovian.com, thedoctor@bbc.com]
+1 Blue Jays Way,  Toronto,  ON,  M5V 1J1,  Canada
+---------------------------------------------
+Beneficiary:
+Ehrmantraut,  Kaylee
+null
+800 West 7th Street,  Albuquerque,  NM,  87105, USA
+---------------------------------------------
+Assets
+Code     Asset                     Return Rate             Risk    Annual Return            Value
+321CC    Coca-Cola                       56.17%             0.08        230734.80        410800.00
+CMPROP0121 Commercial Property-Red Oaks Mall             5.89%             1.24        144843.66       2457160.00
+REALStr12 Fred's Fabulous Hardware Store            10.31%             0.23           671.51          6516.00
+wOOWoo1S Canadian National Railway            15.85%             0.12           774.83          4887.50
+-----------------------------------------------------------------------------------------------
+                                                         1.06795        377024.79       2879363.50
+Portfolio PQ145
+Owner:
+Brittany, Cherry
+null
+1478 Maple Dr., Ogalalla, NE, 68501, USA
+---------------------------------------------
+Manager:
+Tony,  Paul
+[tpaul@who.com]
+2314 North 18th Street, Kansas City, KS, 54723, USA
+---------------------------------------------
+Assets
+Code     Asset                     Return Rate             Risk    Annual Return            Value
+TEWS4A1MO AMAZON                          13.64%             0.90         18998.56        139285.85
+ESPN001  Huskers                          8.87%             0.00          7941.06         89510.00
+-----------------------------------------------------------------------------------------------
+                                                         0.55080         26939.62        228795.85
+Portfolio PT001
+Owner:
+Castro,  Starlin
+[scastro@cubs.com, starlin_castro13@gmail.com]
+1060 West Addison Street, Chicago, IL, 60613, USA
+---------------------------------------------
+Manager:
+Gekko,  Gordon
+null
+1 Wall Street, New York, NY, 10005-0012, USA
+---------------------------------------------
+Beneficiary:
+Sveum,  Dale
+[sveum@cubs.com]
+1060 West Addison Street, Chicago, IL, 60613, USA
+---------------------------------------------
+Assets
+Code     Asset                     Return Rate             Risk    Annual Return            Value
+BX001-23 Money Market Savings             1.06%             0.00            25.37          2403.32
+AGTSAV   Savings Account                  0.25%             0.00            66.42         26534.21
+B0oWM    Costco                          39.94%             0.13          5298.49         13266.25
+-----------------------------------------------------------------------------------------------
+                                                         0.04086          5390.28         42203.78
+Portfolio BPF001
+Owner:
+Castro,  Fidel
+[fcastro@socialist.gov]
+123 Madison Avenue,  Bodega,  NL, , CUBA
+---------------------------------------------
+Manager:
+Mulder,  Fox
+[spooky@fbi.gov, iwnt2bleve@yahoo.com]
+935 Pennsylvania Ave NW,  Washington DC,  DC,  20535,  USA
+---------------------------------------------
+Beneficiary:
+White,  Walter
+[heisenburg@savewalter.com]
+100 W Fake Street, Albaquerque, NM, 80706, USA
+---------------------------------------------
+Assets
+Code     Asset                     Return Rate             Risk    Annual Return            Value
+BUBBAG   BubbaGump Shrimp                27.10%            -0.07          2329.63          8596.00
+SAVE01   Savings Account                  0.25%             0.00            50.06         20000.00
+PEPSI1   Pepsi                           56.17%             0.08           461.47           821.60
+-----------------------------------------------------------------------------------------------
+                                                        -0.01836          2841.16         29417.60
+Portfolio BPF005
+Owner:
+Castro,  Fidel
+[fcastro@socialist.gov]
+123 Madison Avenue,  Bodega,  NL, , CUBA
+---------------------------------------------
+Manager:
+Tutone, Tommy
+[damnu@tommytutone.edu, gummybears@myspace.com]
+1017 BlueJay Way,  London,  DA,  070708,  England
+---------------------------------------------
+Beneficiary:
+White,  Walter
+[heisenburg@savewalter.com]
+100 W Fake Street, Albaquerque, NM, 80706, USA
+---------------------------------------------
+Assets
+Code     Asset                     Return Rate             Risk    Annual Return            Value
+CD5YER   5-year CD                        4.45%             0.00           444.60         10000.00
+SCHROK   Schrock Innovation              42.30%             0.01          1038.56          2455.00
+-----------------------------------------------------------------------------------------------
+                                                         0.00197          1483.16         12455.00
+Portfolio BPF002
+Owner:
+Cube,  Ice
+[ezpleazin@iamnotvanillaicethanks.net, neverforgetthatiamnotvanillaice@jokesonyou.edu]
+124 Easy Street, Detroit, MI, 48202, USA
+---------------------------------------------
+Manager:
+Mulder,  Fox
+[spooky@fbi.gov, iwnt2bleve@yahoo.com]
+935 Pennsylvania Ave NW,  Washington DC,  DC,  20535,  USA
+---------------------------------------------
+Beneficiary:
+White,  Walter
+[heisenburg@savewalter.com]
+100 W Fake Street, Albaquerque, NM, 80706, USA
+---------------------------------------------
+Assets
+Code     Asset                     Return Rate             Risk    Annual Return            Value
+SAVE01   Savings Account                  0.25%             0.00             0.25           100.99
+-----------------------------------------------------------------------------------------------
+                                                         0.00000             0.25           100.99
+Portfolio PF178
+Owner:
+Davison,  Peter
+null
+123 Cabo San Lucas,  Los,  BS,  ,  Mexico
+---------------------------------------------
+Manager:
+Gorge,  Frank
+[gfrank001@huskers.unl.edu]
+478 South 87th Street, Grand Island, NE, 64789, USA
+---------------------------------------------
+Assets
+Code     Asset                     Return Rate             Risk    Annual Return            Value
+-----------------------------------------------------------------------------------------------
+                                                         0.00000             0.00             0.00
+Portfolio PT986
+Owner:
+Frank, John
+[fj2@zoo.com]
+124 Hello world Dr., Mccook, NE, 57814, USA
+---------------------------------------------
+Manager:
+Gorge,  Frank
+[gfrank001@huskers.unl.edu]
+478 South 87th Street, Grand Island, NE, 64789, USA
+---------------------------------------------
+Beneficiary:
+Brittany, Cherry
+null
+1478 Maple Dr., Ogalalla, NE, 68501, USA
+---------------------------------------------
+Assets
+Code     Asset                     Return Rate             Risk    Annual Return            Value
+PWES912  PEPSI INC                       32.16%             0.03         40690.12        126512.50
+VTST     Geigco                           1.80%             0.00           878.57         48920.00
+-----------------------------------------------------------------------------------------------
+                                                         0.02163         41568.69        175432.50
+Portfolio BPF007
+Owner:
+Frazier,  Tommy
+[tommy.frazier@unl.edu, tpayne@history.gov]
+6700 Vine St, Lincoln, NE, 68505, USA
+---------------------------------------------
+Manager:
+Gordon,  Jeff
+null
+123 Talledega Road, Tallahasse, TN, 34345, USA
+---------------------------------------------
+Beneficiary:
+Cube,  Ice
+[ezpleazin@iamnotvanillaicethanks.net, neverforgetthatiamnotvanillaice@jokesonyou.edu]
+124 Easy Street, Detroit, MI, 48202, USA
+---------------------------------------------
+Assets
+Code     Asset                     Return Rate             Risk    Annual Return            Value
+SAVE01   Savings Account                  0.25%             0.00             0.00             1.01
+-----------------------------------------------------------------------------------------------
+                                                         0.00000             0.00             1.01
+Portfolio PF200
+Owner:
+Hurndall,  Richard
+[rhurndall@cse.unl.edu, richard@unl.edu]
+Campos El290, Mexico City,  FD, ,  Mexico
+---------------------------------------------
+Manager:
+Eccleston,  Chris
+[newguy@whovian.com]
+1 E 161st St,  Bronx,  NY, 10451, USA
+---------------------------------------------
+Beneficiary:
+Ehrmantraut,  Kaylee
+null
+800 West 7th Street,  Albuquerque,  NM,  87105, USA
+---------------------------------------------
+Assets
+Code     Asset                     Return Rate             Risk    Annual Return            Value
+-----------------------------------------------------------------------------------------------
+                                                         0.00000             0.00             0.00
+Portfolio PF312
+Owner:
+Jenny,  Roam
+[jr1834@hotmail.com]
+521 Adam Street, Omaha, NE, 68471, USA
+---------------------------------------------
+Manager:
+Gorge,  Frank
+[gfrank001@huskers.unl.edu]
+478 South 87th Street, Grand Island, NE, 64789, USA
+---------------------------------------------
+Assets
+Code     Asset                     Return Rate             Risk    Annual Return            Value
+SEARCH8  Yahoo                            1.35%             0.00           165.93         12300.00
+WESYT129 Bank of America                 11.48%             0.02          7396.34         64431.00
+-----------------------------------------------------------------------------------------------
+                                                         0.01679          7562.27         76731.00
+Portfolio PF713
+Owner:
+John, Sim
+[123@gwoo.com]
+142 Drive,  Shanghai, , 200012, China
+---------------------------------------------
+Manager:
+Tony,  Paul
+[tpaul@who.com]
+2314 North 18th Street, Kansas City, KS, 54723, USA
+---------------------------------------------
+Assets
+Code     Asset                     Return Rate             Risk    Annual Return            Value
+YUOPCT   WALMART                          2.23%             1.05          5593.14        251195.17
+TEWS4A1MO AMAZON                          13.64%             0.90         16573.21        121504.68
+-----------------------------------------------------------------------------------------------
+                                                         1.00439         22166.35        372699.84
+Portfolio CPF001
+Owner:
+Johnson,  Joe
+[jjohnson@somewhere.com, averagejoe@someplace.com]
+35 Main Street, Springfield, IL, 62702, USA
+---------------------------------------------
+Manager:
+Johnson,  Joe
+[jjohnson@somewhere.com, averagejoe@someplace.com]
+35 Main Street, Springfield, IL, 62702, USA
+---------------------------------------------
+Assets
+Code     Asset                     Return Rate             Risk    Annual Return            Value
+DTh38R   Money Market Account             0.96%             0.00            43.41          4500.00
+BIKE035  Buck's Bike Store               34.68%             0.55         15748.12         45410.33
+SVSVNGS  Savings Account                  0.08%             0.00             8.89         11111.00
+TWTTER01 Twitter Inc.                    39.37%            -0.10          6893.93         17508.42
+GLDSD03  Gold                             0.24%             1.07          1687.11        702963.60
+-----------------------------------------------------------------------------------------------
+                                                         0.99040         24381.46        781493.35
+Portfolio CPF003
+Owner:
+Johnson,  Joe
+[jjohnson@somewhere.com, averagejoe@someplace.com]
+35 Main Street, Springfield, IL, 62702, USA
+---------------------------------------------
+Manager:
+Yagami,  Light
+null
+123 Tsune kuni, Hamamatsu City, Toyama Prefecture, , Japan
+---------------------------------------------
+Beneficiary:
+Falcon,  Douglas
+[cfalcon@fzero.com]
+500 Areo Drive, Port Town, CA, 90010, USA
+---------------------------------------------
+Assets
+Code     Asset                     Return Rate             Risk    Annual Return            Value
+CD4523   10-year CD                       9.16%             0.00          4577.57         50000.00
+DTh38R   Money Market Account             0.96%             0.00             9.65          1000.00
+YHOO003  Yahoo! Inc.                      3.40%            -0.03           114.93          3380.40
+MSFT007  Microsoft Corporation            15.91%             0.17          2478.58         15575.00
+THRE456  Three-14 Pi Shop                23.86%             0.33          2031.44          8512.42
+BIKE035  Buck's Bike Store               34.68%             0.55           828.85          2390.02
+-----------------------------------------------------------------------------------------------
+                                                         0.08301         10041.01         80857.83
+Portfolio PF006
+Owner:
+McCoy, Sylvester
+[slyguy@hotmail.com, mccoy@whofan.com]
+126-01 Roosevelt Ave,  Flushing,  NY, 11368, USA
+---------------------------------------------
+Manager:
+Baker, Tom
+[famousdoc@who.com, tbaker@cse.unl.edu, mostfamous@whovian.com, thedoctor@bbc.com]
+1 Blue Jays Way,  Toronto,  ON,  M5V 1J1,  Canada
+---------------------------------------------
+Assets
+Code     Asset                     Return Rate             Risk    Annual Return            Value
+-----------------------------------------------------------------------------------------------
+                                                         0.00000             0.00             0.00
+Portfolio PF300
+Owner:
+McCoy, Sylvester
+[slyguy@hotmail.com, mccoy@whofan.com]
+126-01 Roosevelt Ave,  Flushing,  NY, 11368, USA
+---------------------------------------------
+Manager:
+Hurndall,  Richard
+[rhurndall@cse.unl.edu, richard@unl.edu]
+Campos El290, Mexico City,  FD, ,  Mexico
+---------------------------------------------
+Assets
+Code     Asset                     Return Rate             Risk    Annual Return            Value
+IND321   Industrial Widget Manufacturers Inc.             3.00%             0.82         31566.67       1053333.25
+RSTOR322 7" Vinyl Records                74.79%             0.54         10096.34         13500.00
+123APP   Apple                           27.10%            -0.07        116481.40        429800.00
+GOOG001  Google Inc.                      5.60%            -0.05          4562.36         81470.80
+CD1Y3X   1-year Rollover CD               2.79%             0.00          6970.40        250000.00
+CD1Y3Y   1-year Rollover CD               2.79%             0.00           697.04         25000.00
+RIRA01   Roth IRA                         3.46%             0.00          4150.15        120000.00
+-----------------------------------------------------------------------------------------------
+                                                         0.42448        174524.37       1973104.05
+Portfolio BPF003
+Owner:
+Mulder,  Fox
+[spooky@fbi.gov, iwnt2bleve@yahoo.com]
+935 Pennsylvania Ave NW,  Washington DC,  DC,  20535,  USA
+---------------------------------------------
+Manager:
+Mulder,  Fox
+[spooky@fbi.gov, iwnt2bleve@yahoo.com]
+935 Pennsylvania Ave NW,  Washington DC,  DC,  20535,  USA
+---------------------------------------------
+Assets
+Code     Asset                     Return Rate             Risk    Annual Return            Value
+MONMO1   Money Market Savings             1.06%             0.00           105.55         10000.00
+TABLET   Surface Inc                      5.60%            -0.05          2281.18         40735.40
+-----------------------------------------------------------------------------------------------
+                                                        -0.04014          2386.74         50735.40
+Portfolio PF001
+Owner:
+O'Brien,  Miles
+null
+123 Friendly Street, Ottawa, ON, K1A 0G9, Canada
+---------------------------------------------
+Manager:
+Gekko,  Gordon
+null
+1 Wall Street, New York, NY, 10005-0012, USA
+---------------------------------------------
+Assets
+Code     Asset                     Return Rate             Risk    Annual Return            Value
+BX001-23 Money Market Savings             1.06%             0.00             1.31           124.32
+BERK-B   Berkshire Hathaway               7.20%            -0.10          8092.22        112392.00
+-----------------------------------------------------------------------------------------------
+                                                        -0.09989          8093.54        112516.32
+Portfolio BPF009
+Owner:
+O'Brien,  Conan
+null
+123 Madison Ave, New York, NY, 10005, USA
+---------------------------------------------
+Manager:
+Tutone, Tommy
+[damnu@tommytutone.edu, gummybears@myspace.com]
+1017 BlueJay Way,  London,  DA,  070708,  England
+---------------------------------------------
+Assets
+Code     Asset                     Return Rate             Risk    Annual Return            Value
+ROTIRA   Roth IRA                        
