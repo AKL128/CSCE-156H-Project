@@ -79,3 +79,5 @@ public class Portfolio implements Comparable<Portfolio>{
 		}
 		return totalAnnualReturn;
 	}
+	
+}
