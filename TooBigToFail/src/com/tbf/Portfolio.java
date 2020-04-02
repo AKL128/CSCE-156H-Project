@@ -32,6 +32,10 @@ public class Portfolio implements Comparable<Portfolio>{
 		 this.assetList = assetList;
 	}
 
+	public Portfolio(String portCode, Person owner, Broker Manager, Person beneficiary) {
+		this(null, portCode, new Person(getFullName), new Broker(getFullName), new Person(getFullName), null);
+	}
+
 	public int getPortfolioId() {
 		return portfolioId;
 	}
@@ -55,7 +59,7 @@ public class Portfolio implements Comparable<Portfolio>{
 	public ArrayList<Asset> getAssetList() {
 		return assetList;
 	}
-	
+
 	public double getTotalValue() {
 		double totalValue = 0;
 		for(Asset a : assetList) {
@@ -63,7 +67,7 @@ public class Portfolio implements Comparable<Portfolio>{
 		}
 		return totalValue;
 	}
-	
+
 	public double getAggregateRisk() {
 		double aggregateRisk = 0;
 		for(Asset a : assetList) {
@@ -71,7 +75,7 @@ public class Portfolio implements Comparable<Portfolio>{
 		}
 		return aggregateRisk;
 	}
-	
+
 	public double getTotalAnnualReturn() {
 		double totalAnnualReturn = 0;
 		for(Asset a : assetList) {
@@ -79,5 +83,5 @@ public class Portfolio implements Comparable<Portfolio>{
 		}
 		return totalAnnualReturn;
 	}
-	
+
 }
