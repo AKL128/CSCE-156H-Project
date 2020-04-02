@@ -124,7 +124,7 @@ insert into Address (street, city, stateId, zipCode, countryId) values
 INSERT INTO Person(personId, personCode, brokerData, firstName, lastName, addressId) values
 	(1, 'VB76HV', 'E,sec725', 'Amara', 'Deeson', (SELECT addressId FROM Address WHERE street = '24624 Glacier Hill Alley')),
     (2, 'CWQ9R0', 'J,sec368', 'Fred', 'Biffin', (SELECT addressId FROM Address WHERE street = '04 Talmadge Crossing')),
-    (3, 'BASMCU', null, 'Sergei', 'Rignoldes', (SELECT addressId FROM Address WHERE street = '0 Autumn Leaf Plaza')),
+    (3, 'BASMCU', 'E,sec123', 'Sergei', 'Rignoldes', (SELECT addressId FROM Address WHERE street = '0 Autumn Leaf Plaza')),
 	(500, '8H1DJB', 'J,sec020', 'Brand', 'Calcut', (SELECT addressId FROM Address WHERE street = '9 Colorado Alley'));
 
 -- Persons
@@ -143,7 +143,7 @@ insert into Person (personCode, brokerData, firstName, lastName, addressId) valu
 	('AI4H73', 'J,sec324', 'Ikey', 'Shelborne', (SELECT addressId FROM Address WHERE street = '5 Oakridge Pass'));
 
 
-    
+
 --- Emails
 insert into Email (emailName, personId) values
 	('adeeson0@4shared.com', (SELECT personId FROM Person WHERE lastName = 'Deeson' AND firstName = 'Amara')),
