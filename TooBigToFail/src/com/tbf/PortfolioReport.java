@@ -169,7 +169,7 @@ public static List<Porfolio> loadSummaryReport {
 	}
 
 	Connection conn = null;
-	String url = "jdbc:mysql://cse.unl.edu:3306/?user=bberg"; // TODO: Insert URL to database, username, and password
+	String url = "jdbc:mysql://cse.unl.edu:3306/?user=bberg";
 	String username = "bberg";
 	String password = "Y3t:PU";
 
@@ -179,7 +179,7 @@ public static List<Porfolio> loadSummaryReport {
 		throw new RuntimeException(e);
 	}
 
-	String query = ""; // TODO: Prepare the proper query
+	String query = "select po.portCode, p.firstName, p.lastName, m.firstName, m.lastName"; // TODO: Prepare the proper query
 	PreparedStatement ps = null;
   ResultSet rs = null;
 	try {
