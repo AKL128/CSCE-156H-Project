@@ -169,9 +169,9 @@ public static List<Porfolio> loadSummaryReport {
 	}
 
 	Connection conn = null;
-	String url = ""; // TODO: Insert URL to database, username, and password
-	String username = "";
-	String password = "";
+	String url = "jdbc:mysql://cse.unl.edu:3306/?user=bberg"; // TODO: Insert URL to database, username, and password
+	String username = "bberg";
+	String password = "Y3t:PU";
 
 	try {
 		conn = DriverManager.getConnection(url, username, password);
@@ -194,8 +194,9 @@ public static List<Porfolio> loadSummaryReport {
 	} catch(SQLException e) {
 		throw new RuntimeException(e);
 	}
-
-
+	rs.close();
+	ps.close();
+	conn.close();
 }
 
 
