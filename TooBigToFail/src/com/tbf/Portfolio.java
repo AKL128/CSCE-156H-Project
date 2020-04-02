@@ -55,4 +55,27 @@ public class Portfolio implements Comparable<Portfolio>{
 	public ArrayList<Asset> getAssetList() {
 		return assetList;
 	}
-}
+	
+	public double getTotalValue() {
+		double totalValue = 0;
+		for(Asset a : assetList) {
+			totalValue += a.getValue();
+		}
+		return totalValue;
+	}
+	
+	public double getAggregateRisk() {
+		double aggregateRisk = 0;
+		for(Asset a : assetList) {
+			aggregateRisk += ((a.getRisk() * a.getValue()) / getTotalValue());
+		}
+		return aggregateRisk;
+	}
+	
+	public double getTotalAnnualReturn() {
+		double totalAnnualReturn = 0;
+		for(Asset a : assetList) {
+			totalAnnualReturn += a.getAnnualReturn();
+		}
+		return totalAnnualReturn;
+	}

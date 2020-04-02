@@ -39,7 +39,7 @@ public class DataConverter {
 				String label = tokens[2];
 				if(tokens[1].equals("D")) {
 					double apr = Double.parseDouble(tokens[3]);
-					a = new DepositAccount(code, id, label, apr);
+					a = new DepositAccount(1, code, id, label, apr);
 				}
 				if(tokens[1].equals("S")) {
 					double quarterlyDividend = Double.parseDouble(tokens[3]);
@@ -47,14 +47,14 @@ public class DataConverter {
 					double betaMeasure = Double.parseDouble(tokens[5]);
 					String stockSymbol = tokens[6];
 					double sharePrice = Double.parseDouble(tokens[7]);
-					a = new Stock(code, id, label, quarterlyDividend, baseRateOfReturn, betaMeasure, stockSymbol, sharePrice);
+					a = new Stock(1, code, id, label, quarterlyDividend, baseRateOfReturn, betaMeasure, stockSymbol, sharePrice);
 				}
 				if(tokens[1].equals("P")) {
 					double quarterlyDividend = Double.parseDouble(tokens[3]);
 					double baseRateOfReturn = Double.parseDouble(tokens[4]);
 					double baseOmegaMeasure = Double.parseDouble(tokens[5]);
 					double totalValue = Double.parseDouble(tokens[6]);
-					a = new PrivateInvestment(code, id, label, quarterlyDividend, baseRateOfReturn, baseOmegaMeasure, totalValue);
+					a = new PrivateInvestment(1, code, id, label, quarterlyDividend, baseRateOfReturn, baseOmegaMeasure, totalValue);
 				}
 				result.add(a);
 			}
@@ -103,13 +103,13 @@ public class DataConverter {
 					email = new ArrayList<String>(Arrays.asList(emailData));
 				}
 
-				Address address = new Address(street, city, state, zip, country);
+				Address address = new Address(1, street, city, state, zip, country);
 				if(brokerToken[0].contains("E")) {
-					b = new ExpertBroker(personCode, brokerData, firstName, lastName, address, email);
+					b = new ExpertBroker(1, personCode, brokerData, firstName, lastName, address, email);
 				} else if(brokerToken[0].contains("J")) {
-					b = new JuniorBroker(personCode, brokerData, firstName, lastName, address, email);
+					b = new JuniorBroker(1, personCode, brokerData, firstName, lastName, address, email);
 				} else {
-					b = new Person(personCode, brokerData, firstName, lastName, address, email);
+					b = new Person(1, personCode, brokerData, firstName, lastName, address, email);
 				}
 				
 				result.add(b);
@@ -196,7 +196,7 @@ public class DataConverter {
 						}
 					}
 				}
-				c = new Portfolio(portCode, owner, manager, beneficiary, assetDataList);
+				c = new Portfolio(1, portCode, owner, manager, beneficiary, assetDataList);
 				result.add(c);
 		
 			}

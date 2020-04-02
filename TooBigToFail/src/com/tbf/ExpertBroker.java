@@ -16,7 +16,7 @@ public class ExpertBroker extends Broker{
 
 	public ExpertBroker(int brokerId, String personCode, String brokerData, String firstName, String lastName, Address address,
 			ArrayList<String> email) {
-		super(int brokerId, personCode, brokerData, firstName, lastName, address, email);
+		super(brokerId, personCode, brokerData, firstName, lastName, address, email);
 	}
 
 	public double getFee() {
