@@ -16,7 +16,7 @@ public class PrivateInvestment extends Asset{
 	private double totalValue;
 	private double stake;
 
-	public PrivateInvestment(int assetId, String code, String id, String label, double quarterlyDividend
+	public PrivateInvestment(Integer assetId, String code, String id, String label, double quarterlyDividend
 							, double baseRateOfReturn, double baseOmegaMeasure, double totalValue) {
 		super(assetId, code, id, label);
 		this.quarterlyDividend = quarterlyDividend;

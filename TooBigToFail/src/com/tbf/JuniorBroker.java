@@ -14,9 +14,12 @@ public class JuniorBroker extends Broker{
 
 	private static final double feeRate = 0.0125;
 
-	public JuniorBroker(int brokerId, String personCode, String brokerData, String firstName, String lastName, Address address,
-			ArrayList<String> email) {
-		super(brokerId, personCode, brokerData, firstName, lastName, address, email);
+	public JuniorBroker(Integer brokerId, String personCode, String brokerData, String firstName, String lastName, Address address) {
+		super(brokerId, personCode, brokerData, firstName, lastName, address);
+	}
+	
+	public JuniorBroker(String firstName, String lastName) {
+		this(null, null, null, firstName, lastName, null);
 	}
 
 	public double getFee() {

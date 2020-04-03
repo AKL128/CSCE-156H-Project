@@ -16,7 +16,7 @@ public class Stock extends Asset{
 	private double sharePrice;
 	private double shareNumber;
 
-	public Stock(int assetId, String code, String id, String label, double quarterlyDividend
+	public Stock(Integer assetId, String code, String id, String label, double quarterlyDividend
 			, double baseRateOfReturn, double betaMeasure, String stockSymbol, double sharePrice) {
 		super(assetId, code, id, label);
 		this.quarterlyDividend = quarterlyDividend;

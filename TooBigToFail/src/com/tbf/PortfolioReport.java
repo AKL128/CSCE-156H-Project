@@ -28,17 +28,42 @@ public class PortfolioReport {
 	}
 
 	public static void main(String args[]) {
-		List<Portfolio> portList = DataConverter.parsePortfolioFile();
-		List<Asset> aList = DataConverter.parseAssetFile();
-		List<Person> pList = DataConverter.parsePersonFile();
-
+		List<Portfolio> portListFlat = DataConverter.parsePortfolioFile();
+		List<Asset> aListFlat = DataConverter.parseAssetFile();
+		List<Person> pListFlat = DataConverter.parsePersonFile();
+		
+		List<Portfolio> portList = Portfolio.loadAllPortfolios();
+		List<Asset> aList = Asset.loadAllAssets();
+		List<Person> pList = Person.loadAllPersons();
+		
+//		List<Portfolio> porter = Portfolio.loadAllPortfolios();
+//		List<Address> add = Address.loadAllAddresses();
+//		List<Person> personList = Person.loadAllPersons();
+//		List<Asset> assetList = Asset.loadAllAssets();
+//		
+//		System.out.println(personList);
+//		for(Person p : personList) {
+//			System.out.println(p.getBrokerData());
+//		}
+		
+//		for(Asset a : assetList) {
+//			System.out.println(a.getRisk());
+//		}
+		
+		
+//		
+		for(Portfolio port : portList) {
+			System.out.println(port);
+		}
+		System.out.println(portList);
+		
 		Collections.sort(portList);
 
 		StringBuilder summaryReport = new StringBuilder();
 		summaryReport.append(String.format("Portfolio Summary Report\n"));
 		summaryReport.append(String.format("=================================================================================\n"));
 		summaryReport.append(String.format("%-8s %-20s %16s %16s %16s %16s %16s %16s\n", "Portfolio", "Owner", "Manager", "Fees", "Commissions", "Weighted Risk", "Return", "Total"));
-
+		
 		for(Portfolio port : portList) {
 			port.getManager().setNumberOfAsset(port.getAssetList().size());
 			port.getManager().setTotalAnnualReturn(port.getTotalAnnualReturn());
@@ -47,8 +72,26 @@ public class PortfolioReport {
 					, port.getManager().getFee(), port.getManager().getCommission(), port.getAggregateRisk(), port.getTotalAnnualReturn()
 					, port.getTotalValue()));
 		}
+		
 		System.out.println(summaryReport);
-		for(Portfolio port : portList) {
+		
+		Collections.sort(portListFlat);
+
+		StringBuilder summaryReport2 = new StringBuilder();
+		summaryReport2.append(String.format("Portfolio Summary Report\n"));
+		summaryReport2.append(String.format("=================================================================================\n"));
+		summaryReport2.append(String.format("%-8s %-20s %16s %16s %16s %16s %16s %16s\n", "Portfolio", "Owner", "Manager", "Fees", "Commissions", "Weighted Risk", "Return", "Total"));
+		
+		for(Portfolio port : portListFlat) {
+			port.getManager().setNumberOfAsset(port.getAssetList().size());
+			port.getManager().setTotalAnnualReturn(port.getTotalAnnualReturn());
+			summaryReport2.append(String.format("%-8s %-20s %16s %16.2f %16.2f %16.5f %16.2f %16.2f\n"
+					, port.getPortCode(), port.getOwner().getFullName(), port.getManager().getFullName()
+					, port.getManager().getFee(), port.getManager().getCommission(), port.getAggregateRisk(), port.getTotalAnnualReturn()
+					, port.getTotalValue()));
+		}
+		
+		System.out.println(summaryReport2);
 			//
 //							String portCode = port.getPortCode();
 			//
@@ -129,61 +172,4 @@ public class PortfolioReport {
 
 	}
 
-}
-
-
-public static List<Porfolio> loadSummaryReport {
-  Portfolio p = null;
-
-	List<Portfolio> portfolios = new ArrayList<>();
-
-	String DRIVER_CLASS = "com.mysql.cj.jdbc.Driver";
-	try {
-		Class.forName(DRIVER_CLASS).getDeclaredConstructor().newInstance();
-	} catch(Exception e) {
-		throw new RuntimeException(e);
-	}
-
-	Connection conn = null;
-	String url = "jdbc:mysql://cse.unl.edu:3306/?user=bberg";
-	String username = "bberg";
-	String password = "Y3t:PU";
-
-	try {
-		conn = DriverManager.getConnection(url, username, password);
-	} catch(SQLException e) {
-		throw new RuntimeException(e);
-	}
-
-		String query = "select po.portCode, o.firstName, o.lastName, m.firstName, m.lastName from Portfolio po join Person o on o.personId = po.personId join Broker m on m.brokerid = po.brokerId"; // TODO: Prepare the proper query
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-	try {
-		ps = conn.prepareStatement(query);
-		ps.setInt(1, portfolioId);
-		rs = ps.executeQuery();
-		if(rs.next()) {
-			Person o = new Person(rs.getString);
-			Broker m = new Broker();
-			Person b = new Person();
-			p = new Portfolio(portfolioId, rs.getString("portCode"), o, m, b);
-		}
-	} catch(SQLException e) {
-		throw new RuntimeException(e);
-	}
-	try{
-		if(rs != null && !rs.isClosed()) {
-			rs.close();
-		}
-		if(ps != null && !ps.isClosed()) {
-			ps.close();
-		}
-		if(conn != null && !conn.isClosed()) {
-			conn.close();
-		}
-	} catch (SQLException e) {
-		throw new RuntimeException(e);
-	}
-	return portfolios;
 }

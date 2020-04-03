@@ -105,11 +105,27 @@ public class DataConverter {
 
 				Address address = new Address(1, street, city, state, zip, country);
 				if(brokerToken[0].contains("E")) {
-					b = new ExpertBroker(1, personCode, brokerData, firstName, lastName, address, email);
+					b = new ExpertBroker(1, personCode, brokerData, firstName, lastName, address);
+					if(email != null) {
+						for(String e : email) {
+							b.addEmail(e);
+						}
+					}
+					
 				} else if(brokerToken[0].contains("J")) {
-					b = new JuniorBroker(1, personCode, brokerData, firstName, lastName, address, email);
+					b = new JuniorBroker(1, personCode, brokerData, firstName, lastName, address);
+					if(email != null) {
+						for(String e : email) {
+							b.addEmail(e);
+						}
+					}
 				} else {
-					b = new Person(1, personCode, brokerData, firstName, lastName, address, email);
+					b = new Person(1, personCode, brokerData, firstName, lastName, address);
+					if(email != null) {
+						for(String e : email) {
+							b.addEmail(e);
+						}
+					}
 				}
 				
 				result.add(b);
@@ -196,7 +212,12 @@ public class DataConverter {
 						}
 					}
 				}
-				c = new Portfolio(1, portCode, owner, manager, beneficiary, assetDataList);
+				c = new Portfolio(1, portCode, owner, manager, beneficiary);
+				if(assetDataList != null) {
+					for(Asset a : assetDataList) {
+						c.addAsset(a);
+					}
+				}
 				result.add(c);
 		
 			}

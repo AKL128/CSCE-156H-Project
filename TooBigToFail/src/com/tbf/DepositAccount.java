@@ -13,7 +13,7 @@ public class DepositAccount extends Asset{
 	private double apr;
 	private double totalBalance;
 
-	public DepositAccount(int assetId, String code, String id, String label, double apr) {
+	public DepositAccount(Integer assetId, String code, String id, String label, double apr) {
 		super(assetId, code, id, label);
 		this.apr = apr;
 	}

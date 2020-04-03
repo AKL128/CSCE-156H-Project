@@ -14,9 +14,12 @@ public class ExpertBroker extends Broker{
 
 	private static final double feeRate = 0.0375;
 
-	public ExpertBroker(int brokerId, String personCode, String brokerData, String firstName, String lastName, Address address,
-			ArrayList<String> email) {
-		super(brokerId, personCode, brokerData, firstName, lastName, address, email);
+	public ExpertBroker(Integer brokerId, String personCode, String brokerData, String firstName, String lastName, Address address) {
+		super(brokerId, personCode, brokerData, firstName, lastName, address);
+	}
+	
+	public ExpertBroker(String firstName, String lastName) {
+		this(null, null, null, firstName, lastName, null);
 	}
 
 	public double getFee() {
