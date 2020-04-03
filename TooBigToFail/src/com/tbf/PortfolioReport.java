@@ -88,10 +88,16 @@ public class PortfolioReport {
 		//portfolioSummaryReport(portListFlat);
 
 		Collections.sort(portList);
+		Collections.sort(portListFlat);
 		
 		for(Portfolio port : portList) {
 			portfolioDetailedReport(port);
 		}
+		
+//		for(Portfolio port : portListFlat) {
+//			portfolioDetailedReport(port);
+//		}
+		
 	}
 }
 
