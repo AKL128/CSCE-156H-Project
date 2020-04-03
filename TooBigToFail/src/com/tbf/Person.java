@@ -16,7 +16,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+
 public class Person {
+	
+	private static final Logger log = LogManager.getLogger(Person.class);
+	
 	protected Integer personId;
 	protected String personCode;
 	protected String brokerData;
@@ -102,27 +108,12 @@ public class Person {
 		String emailName = null;
 		List<String> emails = new ArrayList<>();
 
-		String DRIVER_CLASS = "com.mysql.jdbc.Driver";
-		try {
-			Class.forName(DRIVER_CLASS).getDeclaredConstructor().newInstance();
-		} catch(Exception e) {
-			throw new RuntimeException(e);
-		}
-
 		Connection conn = null;
-		String url = DatabaseInfo.url;
-		String username = DatabaseInfo.username;
-		String password = DatabaseInfo.password;
 
-		try {
-			conn = DriverManager.getConnection(url, username, password);
-		} catch(SQLException e) {
-			throw new RuntimeException(e);
-		}
-
-			String query = "select e.emailName, e.personId from Email e";
-			PreparedStatement ps = null;
-			ResultSet rs = null;
+		conn = DatabaseInfo.getConnection();
+		String query = "select e.emailName, e.personId from Email e";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
 
 		try {
 			ps = conn.prepareStatement(query);
@@ -164,44 +155,30 @@ public class Person {
 		List<Address> addressList = Address.loadAllAddresses();
 		List<String> emailList = loadAllEmails();
 
-		String DRIVER_CLASS = "com.mysql.jdbc.Driver";
-		try {
-			Class.forName(DRIVER_CLASS).getDeclaredConstructor().newInstance();
-		} catch(Exception e) {
-			throw new RuntimeException(e);
-		}
-
 		Connection conn = null;
-		String url = DatabaseInfo.url;
-		String username = DatabaseInfo.username;
-		String password = DatabaseInfo.password;
 
-		try {
-			conn = DriverManager.getConnection(url, username, password);
-		} catch(SQLException e) {
-			throw new RuntimeException(e);
-		}
+		conn = DatabaseInfo.getConnection();
 
-			String query = "select * from Person p "
-					+ "join Address a on a.addressId = p.addressId "
-					+ "join Email e on e.personId = p.personId";
-			PreparedStatement ps = null;
-			ResultSet rs = null;
+		String query = "select p.personId, p.personCode, p.brokerData, p.firstName, p.lastName, p.addressId from Person p "
+				+ "join Address a on a.addressId = p.addressId "
+				+ "join Email e on e.personId = p.personId";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
 
 		try {
 			ps = conn.prepareStatement(query);
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				
-				int personId = rs.getInt("personId");
-				String personCode = rs.getString("personCode");
-				String brokerData = rs.getString("brokerData");
-				String firstName = rs.getString("firstName");
-				String lastName = rs.getString("lastName");
+				int personId = rs.getInt("p.personId");
+				String personCode = rs.getString("p.personCode");
+				String brokerData = rs.getString("p.brokerData");
+				String firstName = rs.getString("p.firstName");
+				String lastName = rs.getString("p.lastName");
 				Address address = null;
 				ArrayList<String> emails = new ArrayList<String>();
 				for(Address a : addressList) {
-					if(a.getAddressId() == rs.getInt("addressId")) {
+					if(a.getAddressId() == rs.getInt("p.addressId")) {
 						address = a;
 					}
 				}
@@ -222,7 +199,7 @@ public class Person {
 				for(String em : emailList) {
 					emailTokens = em.split(",");
 					int emailPersonId = Integer.parseInt(emailTokens[0]);
-					if(emailPersonId == rs.getInt("personId")) {
+					if(emailPersonId == rs.getInt("p.personId")) {
 						p.addEmail(emailTokens[1]);
 					}
 				}

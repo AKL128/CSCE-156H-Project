@@ -98,30 +98,16 @@ public class Portfolio implements Comparable<Portfolio>{
 		List<Person> persons = Person.loadAllPersons();
 		List<Asset> assets = Asset.loadAllAssets();
 
-		String DRIVER_CLASS = "com.mysql.jdbc.Driver";
-		try {
-			Class.forName(DRIVER_CLASS).getDeclaredConstructor().newInstance();
-		} catch(Exception e) {
-			throw new RuntimeException(e);
-		}
-
 		Connection conn = null;
-		String url = DatabaseInfo.url;
-		String username = DatabaseInfo.username;
-		String password = DatabaseInfo.password;
 
-		try {
-			conn = DriverManager.getConnection(url, username, password);
-		} catch(SQLException e) {
-			throw new RuntimeException(e);
-		}
+		conn = DatabaseInfo.getConnection();
 
-			String query = "select o.personId, m.personId, b.personId, po.portfolioId, po.portCode from Portfolio po "
-					+ "join Person o on o.personId = po.ownerId "
-					+ "join Person m on m.personId = po.managerId "
-					+ "join Person b on b.personId = po.beneficiaryId";
-			PreparedStatement ps = null;
-			ResultSet rs = null;
+		String query = "select o.personId, m.personId, b.personId, po.portfolioId, po.portCode from Portfolio po "
+				+ "join Person o on o.personId = po.ownerId "
+				+ "join Person m on m.personId = po.managerId "
+				+ "join Person b on b.personId = po.beneficiaryId";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
 
 		try {
 			ps = conn.prepareStatement(query);
@@ -145,8 +131,6 @@ public class Portfolio implements Comparable<Portfolio>{
 				}
 				
 				p = new Portfolio(portfolioId, portCode, owner, manager, beneficiary);
-				
-
 				
 				portfolios.add(p);
 			}

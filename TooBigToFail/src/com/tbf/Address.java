@@ -16,7 +16,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+
 public class Address {
+	
+	private static final Logger log = LogManager.getLogger(Address.class);
+	
 	private Integer addressId;
 	private String street;
 	private String city;
@@ -69,47 +75,34 @@ public class Address {
 
 		List<Address> addresses = new ArrayList<>();
 
-		String DRIVER_CLASS = "com.mysql.jdbc.Driver";
-		try {
-			Class.forName(DRIVER_CLASS).getDeclaredConstructor().newInstance();
-		} catch(Exception e) {
-			throw new RuntimeException(e);
-		}
-
 		Connection conn = null;
-		String url = DatabaseInfo.url;
-		String username = DatabaseInfo.username;
-		String password = DatabaseInfo.password;
 
-		try {
-			conn = DriverManager.getConnection(url, username, password);
-		} catch(SQLException e) {
-			throw new RuntimeException(e);
-		}
+		conn = DatabaseInfo.getConnection();
 
-			String query = "select * from Address a "
+		String query = "select a.addressId, a.street, a.city, s.stateName, a.zipCode, c.countryName from Address a "
 					+ "join State s on s.stateId = a.stateId "
 					+ "join Country c on c.countryId = a.countryId";
-			PreparedStatement ps = null;
-			ResultSet rs = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
 
 		try {
 			ps = conn.prepareStatement(query);
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				
-				int addressId = rs.getInt("addressId");
-				String street = rs.getString("street");
-				String city = rs.getString("city");
-				String state = rs.getString("stateName");
-				String zip = rs.getString("zipCode");
-				String country = rs.getString("countryName");
+				int addressId = rs.getInt("a.addressId");
+				String street = rs.getString("a.street");
+				String city = rs.getString("a.city");
+				String state = rs.getString("s.stateName");
+				String zip = rs.getString("a.zipCode");
+				String country = rs.getString("c.countryName");
 				
 				a = new Address(addressId, street, city, state, zip, country);
 				
 				addresses.add(a);
 			}
 		} catch(SQLException e) {
+			log.error("Address has something bad in it!", e);
 			throw new RuntimeException(e);
 		}
 		
