@@ -143,7 +143,7 @@ insert into Person (personCode, brokerData, firstName, lastName, addressId) valu
 	('AI4H73', 'J,sec324', 'Ikey', 'Shelborne', (SELECT addressId FROM Address WHERE street = '5 Oakridge Pass'));
 
 
-    
+
 --- Emails
 insert into Email (emailName, personId) values
 	('adeeson0@4shared.com', (SELECT personId FROM Person WHERE lastName = 'Deeson' AND firstName = 'Amara')),
@@ -170,39 +170,45 @@ INSERT INTO Email (emailId, emailName, personId) values
 -- Emails without a person
 insert into Email (emailName) values
 	('randomEmail@4shared.com');
---- Assets
-insert into Asset (assetCode, assetType, assetLabel, apr, balance, quarterlyDividend, baseRateOfReturn, betaMeasure, stockSymbol, sharePrice, baseOmegaMeasure, totalValue) values
-	('YMj2jjQt', 'D', 'Photobug', 83.89, null, null, null, null, null, null, null, null),
-	('FSacHJRA', 'D', 'Minyx', 36.5, null, null, null, null, null, null, null, null),
-	('TTAVkJ1z', 'D', 'Kimia', 80.46, null, null, null, null, null, null, null, null),
-	('WSWGFGOt', 'D', 'Tazz', 2.14, null, null, null, null, null, null, null, null),
-	('Z2XGqhbU', 'D', 'Photobug', 22.17, null, null, null, null, null, null, null, null),
-	('OYWhU0b8', 'D', 'Agivu', 13.34, null, null, null, null, null, null, null, null),
-	('NMgkglJq', 'D', 'Gigabox', 75.03, null, null, null, null, null, null, null, null),
-	('tAceWN9L', 'D', 'Yotz', 32.12, null, null, null, null, null, null, null, null),
-	('zUcSIYPE', 'D', 'Thoughtbridge', 70.95, null, null, null, null, null, null, null, null),
-	('giff6C5r', 'D', 'Dablist', 70.77, null, null, null, null, null, null, null, null),
-	('89uKEpsi', 'S', 'Buzzster', null, 1738472.35, 53.02, 0.14452, 43, 'ACV', 99737.57, null, null),
-	('4WDyHL0t', 'S', 'Realbridge', null, 4698672.52, 13.78, 0.85331, 21, 'PRA', 1963.33, null, null),
-	('OM3XnDC7', 'S', 'Trupe', null, 9816301.0, 30.42, 0.09815, 87, 'RESN', 56916.89, null, null),
-	('s0rhIsHa', 'S', 'Topdrive', null, 6828861.31, 27.51, 0.87092, 77.77, 'KND', 834.36, null, null),
-	('fWHZRzrb', 'S', 'Aimbo', null, 353829.81, 8.21, 0.1455, 12.21, 'SSFN', 21662.82, null, null),
-	('0KZ7GLay', 'S', 'Twimbo', null, 9852915.0, 82.89, 0.43662, 44.4, 'TIER', 36996.0, null, null),
-	('CvGUIwRO', 'S', 'Meemm', null, 2656051.28, 36.34, 0.41667, 69, 'EW', 42952.67, null, null),
-	('Q2pTejug', 'S', 'Skyvu', null, 5381220.0, 38.14, 0.55755, 65.57, 'HABT', 74776.52, null, null),
-	('un1qqk3u', 'S', 'Talane', null, 3163798.35, 6.21, 0.86828, 1, 'Y', 54341.31, null, null),
-	('4agAKJEq', 'S', 'Rhycero', null, 4224872.0, 64.13, 0.26453, 99.9, 'WTW', 33628.92, null, null),
-	('ZEnSzfbI', 'P', 'Roombo', null, 3519178.68, 15.08, null, null, null, null, 0.86325, 6514528.34),
-	('kzMLkD2z', 'P', 'Kwimbee', null, 3125087.79, 38.38, null, null, null, null, 0.0325, 729509.87),
-	('N9dpHjke', 'P', 'Avamm', null, 8901536.0, 12.37, null, null, null, null, 0.76147, 666338.36),
-	('N4ujtpKT', 'P', 'Fadeo', null, 5659081.7, 82.82, null, null, null, null, 0.71471, 549900.29),
-	('EbTjfJsg', 'P', 'JumpXS', null, 325017.3, 94.36, null, null, null, null, 0.70894, 5780667.82),
-	('hm7FbEF2', 'P', 'Livetube', null, 8482339.0, 11.79, null, null, null, null, 0.36347, 8560968.0),
-	('zd68EsoK', 'P', 'Vidoo', null, 3567412.0, 63.69, null, null, null, null, 0.06971, 2774868.86),
-	('D6j50RPV', 'P', 'Zoozzy', null, 9500256.0, 21.91, null, null, null, null, 0.62879, 8101357.0),
-	('bC51jaAV', 'P', 'Tagchat', null, 5180527.3, 11.15, null, null, null, null, 0.35742, 7391383.09),
-	('LS30qQV5', 'P', 'Wordify', null, 8041050.18, 34.4, null, null, null, null, 0.03922, 9126317.0);
 
+-- Deposit Accounts
+insert into Asset (assetCode, assetType, assetLabel, apr) values
+  ('YMj2jjQt', 'D', 'Photobug', 83.89),
+	('FSacHJRA', 'D', 'Minyx', 36.5),
+	('TTAVkJ1z', 'D', 'Kimia', 80.46),
+	('WSWGFGOt', 'D', 'Tazz', 2.14),
+	('Z2XGqhbU', 'D', 'Photobug', 22.17),
+	('OYWhU0b8', 'D', 'Agivu', 13.34),
+	('NMgkglJq', 'D', 'Gigabox', 75.03),
+	('tAceWN9L', 'D', 'Yotz', 32.12),
+	('zUcSIYPE', 'D', 'Thoughtbridge', 70.95),
+	('giff6C5r', 'D', 'Dablist', 70.77);
+
+-- Stocks
+insert into Asset (assetCode, assetType, assetLabel, balance, quarterlyDividend, baseRateOfReturn, betaMeasure, stockSymbol, sharePrice) values
+  ('89uKEpsi', 'S', 'Buzzster', 1738472.35, 53.02, 0.14452, 43, 'ACV', 99737.57),
+	('4WDyHL0t', 'S', 'Realbridge', 4698672.52, 13.78, 0.85331, 21, 'PRA', 1963.33),
+	('OM3XnDC7', 'S', 'Trupe', 9816301.0, 30.42, 0.09815, 87, 'RESN', 56916.89),
+	('s0rhIsHa', 'S', 'Topdrive', 6828861.31, 27.51, 0.87092, 77.77, 'KND', 834.36),
+	('fWHZRzrb', 'S', 'Aimbo', 353829.81, 8.21, 0.1455, 12.21, 'SSFN', 21662.82),
+	('0KZ7GLay', 'S', 'Twimbo', 9852915.0, 82.89, 0.43662, 44.4, 'TIER', 36996.0),
+	('CvGUIwRO', 'S', 'Meemm', 2656051.28, 36.34, 0.41667, 69, 'EW', 42952.67),
+	('Q2pTejug', 'S', 'Skyvu', 5381220.0, 38.14, 0.55755, 65.57, 'HABT', 74776.52),
+	('un1qqk3u', 'S', 'Talane', 3163798.35, 6.21, 0.86828, 1, 'Y', 54341.31),
+	('4agAKJEq', 'S', 'Rhycero', 4224872.0, 64.13, 0.26453, 99.9, 'WTW', 33628.92);
+
+-- Private Investments
+insert into Asset (assetCode, assetType, assetLabel, quarterlyDividend, baseRateOfReturn, baseOmegaMeasure, totalValue) values
+  ('ZEnSzfbI', 'P', 'Roombo', 3519178.68, 15.08, 0.86325, 6514528.34),
+	('kzMLkD2z', 'P', 'Kwimbee', 3125087.79, 38.38, 0.0325, 729509.87),
+	('N9dpHjke', 'P', 'Avamm', 8901536.0, 12.37, 0.76147, 666338.36),
+	('N4ujtpKT', 'P', 'Fadeo', 5659081.7, 82.82, 0.71471, 549900.29),
+	('EbTjfJsg', 'P', 'JumpXS', 325017.3, 94.36, 0.70894, 5780667.82),
+	('hm7FbEF2', 'P', 'Livetube', 8482339.0, 11.79, 0.36347, 8560968.0),
+	('zd68EsoK', 'P', 'Vidoo', 3567412.0, 63.69, 0.06971, 2774868.86),
+	('D6j50RPV', 'P', 'Zoozzy', 9500256.0, 21.91, 0.62879, 8101357.0),
+	('bC51jaAV', 'P', 'Tagchat', 5180527.3, 11.15, 0.35742, 7391383.09),
+	('LS30qQV5', 'P', 'Wordify', 8041050.18, 34.4, 0.03922, 9126317.0);
 
 -- Portfolios
 insert into Portfolio (portCode, ownerId, managerId, beneficiaryId) values
