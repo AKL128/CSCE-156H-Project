@@ -79,9 +79,9 @@ public class PortfolioReport {
 		List<Asset> aListFlat = DataConverter.parseAssetFile();
 		List<Person> pListFlat = DataConverter.parsePersonFile();
 
-		List<Portfolio> portList = Portfolio.loadAllPortfolios();
-		List<Asset> aList = Asset.loadAllAssets();
-		List<Person> pList = Person.loadAllPersons();
+		List<Portfolio> portList = DatabaseInfo.loadAllPortfolios();
+		List<Asset> aList = DatabaseInfo.loadAllAssets();
+		List<Person> pList = DatabaseInfo.loadAllPersons();
 
 		portfolioSummaryReport(portList);
 

@@ -70,56 +70,6 @@ public class Address {
 		return sb.toString();
 	}
 	
-	public static List<Address> loadAllAddresses() {
-		Address a = null;
-
-		List<Address> addresses = new ArrayList<>();
-
-		Connection conn = null;
-
-		conn = DatabaseInfo.getConnection();
-
-		String query = "select a.addressId, a.street, a.city, s.stateName, a.zipCode, c.countryName from Address a "
-					+ "join State s on s.stateId = a.stateId "
-					+ "join Country c on c.countryId = a.countryId";
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			ps = conn.prepareStatement(query);
-			rs = ps.executeQuery();
-			while(rs.next()) {
-				
-				int addressId = rs.getInt("a.addressId");
-				String street = rs.getString("a.street");
-				String city = rs.getString("a.city");
-				String state = rs.getString("s.stateName");
-				String zip = rs.getString("a.zipCode");
-				String country = rs.getString("c.countryName");
-				
-				a = new Address(addressId, street, city, state, zip, country);
-				
-				addresses.add(a);
-			}
-		} catch(SQLException e) {
-			log.error("Address has something bad in it!", e);
-			throw new RuntimeException(e);
-		}
-		
-		try{
-			if(rs != null && !rs.isClosed()) {
-				rs.close();
-			}
-			if(ps != null && !ps.isClosed()) {
-				ps.close();
-			}
-			if(conn != null && !conn.isClosed()) {
-				conn.close();
-			}
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-		return addresses;
-	}
+	
 
 }
