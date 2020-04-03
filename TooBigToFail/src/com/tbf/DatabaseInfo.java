@@ -282,6 +282,7 @@ public class DatabaseInfo {
 	}
 	
 	public static List<Portfolio> loadAllPortfolios() {
+		log.info("Loading All Portfolios. . .");
 		Portfolio p = null;
 
 		List<Portfolio> portfolios = new ArrayList<>();
@@ -325,6 +326,7 @@ public class DatabaseInfo {
 				portfolios.add(p);
 			}
 		} catch(SQLException e) {
+			log.error("Failed Preparing Portfolios", e);
 			throw new RuntimeException(e);
 		}
 		
@@ -346,6 +348,7 @@ public class DatabaseInfo {
 				
 			}
 		} catch (SQLException e) {
+			log.error("Failed Preparing Portfolio's Assets", e);
 			throw new RuntimeException(e);
 		}
 		
