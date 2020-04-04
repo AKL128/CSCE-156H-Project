@@ -1,3 +1,5 @@
+use aluu;
+
 start transaction;
 
 drop table if exists PortfolioAsset;
@@ -236,19 +238,19 @@ insert into Asset (assetCode, assetType, assetLabel, quarterlyDividend, baseRate
 	('LS30qQV5', 'P', 'Wordify', 8041050.18, 34.4, 0.03922, 9126317.0);
 
 -- Portfolios
-insert into Portfolio (portCode, ownerId, managerId) values
-	('PD111', (SELECT personId FROM Person WHERE lastName = 'Deeson' AND firstName = 'Amara'), (SELECT personId FROM Person WHERE lastName = 'Biffin' AND firstName = 'Fred')),
-    ('PT001', (SELECT personId FROM Person WHERE lastName = 'Rignoldes' AND firstName = 'Sergei'), (SELECT personId FROM Person WHERE lastName = 'Ropartz' AND firstName = 'Tamiko')),
-    ('PF001', (SELECT personId FROM Person WHERE lastName = 'Lacaze' AND firstName = 'Opaline'), (SELECT personId FROM Person WHERE lastName = 'McAllen' AND firstName = 'Dag')),
-    ('PT002', (SELECT personId FROM Person WHERE lastName = 'Applegate' AND firstName = 'Glad'), (SELECT personId FROM Person WHERE lastName = 'Brant' AND firstName = 'Simona')),
-    ('PF002', (SELECT personId FROM Person WHERE lastName = 'Mansour' AND firstName = 'Barton'), (SELECT personId FROM Person WHERE lastName = 'Brant' AND firstName = 'Simona')),
-    ('PD001', (SELECT personId FROM Person WHERE lastName = 'Grevel' AND firstName = 'Alano'), (SELECT personId FROM Person WHERE lastName = 'Schirach' AND firstName = 'Emera')),
-    ('PZ001', (SELECT personId FROM Person WHERE lastName = 'Calcut' AND firstName = 'Brand'), (SELECT personId FROM Person WHERE lastName = 'Gasson' AND firstName = 'Marco')),
-    ('PZ002', (SELECT personId FROM Person WHERE lastName = 'Shelborne' AND firstName = 'Ikey'), (SELECT personId FROM Person WHERE lastName = 'Calcut' AND firstName = 'Brand')),
-    ('PZ003', (SELECT personId FROM Person WHERE lastName = 'Shelborne' AND firstName = 'Ikey'), (SELECT personId FROM Person WHERE lastName = 'Brant' AND firstName = 'Simona')),
-    ('PF473', (SELECT personId FROM Person WHERE lastName = 'Wei' AND firstName = 'Wang'), (SELECT personId FROM Person WHERE lastName = 'David' AND firstName = 'Hunter')),
-    ('CPF003', (SELECT personId FROM Person WHERE lastName = 'Yagami' AND firstName = 'Light'), (SELECT personId FROM Person WHERE lastName = 'Johnson' AND firstName = 'Joe')),
-    ('PT114', (SELECT personId FROM Person WHERE lastName = 'Alden' AND firstName = 'John'), (SELECT personId FROM Person WHERE lastName = 'Tom' AND firstName = 'Adison'));
+insert into Portfolio (portCode, ownerId, managerId, beneficiaryId) values
+	('PD111', (SELECT personId FROM Person WHERE lastName = 'Deeson' AND firstName = 'Amara'), (SELECT personId FROM Person WHERE lastName = 'Biffin' AND firstName = 'Fred'), (SELECT personId FROM Person WHERE lastName = 'McAllen' AND firstName = 'Dag')),
+    ('PT001', (SELECT personId FROM Person WHERE lastName = 'Rignoldes' AND firstName = 'Sergei'), (SELECT personId FROM Person WHERE lastName = 'Ropartz' AND firstName = 'Tamiko'), (SELECT personId FROM Person WHERE lastName = 'Deeson' AND firstName = 'Amara')),
+    ('PF001', (SELECT personId FROM Person WHERE lastName = 'Lacaze' AND firstName = 'Opaline'), (SELECT personId FROM Person WHERE lastName = 'McAllen' AND firstName = 'Dag'), (SELECT personId FROM Person WHERE lastName = 'Gasson' AND firstName = 'Marco')),
+    ('PT002', (SELECT personId FROM Person WHERE lastName = 'Applegate' AND firstName = 'Glad'), (SELECT personId FROM Person WHERE lastName = 'Brant' AND firstName = 'Simona'), (SELECT personId FROM Person WHERE lastName = 'Calcut' AND firstName = 'Brand')),
+    ('PF002', (SELECT personId FROM Person WHERE lastName = 'Mansour' AND firstName = 'Barton'), (SELECT personId FROM Person WHERE lastName = 'Brant' AND firstName = 'Simona'), (SELECT personId FROM Person WHERE lastName = 'Grevel' AND firstName = 'Alano')),
+    ('PD001', (SELECT personId FROM Person WHERE lastName = 'Grevel' AND firstName = 'Alano'), (SELECT personId FROM Person WHERE lastName = 'Schirach' AND firstName = 'Emera'), (SELECT personId FROM Person WHERE lastName = 'Brant' AND firstName = 'Simona')),
+    ('PZ001', (SELECT personId FROM Person WHERE lastName = 'Calcut' AND firstName = 'Brand'), (SELECT personId FROM Person WHERE lastName = 'Gasson' AND firstName = 'Marco'), (SELECT personId FROM Person WHERE lastName = 'Calcut' AND firstName = 'Brand')),
+    ('PZ002', (SELECT personId FROM Person WHERE lastName = 'Shelborne' AND firstName = 'Ikey'), (SELECT personId FROM Person WHERE lastName = 'Calcut' AND firstName = 'Brand'), (SELECT personId FROM Person WHERE lastName = 'David' AND firstName = 'Hunter')),
+    ('PZ003', (SELECT personId FROM Person WHERE lastName = 'Shelborne' AND firstName = 'Ikey'), (SELECT personId FROM Person WHERE lastName = 'Brant' AND firstName = 'Simona'), (SELECT personId FROM Person WHERE lastName = 'Johnson' AND firstName = 'Joe')),
+    ('PF473', (SELECT personId FROM Person WHERE lastName = 'Wei' AND firstName = 'Wang'), (SELECT personId FROM Person WHERE lastName = 'David' AND firstName = 'Hunter'), (SELECT personId FROM Person WHERE lastName = 'Lacaze' AND firstName = 'Opaline')),
+    ('CPF003', (SELECT personId FROM Person WHERE lastName = 'Yagami' AND firstName = 'Light'), (SELECT personId FROM Person WHERE lastName = 'Johnson' AND firstName = 'Joe'), (SELECT personId FROM Person WHERE lastName = 'Tom' AND firstName = 'Adison')),
+    ('PT114', (SELECT personId FROM Person WHERE lastName = 'Alden' AND firstName = 'John'), (SELECT personId FROM Person WHERE lastName = 'Tom' AND firstName = 'Adison'), (SELECT personId FROM Person WHERE lastName = 'Yagami' AND firstName = 'Light'));
 
 -- Portfolio Assets
 insert into PortfolioAsset (portfolioId, assetId, assetAmount) values

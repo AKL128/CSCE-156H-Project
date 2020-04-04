@@ -21,7 +21,7 @@ import org.apache.logging.log4j.core.config.DefaultConfiguration;
 
 public class PortfolioReport {
 	
-	public static void portfolioSummaryReport(List<Portfolio> portfolioList) {
+	public static StringBuilder portfolioSummaryReport(List<Portfolio> portfolioList) {
 		Collections.sort(portfolioList);
 		
 		StringBuilder summaryReport = new StringBuilder();
@@ -30,6 +30,9 @@ public class PortfolioReport {
 		summaryReport.append(String.format("%-8s %-20s %16s %16s %16s %16s %16s %16s\n", "Portfolio", "Owner", "Manager", "Fees", "Commissions", "Weighted Risk", "Return", "Total"));
 		
 		double summaryTotal = 0;
+		double summaryFee = 0;
+		double summaryCommission = 0;
+		double summaryReturn = 0;
 		for(Portfolio port : portfolioList) {
 			port.getManager().setNumberOfAsset(port.getAssetList().size());
 			port.getManager().setTotalAnnualReturn(port.getTotalAnnualReturn());
@@ -38,14 +41,16 @@ public class PortfolioReport {
 				, port.getManager().getFee(), port.getManager().getCommission(), port.getAggregateRisk(), port.getTotalAnnualReturn()
 				, port.getTotalValue()));
 			summaryTotal += port.getTotalValue();
+			summaryFee += port.getManager().getFee();
+			summaryCommission += port.getManager().getCommission();
+			summaryReturn += port.getTotalAnnualReturn();
 		}
 		summaryReport.append(String.format("========================================================================================================================================\n"));
-		summaryReport.append(String.format("%131.2f", summaryTotal));
-		System.out.println(summaryReport);
-		return;
+		summaryReport.append(String.format("Totals %56.2f %16.2f %33.2f %16.2f", summaryFee, summaryCommission, summaryReturn, summaryTotal));
+		return summaryReport;
 	}
 	
-	public static void portfolioDetailedReport(Portfolio portfolio) {
+	public static StringBuilder portfolioDetailedReport(Portfolio portfolio) {
 		StringBuilder detailedReport = new StringBuilder();
 		detailedReport.append(String.format("Portfolio %s\n", portfolio.getPortCode()));
 		detailedReport.append(String.format("Owner: %s\n", portfolio.getOwner().getFullName()));
@@ -67,14 +72,19 @@ public class PortfolioReport {
 		}
 		detailedReport.append(String.format("-----------------------------------------------------------------------------------------------\n"));
 		detailedReport.append(String.format("%64.5f %16.2f % 16.2f\n", portfolio.getAggregateRisk(), portfolio.getTotalAnnualReturn(), portfolio.getTotalValue()));
-		System.out.println(detailedReport);
-		return;
+		return detailedReport;
 	}
 
 	public static void main(String args[]) {
+	
+	try {
 		
 		Configurator.initialize(new DefaultConfiguration());
 		Configurator.setRootLevel(Level.INFO);
+		
+		File outputReport = new File("data/output.txt");
+		PrintWriter pwR = new PrintWriter(outputReport);
+		
 		List<Portfolio> portListFlat = DataConverter.parsePortfolioFile();
 		List<Asset> aListFlat = DataConverter.parseAssetFile();
 		List<Person> pListFlat = DataConverter.parsePersonFile();
@@ -85,7 +95,7 @@ public class PortfolioReport {
 
 		portfolioSummaryReport(portList);
 
-		//portfolioSummaryReport(portListFlat);
+		portfolioSummaryReport(portListFlat);
 
 		Collections.sort(portList);
 		Collections.sort(portListFlat);
@@ -94,10 +104,24 @@ public class PortfolioReport {
 			portfolioDetailedReport(port);
 		}
 		
-//		for(Portfolio port : portListFlat) {
-//			portfolioDetailedReport(port);
-//		}
+		for(Portfolio port : portListFlat) {
+			portfolioDetailedReport(port);
+		}
 		
+		pwR.println(portfolioSummaryReport(portList));
+		System.out.println(portfolioSummaryReport(portList));
+		for(Portfolio port : portList) {
+			pwR.println(portfolioDetailedReport(port));
+			System.out.println(portfolioDetailedReport(port));
+		}
+		
+		pwR.close();
+		
+
+		
+	} catch(FileNotFoundException fnfe) {
+		throw new RuntimeException(fnfe);
+	}
 	}
 }
 

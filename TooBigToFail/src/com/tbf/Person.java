@@ -85,6 +85,10 @@ public class Person {
 	public List<String> getEmail() {
 		return email;
 	}
+	
+	public void setEmailList(List<String> emails) {
+		this.email = emails;
+	}
 
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
