@@ -1,3 +1,11 @@
+/**
+ * Author: Anthony luu, and Brett Berg
+ * Date: 2020/3/30
+ *
+ * This is a class that holds methods for database sql retrieval and connection
+ *
+ */
+
 package com.tbf;
 
 import java.sql.Connection;
