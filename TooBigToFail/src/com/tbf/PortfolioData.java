@@ -10,8 +10,16 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+
+import org.apache.logging.log4j.Logger;
+
+import org.apache.logging.log4j.LogManager;
+
+
 public class PortfolioData {
 
 	private static final Logger log = LogManager.getLogger(Address.class);
@@ -35,8 +43,9 @@ public class PortfolioData {
 
 	/**
 	 * Method that removes every person record from the database
+	 * @throws SQLException 
 	 */
-	public static void removeAllPersons() {
+	public static void removeAllPersons() throws SQLException {
 		log.info("Removing all Persons. . .");
 		Connection conn = null;
 		conn = PortfolioData.getConnection();
@@ -66,8 +75,9 @@ public class PortfolioData {
 	 * Removes the person record from the database corresponding to the
 	 * provided <code>personCode</code>
 	 * @param personCode
+	 * @throws SQLException 
 	 */
-	public static void removePerson(String personCode) {
+	public static void removePerson(String personCode) throws SQLException {
 		log.info("Removing Person . . .");
 		Connection conn = null;
 		conn = PortfolioData.getConnection();
@@ -143,8 +153,9 @@ public class PortfolioData {
 	 * provided <code>personCode</code>
 	 * @param personCode
 	 * @param email
+	 * @throws SQLException 
 	 */
-	public static void addEmail(String personCode, String email) {
+	public static void addEmail(String personCode, String email) throws SQLException {
 		log.info("Adding Email to Person. . .");
 		Connection conn = null;
 		conn = PortfolioData.getConnection();
@@ -173,8 +184,9 @@ public class PortfolioData {
 
 	/**
 	 * Removes all asset records from the database
+	 * @throws SQLException 
 	 */
-	public static void removeAllAssets() {
+	public static void removeAllAssets() throws SQLException {
 		log.info("Removing all Assets. . .");
 		Connection conn = null;
 		conn = PortfolioData.getConnection();
@@ -204,8 +216,9 @@ public class PortfolioData {
 	 * Removes the asset record from the database corresponding to the
 	 * provided <code>assetCode</code>
 	 * @param assetCode
+	 * @throws SQLException 
 	 */
-	public static void removeAsset(String assetCode) {
+	public static void removeAsset(String assetCode) throws SQLException {
 		log.info("Removing Asset. . .");
 		Connection conn = null;
 		conn = PortfolioData.getConnection();
@@ -238,8 +251,9 @@ public class PortfolioData {
 	 * @param assetCode
 	 * @param label
 	 * @param apr
+	 * @throws SQLException 
 	 */
-	public static void addDepositAccount(String assetCode, String label, double apr) {
+	public static void addDepositAccount(String assetCode, String label, double apr) throws SQLException {
 		log.info("Adding Deposit Account. . .");
 		Connection conn = null;
 		conn = PortfolioData.getConnection();
@@ -275,9 +289,10 @@ public class PortfolioData {
 	 * @param baseRateOfReturn
 	 * @param baseOmega
 	 * @param totalValue
+	 * @throws SQLException 
 	 */
 	public static void addPrivateInvestment(String assetCode, String label, Double quarterlyDividend,
-			Double baseRateOfReturn, Double baseOmega, Double totalValue) {
+			Double baseRateOfReturn, Double baseOmega, Double totalValue) throws SQLException {
 				log.info("Adding Private Investment. . .");
 				Connection conn = null;
 				conn = PortfolioData.getConnection();
@@ -314,9 +329,10 @@ public class PortfolioData {
 	 * @param beta
 	 * @param stockSymbol
 	 * @param sharePrice
+	 * @throws SQLException 
 	 */
 	public static void addStock(String assetCode, String label, Double quarterlyDividend,
-			Double baseRateOfReturn, Double beta, String stockSymbol, Double sharePrice) {
+			Double baseRateOfReturn, Double beta, String stockSymbol, Double sharePrice) throws SQLException {
 				log.info("Adding Stock. . .");
 				Connection conn = null;
 				conn = PortfolioData.getConnection();
@@ -345,8 +361,9 @@ public class PortfolioData {
 
 	/**
 	 * Removes all portfolio records from the database
+	 * @throws SQLException 
 	 */
-	public static void removeAllPortfolios() {
+	public static void removeAllPortfolios() throws SQLException {
 		log.info("Removing all Portfolios. . .");
 		Connection conn = null;
 		conn = PortfolioData.getConnection();
@@ -376,8 +393,9 @@ public class PortfolioData {
 	 * Removes the portfolio record from the database corresponding to the
 	 * provided <code>portfolioCode</code>
 	 * @param portfolioCode
+	 * @throws SQLException 
 	 */
-	public static void removePortfolio(String portfolioCode) {
+	public static void removePortfolio(String portfolioCode) throws SQLException {
 		log.info("Removing Portfolio. . .");
 		Connection conn = null;
 		conn = PortfolioData.getConnection();
@@ -411,8 +429,9 @@ public class PortfolioData {
 	 * @param ownerCode
 	 * @param managerCode
 	 * @param beneficiaryCode
+	 * @throws SQLException 
 	 */
-	public static void addPortfolio(String portfolioCode, String ownerCode, String managerCode, String beneficiaryCode) {
+	public static void addPortfolio(String portfolioCode, String ownerCode, String managerCode, String beneficiaryCode) throws SQLException {
 		log.info("Adding Portfolio. . .");
 		Connection conn = null;
 		conn = PortfolioData.getConnection();
@@ -450,8 +469,9 @@ public class PortfolioData {
 	 * @param portfolioCode
 	 * @param assetCode
 	 * @param value
+	 * @throws SQLException 
 	 */
-	public static void addAsset(String portfolioCode, String assetCode, double value) {
+	public static void addAsset(String portfolioCode, String assetCode, double value) throws SQLException {
 		log.info("Adding Asset to Portfolio. . .");
 		Connection conn = null;
 		conn = PortfolioData.getConnection();
