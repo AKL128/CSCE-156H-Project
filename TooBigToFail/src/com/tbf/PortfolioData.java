@@ -37,7 +37,7 @@ public class PortfolioData {
 	 * Method that removes every person record from the database
 	 */
 	public static void removeAllPersons() {
-		log.info("Deleting all Persons. . .");
+		log.info("Removing all Persons. . .");
 		Connection conn = null;
 		conn = PortfolioData.getConnection();
  		try {
@@ -54,7 +54,7 @@ public class PortfolioData {
 			}
 			conn.commit();
 		} catch(Exception e) {
-			connection.rollback();
+			conn.rollback();
 		} finally {
 			if(conn == null) {
 				conn.close();
@@ -68,7 +68,7 @@ public class PortfolioData {
 	 * @param personCode
 	 */
 	public static void removePerson(String personCode) {
-		log.info("Deleting Person . . .");
+		log.info("Removing Person . . .");
 		Connection conn = null;
 		conn = PortfolioData.getConnection();
 		try {
@@ -86,7 +86,7 @@ public class PortfolioData {
 			}
 			conn.commit();
 		} catch(Exception e) {
-			connection.rollback();
+			conn.rollback();
 		} finally {
 			if(conn == null) {
 				conn.close();
@@ -130,7 +130,7 @@ public class PortfolioData {
 			}
 			conn.commit();
 		} catch(Exception e) {
-			connection.rollback();
+			conn.rollback();
 		} finally {
 			if(conn == null) {
 				conn.close();
@@ -144,19 +144,93 @@ public class PortfolioData {
 	 * @param personCode
 	 * @param email
 	 */
-	public static void addEmail(String personCode, String email) {}
+	public static void addEmail(String personCode, String email) {
+		log.info("Adding Email to Person. . .");
+		Connection conn = null;
+		conn = PortfolioData.getConnection();
+		try {
+			conn.setAutoCommit(false);
+			Statement stmt = null;
+			try {
+				stmt = conn.createStatement();
+				String query = "insert into Email (emailName, personId)"
+					+ "values ("+email+", (select personId from Person where personCode = "+personCode+"))";
+				int recordsAffected = stmt.executeUpdate(query);
+			} finally {
+				if(stmt == null) {
+					stmt.close();
+				}
+			}
+			conn.commit();
+		} catch(Exception e) {
+			conn.rollback();
+		} finally {
+			if(conn == null) {
+				conn.close();
+			}
+		}
+	}
 
 	/**
 	 * Removes all asset records from the database
 	 */
-	public static void removeAllAssets() {}
+	public static void removeAllAssets() {
+		log.info("Removing all Assets. . .");
+		Connection conn = null;
+		conn = PortfolioData.getConnection();
+		try {
+			conn.setAutoCommit(false);
+			Statement stmt = null;
+			try {
+				stmt = conn.createStatement();
+				String query = "delete from Asset";
+				int recordsAffected = stmt.executeUpdate(query);
+			} finally {
+				if(stmt == null) {
+					stmt.close();
+				}
+			}
+			conn.commit();
+		} catch(Exception e) {
+			conn.rollback();
+		} finally {
+			if(conn == null) {
+				conn.close();
+			}
+		}
+	}
 
 	/**
 	 * Removes the asset record from the database corresponding to the
 	 * provided <code>assetCode</code>
 	 * @param assetCode
 	 */
-	public static void removeAsset(String assetCode) {}
+	public static void removeAsset(String assetCode) {
+		log.info("Removing Asset. . .");
+		Connection conn = null;
+		conn = PortfolioData.getConnection();
+		try {
+			conn.setAutoCommit(false);
+			Statement stmt = null;
+			try {
+				stmt = conn.createStatement();
+				String query = "delete from Asset"
+					+ "where assetCode = "+assetCode;
+				int recordsAffected = stmt.executeUpdate(query);
+			} finally {
+				if(stmt == null) {
+					stmt.close();
+				}
+			}
+			conn.commit();
+		} catch(Exception e) {
+			conn.rollback();
+		} finally {
+			if(conn == null) {
+				conn.close();
+			}
+		}
+	}
 
 	/**
 	 * Adds a deposit account asset record to the database with the
@@ -165,7 +239,32 @@ public class PortfolioData {
 	 * @param label
 	 * @param apr
 	 */
-	public static void addDepositAccount(String assetCode, String label, double apr) {}
+	public static void addDepositAccount(String assetCode, String label, double apr) {
+		log.info("Adding Deposit Account. . .");
+		Connection conn = null;
+		conn = PortfolioData.getConnection();
+		try {
+			conn.setAutoCommit(false);
+			Statement stmt = null;
+			try {
+				stmt = conn.createStatement();
+				String query = "insert into Asset (assetCode, assetType, assetLabel, apr)"
+					+ "values ("+assetCode+", D, "+label+", "+apr+")";
+				int recordsAffected = stmt.executeUpdate(query);
+			} finally {
+				if(stmt == null) {
+					stmt.close();
+				}
+			}
+			conn.commit();
+		} catch(Exception e) {
+			conn.rollback();
+		} finally {
+			if(conn == null) {
+				conn.close();
+			}
+		}
+	}
 
 	/**
 	 * Adds a private investment asset record to the database with the
@@ -178,7 +277,32 @@ public class PortfolioData {
 	 * @param totalValue
 	 */
 	public static void addPrivateInvestment(String assetCode, String label, Double quarterlyDividend,
-			Double baseRateOfReturn, Double baseOmega, Double totalValue) {}
+			Double baseRateOfReturn, Double baseOmega, Double totalValue) {
+				log.info("Adding Private Investment. . .");
+				Connection conn = null;
+				conn = PortfolioData.getConnection();
+				try {
+					conn.setAutoCommit(false);
+					Statement stmt = null;
+					try {
+						stmt = conn.createStatement();
+						String query = "insert into Asset (assetCode, assetType, assetLabel, quarterlyDividend, baseRateOfReturn, baseOmegaMeasure, totalValue)"
+							+ "values ("+assetCode+", P, "+label+", "+quarterlyDividend+", "+baseRateOfReturn+", "+baseOmega+", "+totalValue+")";
+						int recordsAffected = stmt.executeUpdate(query);
+					} finally {
+						if(stmt == null) {
+							stmt.close();
+						}
+					}
+					conn.commit();
+				} catch(Exception e) {
+					conn.rollback();
+				} finally {
+					if(conn == null) {
+						conn.close();
+					}
+				}
+			}
 
 	/**
 	 * Adds a stock asset record to the database with the
@@ -192,19 +316,93 @@ public class PortfolioData {
 	 * @param sharePrice
 	 */
 	public static void addStock(String assetCode, String label, Double quarterlyDividend,
-			Double baseRateOfReturn, Double beta, String stockSymbol, Double sharePrice) {}
+			Double baseRateOfReturn, Double beta, String stockSymbol, Double sharePrice) {
+				log.info("Adding Stock. . .");
+				Connection conn = null;
+				conn = PortfolioData.getConnection();
+				try {
+					conn.setAutoCommit(false);
+					Statement stmt = null;
+					try {
+						stmt = conn.createStatement();
+						String query = "insert into Asset (assetCode, assetType, assetLabel, balance, quarterlyDividend, baseRateOfReturn, betaMeasure, stockSymbol, sharePrice)"
+							+ "values ("+assetCode+", S, "+label+", "+quarterlyDividend+", "+baseRateOfReturn+", "+beta+", "+stockSymbol+", "+sharePrice+")";
+						int recordsAffected = stmt.executeUpdate(query);
+					} finally {
+						if(stmt == null) {
+							stmt.close();
+						}
+					}
+					conn.commit();
+				} catch(Exception e) {
+					conn.rollback();
+				} finally {
+					if(conn == null) {
+						conn.close();
+					}
+				}
+			}
 
 	/**
 	 * Removes all portfolio records from the database
 	 */
-	public static void removeAllPortfolios() {}
+	public static void removeAllPortfolios() {
+		log.info("Removing all Portfolios. . .");
+		Connection conn = null;
+		conn = PortfolioData.getConnection();
+		try {
+			conn.setAutoCommit(false);
+			Statement stmt = null;
+			try {
+				stmt = conn.createStatement();
+				String query = "delete from Portfolio";
+				int recordsAffected = stmt.executeUpdate(query);
+			} finally {
+				if(stmt == null) {
+					stmt.close();
+				}
+			}
+			conn.commit();
+		} catch(Exception e) {
+			conn.rollback();
+		} finally {
+			if(conn == null) {
+				conn.close();
+			}
+		}
+	}
 
 	/**
 	 * Removes the portfolio record from the database corresponding to the
 	 * provided <code>portfolioCode</code>
 	 * @param portfolioCode
 	 */
-	public static void removePortfolio(String portfolioCode) {}
+	public static void removePortfolio(String portfolioCode) {
+		log.info("Removing Portfolio. . .");
+		Connection conn = null;
+		conn = PortfolioData.getConnection();
+		try {
+			conn.setAutoCommit(false);
+			Statement stmt = null;
+			try {
+				stmt = conn.createStatement();
+				String query = "delete from Portfolio"
+					+ "where portCode = "+portfolioCode;
+				int recordsAffected = stmt.executeUpdate(query);
+			} finally {
+				if(stmt == null) {
+					stmt.close();
+				}
+			}
+			conn.commit();
+		} catch(Exception e) {
+			conn.rollback();
+		} finally {
+			if(conn == null) {
+				conn.close();
+			}
+		}
+	}
 
 	/**
 	 * Adds a portfolio records to the database with the given data.  If the portfolio has no
@@ -214,7 +412,32 @@ public class PortfolioData {
 	 * @param managerCode
 	 * @param beneficiaryCode
 	 */
-	public static void addPortfolio(String portfolioCode, String ownerCode, String managerCode, String beneficiaryCode) {}
+	public static void addPortfolio(String portfolioCode, String ownerCode, String managerCode, String beneficiaryCode) {
+		log.info("Adding Portfolio. . .");
+		Connection conn = null;
+		conn = PortfolioData.getConnection();
+		try {
+			conn.setAutoCommit(false);
+			Statement stmt = null;
+			try {
+				stmt = conn.createStatement();
+				String query = "insert into Portfolio (portCode, ownerId, managerId, beneficiaryId)"
+					+ "values ("+portfolioCode+", (select personId from Person where personCode = "+ownerCode+"), (select personId from Person where personCode = "+managerCode+"), (select personId from Person where personCode = "+beneficiaryCode+"))";
+				int recordsAffected = stmt.executeUpdate(query);
+			} finally {
+				if(stmt == null) {
+					stmt.close();
+				}
+			}
+			conn.commit();
+		} catch(Exception e) {
+			conn.rollback();
+		} finally {
+			if(conn == null) {
+				conn.close();
+			}
+		}
+	}
 
 	/**
 	 * Associates the asset record corresponding to <code>assetCode</code> with
@@ -228,7 +451,32 @@ public class PortfolioData {
 	 * @param assetCode
 	 * @param value
 	 */
-	public static void addAsset(String portfolioCode, String assetCode, double value) {}
+	public static void addAsset(String portfolioCode, String assetCode, double value) {
+		log.info("Adding Asset to Portfolio. . .");
+		Connection conn = null;
+		conn = PortfolioData.getConnection();
+		try {
+			conn.setAutoCommit(false);
+			Statement stmt = null;
+			try {
+				stmt = conn.createStatement();
+				String query = "insert into PortfolioAsset (portfolioId, assetId, assetAmount)"
+					+ "values ((select portfolioId from Portfolio where portCode = "+portfolioCode+"), (select assetId from Asset where assetCode = "+assetCode+"), "+value+")";
+				int recordsAffected = stmt.executeUpdate(query);
+			} finally {
+				if(stmt == null) {
+					stmt.close();
+				}
+			}
+			conn.commit();
+		} catch(Exception e) {
+			conn.rollback();
+		} finally {
+			if(conn == null) {
+				conn.close();
+			}
+		}
+	}
 
 
 }
