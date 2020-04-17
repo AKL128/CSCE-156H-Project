@@ -122,8 +122,9 @@ public class PortfolioData {
 	 * @param zip
 	 * @param country
 	 * @param brokerType
+	 * @throws SQLException 
 	 */
-	public static void addPerson(String personCode, String firstName, String lastName, String street, String city, String state, String zip, String country, String brokerType, String secBrokerId) {
+	public static void addPerson(String personCode, String firstName, String lastName, String street, String city, String state, String zip, String country, String brokerType, String secBrokerId) throws SQLException {
 		log.info("Adding Person . . .");
 		Connection conn = null;
 		conn = PortfolioData.getConnection();
@@ -134,7 +135,7 @@ public class PortfolioData {
 			try {
 				stmt = conn.createStatement();
 				stmt.addBatch("insert into Address (street, city, stateId, zipCode, countryId)"
-					+"values ("+street+", "+city+", (select stateId from State where stateName = "+state+"), "+zipCode+", (select countryId from Country where countryName = "+country+"))");
+					+"values ("+street+", "+city+", (select stateId from State where stateName = "+state+"), "+zip+", (select countryId from Country where countryName = "+country+"))");
 				stmt.addBatch("insert into Person (personCode, brokerData, firstName, lastName, addressId)"
 					+"values ("+personCode+", "+brokerData+", "+firstName+", "+lastName+", (select addressId from Address where street = "+street+"))");
 				int[] recordsAffected = stmt.executeBatch();
