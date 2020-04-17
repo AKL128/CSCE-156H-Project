@@ -77,6 +77,38 @@ public class PortfolioData {
 			throw new RuntimeException(e);
 		}
 	}
+	
+	public static int getPersonId(String personCode) {
+		Connection conn = null;
+		conn = DatabaseInfo.getConnection();
+		String query = "select personId from Person where personCode = (?)";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int personId;
+		try {
+			ps = conn.prepareStatement(query);
+			ps.setString(1, personCode);
+			rs = ps.executeQuery();
+			personId = rs.getInt("personId");
+		} catch(SQLException e) {
+			throw new RuntimeException(e);
+		}
+		
+		try{
+			if(rs != null && !rs.isClosed()) {
+				rs.close();
+			}
+			if(ps != null && !ps.isClosed()) {
+				ps.close();
+			}
+			if(conn != null && !conn.isClosed()) {
+				conn.close();
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		return personId;
+	}
 
 	/**
 	 * Removes the person record from the database corresponding to the
@@ -84,32 +116,43 @@ public class PortfolioData {
 	 * @param personCode
 	 * @throws SQLException
 	 */
-	public static void removePerson(String personCode) throws SQLException {
+	public static void removePerson(String personCode) {
 		log.info("Removing Person . . .");
 		Connection conn = null;
-		conn = PortfolioData.getConnection();
+		conn = PortfolioData.getConnection();	
+		String query = "delete from Email where personId = (?)";
+		PreparedStatement ps = null;
+		String query2 = "delete from Person where personCode = (?)";
+		PreparedStatement ps2 = null;
+		
+		int personId;
 		try {
-			conn.setAutoCommit(false);
-			Statement stmt = null;
-			try {
-				stmt = conn.createStatement();
-				stmt.addBatch("delete from Email where personId = (select personId from Person where personCode = "+personCode+")");
-				stmt.addBatch("delete from Address where addressid = (select addressId from Person where personCode = "+personCode+")");
-				stmt.addBatch("delete from Person where personCode = "+personCode+"");
-				int[] recordsAffected = stmt.executeBatch();
-			} finally {
-				if(stmt == null) {
-					stmt.close();
-				}
-			}
-			conn.commit();
+			
+			personId = getPersonId(personCode);
+			ps = conn.prepareStatement(query);
+			ps.setInt(1, personId);
+			ps.executeUpdate();
+			
+			ps2 = conn.prepareStatement(query2);
+			ps2.setString(1, personCode);
+			ps2.executeUpdate();
+			
 		} catch(SQLException e) {
-			conn.rollback();
 			throw new RuntimeException(e);
-		} finally {
-			if(conn == null) {
+		}
+				
+		try {
+			if(ps2 != null && !ps2.isClosed()) {
+				ps2.close();
+			}
+			if(ps != null && !ps.isClosed()) {
+				ps.close();
+			}
+			if(conn != null && !conn.isClosed()) {
 				conn.close();
 			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
 		}
 	}
 
@@ -132,15 +175,15 @@ public class PortfolioData {
 	public static int getStateId(String stateName) {
 		Connection conn = null;
 		conn = DatabaseInfo.getConnection();
-		String query = "select stateId from state where stateName = (state) values (?)";
+		String query = "select stateId from State where stateName = (?)";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		int stateId = (Integer) null;
+		int stateId;
 		try {
 			ps = conn.prepareStatement(query);
 			ps.setString(1, stateName);
 			rs = ps.executeQuery();
-			stateId = rs.getInt(rs.getInt("stateId"));
+			stateId = rs.getInt("stateId");
 		} catch(SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -161,18 +204,45 @@ public class PortfolioData {
 		return stateId;
 	}
 	
+	public static void addState(String stateName) {
+		Connection conn = null;
+		conn = DatabaseInfo.getConnection();
+		String query = "insert into State (stateName) values (?)";
+		PreparedStatement ps = null;
+		try {
+			ps = conn.prepareStatement(query);
+			ps.setString(1, stateName);
+			ps.executeUpdate();
+		} catch(SQLException e) {
+			throw new RuntimeException(e);
+		}
+		
+		try {
+			if(ps != null && !ps.isClosed()) {
+				ps.close();
+			}
+			if(conn != null && !conn.isClosed()) {
+				conn.close();
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	
+	
 	public static int getCountryId(String countryName) {
 		Connection conn = null;
 		conn = DatabaseInfo.getConnection();
-		String query = "select countryId from country where countryName = (country) values (?)";
+		String query = "select countryId from Country where countryName = (?)";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		int countryId = (Integer) null;
+		int countryId;
 		try {
 			ps = conn.prepareStatement(query);
 			ps.setString(1, countryName);
 			rs = ps.executeQuery();
-			countryId = rs.getInt(rs.getInt("countryId"));
+			countryId = rs.getInt("countryId");
 		} catch(SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -191,6 +261,31 @@ public class PortfolioData {
 			throw new RuntimeException(e);
 		}
 		return countryId;
+	}
+	
+	public static void addCountry(String countryName) {
+		Connection conn = null;
+		conn = DatabaseInfo.getConnection();
+		String query = "insert into Country (countryName) values (?)";
+		PreparedStatement ps = null;
+		try {
+			ps = conn.prepareStatement(query);
+			ps.setString(1, countryName);
+			ps.executeUpdate();
+		} catch(SQLException e) {
+			throw new RuntimeException(e);
+		}
+		
+		try {
+			if(ps != null && !ps.isClosed()) {
+				ps.close();
+			}
+			if(conn != null && !conn.isClosed()) {
+				conn.close();
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 	
 	public static void addAddress(String street, String city, int stateId, String zipCode, int countryId) {
@@ -225,15 +320,15 @@ public class PortfolioData {
 	public static int getAddressId(String street) {
 		Connection conn = null;
 		conn = DatabaseInfo.getConnection();
-		String query = "select addressId from address where street = (street) values (?)";
+		String query = "select addressId from Address where street = (?)";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		int addressId = (Integer) null;
+		int addressId;
 		try {
 			ps = conn.prepareStatement(query);
 			ps.setString(1, street);
 			rs = ps.executeQuery();
-			addressId = rs.getInt(rs.getInt("addressId"));
+			addressId = rs.getInt("addressId");
 		} catch(SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -263,10 +358,11 @@ public class PortfolioData {
 		
 		String query = "insert into Person (personCode, brokerData, firstName, lastName, addressId) values (?, ?, ?, ?, ?)";
 		PreparedStatement ps = null;
-		int stateId = (Integer) null;
-		int countryId = (Integer) null;
+		int stateId;
+		int countryId;
 		try {
-			
+			addState(state);
+			addCountry(country);
 			stateId = getStateId(state);
 			countryId = getCountryId(country);
 			
@@ -277,6 +373,7 @@ public class PortfolioData {
 			ps.setString(3, firstName);
 			ps.setString(4, lastName);
 			ps.setInt(5, getAddressId(street));
+			ps.executeUpdate();
 		} catch(SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -300,31 +397,31 @@ public class PortfolioData {
 	 * @param email
 	 * @throws SQLException
 	 */
-	public static void addEmail(String personCode, String email) throws SQLException {
+	public static void addEmail(String personCode, String email) {
 		log.info("Adding Email to Person. . .");
 		Connection conn = null;
-		conn = PortfolioData.getConnection();
+		conn = DatabaseInfo.getConnection();
+		String query = "insert into Email (emailName, personId) values (?, ?)";
+		PreparedStatement ps = null;
 		try {
-			conn.setAutoCommit(false);
-			Statement stmt = null;
-			try {
-				stmt = conn.createStatement();
-				String query = "insert into Email (emailName, personId)"
-					+ "values ("+email+", (select personId from Person where personCode = "+personCode+"))";
-				int recordsAffected = stmt.executeUpdate(query);
-			} finally {
-				if(stmt == null) {
-					stmt.close();
-				}
-			}
-			conn.commit();
+			
+			ps = conn.prepareStatement(query);
+			ps.setString(1, personCode);
+			ps.setString(2, email);
+			ps.executeUpdate();
 		} catch(SQLException e) {
-			conn.rollback();
 			throw new RuntimeException(e);
-		} finally {
-			if(conn == null) {
+		}
+		
+		try {
+			if(ps != null && !ps.isClosed()) {
+				ps.close();
+			}
+			if(conn != null && !conn.isClosed()) {
 				conn.close();
 			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
 		}
 	}
 
@@ -371,31 +468,39 @@ public class PortfolioData {
 	 * @param assetCode
 	 * @throws SQLException
 	 */
-	public static void removeAsset(String assetCode) throws SQLException {
+	public static void removeAsset(String assetCode) {
 		log.info("Removing Asset. . .");
 		Connection conn = null;
-		conn = PortfolioData.getConnection();
+		conn = DatabaseInfo.getConnection();
+		String query = "update PortfolioAsset set assetId = null where assetId = (?)";
+		PreparedStatement ps = null;
+		String query2 = "delete from Asset where assetCode = (?)";
+		PreparedStatement ps2 = null;
 		try {
-			conn.setAutoCommit(false);
-			Statement stmt = null;
-			try {
-				stmt = conn.createStatement();
-				stmt.addBatch("update PortfolioAsset set assetId = null where assetId = (select assetId from Asset where assetCode = "+assetCode+")");
-				stmt.addBatch("delete from Asset where assetCode = "+assetCode+"");
-				int[] recordsAffected = stmt.executeBatch();
-			} finally {
-				if(stmt == null) {
-					stmt.close();
-				}
-			}
-			conn.commit();
+			ps = conn.prepareStatement(query);
+			ps.setString(1, assetCode);
+			ps.executeUpdate();
+			
+			ps2 = conn.prepareStatement(query2);
+			ps2.setString(1, assetCode);
+			ps2.executeUpdate();
+			
 		} catch(SQLException e) {
-			conn.rollback();
 			throw new RuntimeException(e);
-		} finally {
-			if(conn == null) {
+		}
+				
+		try {
+			if(ps2 != null && !ps2.isClosed()) {
+				ps2.close();
+			}
+			if(ps != null && !ps.isClosed()) {
+				ps.close();
+			}
+			if(conn != null && !conn.isClosed()) {
 				conn.close();
 			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
 		}
 	}
 
@@ -407,31 +512,32 @@ public class PortfolioData {
 	 * @param apr
 	 * @throws SQLException
 	 */
-	public static void addDepositAccount(String assetCode, String label, double apr) throws SQLException {
+	public static void addDepositAccount(String assetCode, String label, double apr) {
 		log.info("Adding Deposit Account. . .");
 		Connection conn = null;
-		conn = PortfolioData.getConnection();
+		conn = DatabaseInfo.getConnection();
+		String query = "insert into Asset (assetCode, assetType, assetLabel, apr) values (?, ?, ?, ?)";
+		PreparedStatement ps = null;
 		try {
-			conn.setAutoCommit(false);
-			Statement stmt = null;
-			try {
-				stmt = conn.createStatement();
-				String query = "insert into Asset (assetCode, assetType, assetLabel, apr)"
-					+ "values ("+assetCode+", D, "+label+", "+apr+")";
-				int recordsAffected = stmt.executeUpdate(query);
-			} finally {
-				if(stmt == null) {
-					stmt.close();
-				}
-			}
-			conn.commit();
+			ps = conn.prepareStatement(query);
+			ps.setString(1, assetCode);
+			ps.setString(2, "D");
+			ps.setString(3, label);
+			ps.setDouble(4, apr);
+			ps.executeUpdate();
 		} catch(SQLException e) {
-			conn.rollback();
 			throw new RuntimeException(e);
-		} finally {
-			if(conn == null) {
+		}
+		
+		try {
+			if(ps != null && !ps.isClosed()) {
+				ps.close();
+			}
+			if(conn != null && !conn.isClosed()) {
 				conn.close();
 			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
 		}
 	}
 
@@ -447,33 +553,38 @@ public class PortfolioData {
 	 * @throws SQLException
 	 */
 	public static void addPrivateInvestment(String assetCode, String label, Double quarterlyDividend,
-			Double baseRateOfReturn, Double baseOmega, Double totalValue) throws SQLException {
+			Double baseRateOfReturn, Double baseOmega, Double totalValue) {
 				log.info("Adding Private Investment. . .");
 				Connection conn = null;
 				conn = PortfolioData.getConnection();
+				String query = "insert into Asset (assetCode, assetType, assetLabel, quarterlyDividend, baseRateOfReturn, baseOmegaMeasure, totalValue) "
+						+ "values (?, ?, ?, ?, ?, ?, ?)";
+				PreparedStatement ps = null;
 				try {
-					conn.setAutoCommit(false);
-					Statement stmt = null;
-					try {
-						stmt = conn.createStatement();
-						String query = "insert into Asset (assetCode, assetType, assetLabel, quarterlyDividend, baseRateOfReturn, baseOmegaMeasure, totalValue)"
-							+ "values ("+assetCode+", P, "+label+", "+quarterlyDividend+", "+baseRateOfReturn+", "+baseOmega+", "+totalValue+")";
-						int recordsAffected = stmt.executeUpdate(query);
-					} finally {
-						if(stmt == null) {
-							stmt.close();
-						}
-					}
-					conn.commit();
+					ps = conn.prepareStatement(query);
+					ps.setString(1, assetCode);
+					ps.setString(2, "P");
+					ps.setString(3, label);
+					ps.setDouble(4, quarterlyDividend);
+					ps.setDouble(5,  baseRateOfReturn);
+					ps.setDouble(6, baseOmega);
+					ps.setDouble(7, totalValue);
+					ps.executeUpdate();
 				} catch(SQLException e) {
-					conn.rollback();
 					throw new RuntimeException(e);
-				} finally {
-					if(conn == null) {
+				}
+				
+				try {
+					if(ps != null && !ps.isClosed()) {
+						ps.close();
+					}
+					if(conn != null && !conn.isClosed()) {
 						conn.close();
 					}
+				} catch (SQLException e) {
+					throw new RuntimeException(e);
 				}
-			}
+		}
 
 	/**
 	 * Adds a stock asset record to the database with the
@@ -488,31 +599,37 @@ public class PortfolioData {
 	 * @throws SQLException
 	 */
 	public static void addStock(String assetCode, String label, Double quarterlyDividend,
-			Double baseRateOfReturn, Double beta, String stockSymbol, Double sharePrice) throws SQLException {
+			Double baseRateOfReturn, Double beta, String stockSymbol, Double sharePrice) {
 				log.info("Adding Stock. . .");
 				Connection conn = null;
 				conn = PortfolioData.getConnection();
+				String query = "insert into Asset (assetCode, assetType, assetLabel, quarterlyDividend, baseRateOfReturn, betaMeasure, stockSymbol, sharePrice)"
+						+ "values (?, ?, ?, ?, ?, ?, ?, ?)";
+				PreparedStatement ps = null;
 				try {
-					conn.setAutoCommit(false);
-					Statement stmt = null;
-					try {
-						stmt = conn.createStatement();
-						String query = "insert into Asset (assetCode, assetType, assetLabel, balance, quarterlyDividend, baseRateOfReturn, betaMeasure, stockSymbol, sharePrice)"
-							+ "values ("+assetCode+", S, "+label+", "+quarterlyDividend+", "+baseRateOfReturn+", "+beta+", "+stockSymbol+", "+sharePrice+")";
-						int recordsAffected = stmt.executeUpdate(query);
-					} finally {
-						if(stmt == null) {
-							stmt.close();
-						}
-					}
-					conn.commit();
+					ps = conn.prepareStatement(query);
+					ps.setString(1, assetCode);
+					ps.setString(2, "S");
+					ps.setString(3, label);
+					ps.setDouble(4, quarterlyDividend);
+					ps.setDouble(5, baseRateOfReturn);
+					ps.setDouble(6, beta);
+					ps.setString(7, stockSymbol);
+					ps.setDouble(8, sharePrice);
+					ps.executeUpdate();
 				} catch(SQLException e) {
-					conn.rollback();
 					throw new RuntimeException(e);
-				} finally {
-					if(conn == null) {
+				}
+				
+				try {
+					if(ps != null && !ps.isClosed()) {
+						ps.close();
+					}
+					if(conn != null && !conn.isClosed()) {
 						conn.close();
 					}
+				} catch (SQLException e) {
+					throw new RuntimeException(e);
 				}
 			}
 
@@ -560,33 +677,107 @@ public class PortfolioData {
 	 * @param portfolioCode
 	 * @throws SQLException
 	 */
-	public static void removePortfolio(String portfolioCode) throws SQLException {
+	public static void removePortfolio(String portfolioCode) {
 		log.info("Removing Portfolio. . .");
 		Connection conn = null;
 		conn = PortfolioData.getConnection();
+		String query = "update PortfolioAsset set portfolioId = null where portfolioId = (?)";
+		String query2 = "delete from Portfolio where portCode = (?)";
+		PreparedStatement ps = null;
+		PreparedStatement ps2 = null;
 		try {
-			conn.setAutoCommit(false);
-			Statement stmt = null;
-			try {
-				stmt = conn.createStatement();
-				stmt.addBatch("update PortfolioAsset set portfolioId = null where portfolioId = (select portfolioId from Portfolio where portCode = "+portfolioCode+")");
-				stmt.addBatch("delete from Portfolio where portCode = "+portfolioCode+"");
-				int[] recordsAffected = stmt.executeBatch();
-			} finally {
-				if(stmt == null) {
-					stmt.close();
-				}
-			}
-			conn.commit();
+			ps = conn.prepareStatement(query);
+			ps.setString(1, portfolioCode);
+			ps.executeUpdate();
+			
+			ps2 = conn.prepareStatement(query2);
+			ps2.setString(1, portfolioCode);
+			ps2.executeUpdate();
+			
 		} catch(SQLException e) {
-			conn.rollback();
 			throw new RuntimeException(e);
-		} finally {
-			if(conn == null) {
+		}
+
+		try {
+			if(ps2 != null && !ps2.isClosed()) {
+				ps2.close();
+			}
+			if(ps != null && !ps.isClosed()) {
+				ps.close();
+			}
+			if(conn != null && !conn.isClosed()) {
 				conn.close();
 			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
 		}
 	}
+	
+	public static int getPortfolioId(String portfolioCode) {
+		Connection conn = null;
+		conn = DatabaseInfo.getConnection();
+		String query = "select portfolioId from Portfolio where portCode = (?)";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int portfolioId;
+		try {
+			ps = conn.prepareStatement(query);
+			ps.setString(1, portfolioCode);
+			rs = ps.executeQuery();
+			portfolioId = rs.getInt("portfolioId");
+		} catch(SQLException e) {
+			throw new RuntimeException(e);
+		}
+		
+		try{
+			if(rs != null && !rs.isClosed()) {
+				rs.close();
+			}
+			if(ps != null && !ps.isClosed()) {
+				ps.close();
+			}
+			if(conn != null && !conn.isClosed()) {
+				conn.close();
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		return portfolioId;
+	}
+	
+	public static int getAssetId(String assetCode) {
+		Connection conn = null;
+		conn = DatabaseInfo.getConnection();
+		String query = "select assetId from Asset where assetCode = (?)";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int assetId;
+		try {
+			ps = conn.prepareStatement(query);
+			ps.setString(1, assetCode);
+			rs = ps.executeQuery();
+			assetId = rs.getInt("assetId");
+		} catch(SQLException e) {
+			throw new RuntimeException(e);
+		}
+		
+		try{
+			if(rs != null && !rs.isClosed()) {
+				rs.close();
+			}
+			if(ps != null && !ps.isClosed()) {
+				ps.close();
+			}
+			if(conn != null && !conn.isClosed()) {
+				conn.close();
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		return assetId;
+	}
+	
+
 
 	/**
 	 * Adds a portfolio records to the database with the given data.  If the portfolio has no
@@ -601,27 +792,39 @@ public class PortfolioData {
 		log.info("Adding Portfolio. . .");
 		Connection conn = null;
 		conn = PortfolioData.getConnection();
+		String query = "insert into Portfolio (portCode, ownerId, managerId, beneficiaryId)"
+				+ "values (?, ?, ?, ?)";
+		PreparedStatement ps = null;
+		
+		int ownerId;
+		int managerId;
+		int beneficiaryId;
+		
 		try {
-			conn.setAutoCommit(false);
-			Statement stmt = null;
-			try {
-				stmt = conn.createStatement();
-				String query = "insert into Portfolio (portCode, ownerId, managerId, beneficiaryId)"
-					+ "values ("+portfolioCode+", (select personId from Person where personCode = "+ownerCode+"), (select personId from Person where personCode = "+managerCode+"), (select personId from Person where personCode = "+beneficiaryCode+"))";
-				int recordsAffected = stmt.executeUpdate(query);
-			} finally {
-				if(stmt == null) {
-					stmt.close();
-				}
-			}
-			conn.commit();
+			
+			ownerId = getPersonId(ownerCode);
+			managerId = getPersonId(managerCode);
+			beneficiaryId = getPersonId(beneficiaryCode);
+			
+			ps = conn.prepareStatement(query);
+			ps.setString(1, portfolioCode);
+			ps.setInt(2, ownerId);
+			ps.setInt(3, managerId);
+			ps.setInt(4, beneficiaryId);
+			ps.executeUpdate();
 		} catch(SQLException e) {
-			conn.rollback();
 			throw new RuntimeException(e);
-		} finally {
-			if(conn == null) {
+		}
+		
+		try {
+			if(ps != null && !ps.isClosed()) {
+				ps.close();
+			}
+			if(conn != null && !conn.isClosed()) {
 				conn.close();
 			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
 		}
 	}
 
@@ -638,31 +841,37 @@ public class PortfolioData {
 	 * @param value
 	 * @throws SQLException
 	 */
-	public static void addAsset(String portfolioCode, String assetCode, double value) throws SQLException {
+	public static void addAsset(String portfolioCode, String assetCode, double value) {
 		log.info("Adding Asset to Portfolio. . .");
 		Connection conn = null;
-		conn = PortfolioData.getConnection();
+		conn = DatabaseInfo.getConnection();
+		String query = "insert into PortfolioAsset (portfolioId, assetId, assetAmount)"
+				+ "values (?, ?, ?)";
+		PreparedStatement ps = null;
+		int portfolioId;
+		int assetId;
 		try {
-			conn.setAutoCommit(false);
-			Statement stmt = null;
-			try {
-				stmt = conn.createStatement();
-				String query = "insert into PortfolioAsset (portfolioId, assetId, assetAmount)"
-					+ "values ((select portfolioId from Portfolio where portCode = "+portfolioCode+"), (select assetId from Asset where assetCode = "+assetCode+"), "+value+")";
-				int recordsAffected = stmt.executeUpdate(query);
-			} finally {
-				if(stmt == null) {
-					stmt.close();
-				}
-			}
-			conn.commit();
+			portfolioId = getPortfolioId(portfolioCode);
+			assetId = getAssetId(assetCode);
+			
+			ps = conn.prepareStatement(query);
+			ps.setInt(1, portfolioId);
+			ps.setInt(2, assetId);
+			ps.setDouble(3, value);
+			ps.executeUpdate();
 		} catch(SQLException e) {
-			conn.rollback();
 			throw new RuntimeException(e);
-		} finally {
-			if(conn == null) {
+		}
+		
+		try {
+			if(ps != null && !ps.isClosed()) {
+				ps.close();
+			}
+			if(conn != null && !conn.isClosed()) {
 				conn.close();
 			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
 		}
 	}
 	
