@@ -128,43 +128,160 @@ public class PortfolioData {
 	 * @param brokerType
 	 * @throws SQLException
 	 */
+	
+	public static int getStateId(String stateName) {
+		Connection conn = null;
+		conn = DatabaseInfo.getConnection();
+		String query = "select stateId from state where stateName = (state) values (?)";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int stateId = (Integer) null;
+		try {
+			ps = conn.prepareStatement(query);
+			ps.setString(1, stateName);
+			rs = ps.executeQuery();
+			stateId = rs.getInt(rs.getInt("stateId"));
+		} catch(SQLException e) {
+			throw new RuntimeException(e);
+		}
+		
+		try{
+			if(rs != null && !rs.isClosed()) {
+				rs.close();
+			}
+			if(ps != null && !ps.isClosed()) {
+				ps.close();
+			}
+			if(conn != null && !conn.isClosed()) {
+				conn.close();
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		return stateId;
+	}
+	
+	public static int getCountryId(String countryName) {
+		Connection conn = null;
+		conn = DatabaseInfo.getConnection();
+		String query = "select countryId from country where countryName = (country) values (?)";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int countryId = (Integer) null;
+		try {
+			ps = conn.prepareStatement(query);
+			ps.setString(1, countryName);
+			rs = ps.executeQuery();
+			countryId = rs.getInt(rs.getInt("countryId"));
+		} catch(SQLException e) {
+			throw new RuntimeException(e);
+		}
+		
+		try{
+			if(rs != null && !rs.isClosed()) {
+				rs.close();
+			}
+			if(ps != null && !ps.isClosed()) {
+				ps.close();
+			}
+			if(conn != null && !conn.isClosed()) {
+				conn.close();
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		return countryId;
+	}
+	
+	public static void addAddress(String street, String city, int stateId, String zipCode, int countryId) {
+		Connection conn = null;
+		conn = DatabaseInfo.getConnection();
+		String query = "insert into Address (street, city, stateId, zipCode, countryId) values (?, ?, ?, ?, ?)";
+		PreparedStatement ps = null;
+		try {
+			ps = conn.prepareStatement(query);
+			ps.setString(1, street);
+			ps.setString(2, city);
+			ps.setInt(3, stateId);
+			ps.setString(4, zipCode);
+			ps.setInt(5, countryId);
+			ps.executeUpdate();
+		} catch(SQLException e) {
+			throw new RuntimeException(e);
+		}
+		
+		try{
+			if(ps != null && !ps.isClosed()) {
+				ps.close();
+			}
+			if(conn != null && !conn.isClosed()) {
+				conn.close();
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	public static int getAddressId(String street) {
+		Connection conn = null;
+		conn = DatabaseInfo.getConnection();
+		String query = "select addressId from address where street = (street) values (?)";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int addressId = (Integer) null;
+		try {
+			ps = conn.prepareStatement(query);
+			ps.setString(1, street);
+			rs = ps.executeQuery();
+			addressId = rs.getInt(rs.getInt("addressId"));
+		} catch(SQLException e) {
+			throw new RuntimeException(e);
+		}
+		
+		try{
+			if(rs != null && !rs.isClosed()) {
+				rs.close();
+			}
+			if(ps != null && !ps.isClosed()) {
+				ps.close();
+			}
+			if(conn != null && !conn.isClosed()) {
+				conn.close();
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		return addressId;
+	}
+	
+	
 	public static void addPerson(String personCode, String firstName, String lastName, String street, String city, String state, String zip, String country, String brokerType, String secBrokerId) {
 		log.info("Adding Person . . .");
 		Connection conn = null;
 		conn = PortfolioData.getConnection();
 		String brokerData = brokerType + "," + secBrokerId;
-		String query = "select stateId from state where stateName = (state) values (?)";
+		
+		String query = "insert into Person (personCode, brokerData, firstName, lastName, addressId) values (?, ?, ?, ?, ?)";
 		PreparedStatement ps = null;
-		String query2 = "select countryId from country where countryName = (country) values (?)";
-		PreparedStatement ps2 = null;
-		String query3 = "insert into Address (street, city, stateId, zipCode, countryId) values (?, ?, ?, ?, ?)";
-		PreparedStatement ps3 = null;
-		int rs = (Integer) null;
-		int rs2 = (Integer) null;
+		int stateId = (Integer) null;
+		int countryId = (Integer) null;
 		try {
 			
+			stateId = getStateId(state);
+			countryId = getCountryId(country);
+			
+			addAddress(street, city, stateId, zip, countryId);
 			ps = conn.prepareStatement(query);
-			ps.setString(1, state);
-			rs = ps.executeUpdate();
-			
-			ps2 = conn.prepareStatement(query2);
-			ps2.setString(1, country);
-			rs2 = ps2.executeUpdate();
-			
-			ps3.setString(1, street);
-			ps3.setString(2, city);
-			ps3.setInt(3, rs);
-			ps3.setString(4, zip);
-			ps3.setInt(5, rs2);
-			
+			ps.setString(1, personCode);
+			ps.setString(2, brokerData);
+			ps.setString(3, firstName);
+			ps.setString(4, lastName);
+			ps.setInt(5, getAddressId(street));
 		} catch(SQLException e) {
 			throw new RuntimeException(e);
 		}
 		
 		try {
-			if(ps2 != null && !ps2.isClosed()) {
-				ps2.close();
-			}
 			if(ps != null && !ps.isClosed()) {
 				ps.close();
 			}
