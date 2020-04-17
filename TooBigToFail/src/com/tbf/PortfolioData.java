@@ -122,7 +122,7 @@ public class PortfolioData {
 	 * @param zip
 	 * @param country
 	 * @param brokerType
-	 * @throws SQLException 
+	 * @throws SQLException
 	 */
 	public static void addPerson(String personCode, String firstName, String lastName, String street, String city, String state, String zip, String country, String brokerType, String secBrokerId) throws SQLException {
 		log.info("Adding Person . . .");
@@ -201,7 +201,7 @@ public class PortfolioData {
 			Statement stmt = null;
 			try {
 				stmt = conn.createStatement();
-				stmt.addBatch("delete from PortfolioAsset");
+				stmt.addBatch("update PortfolioAsset set assetId = null");
 				stmt.addBatch("delete from Asset");
 				int[] recordsAffected = stmt.executeBatch();
 			} finally {
@@ -234,7 +234,7 @@ public class PortfolioData {
 			Statement stmt = null;
 			try {
 				stmt = conn.createStatement();
-				stmt.addBatch("delete from PortfolioAsset where assetId = (select assetId from Asset where assetCode = "+assetCode+")");
+				stmt.addBatch("update PortfolioAsset set assetId = null where assetId = (select assetId from Asset where assetCode = "+assetCode+")");
 				stmt.addBatch("delete from Asset where assetCode = "+assetCode+"");
 				int[] recordsAffected = stmt.executeBatch();
 			} finally {
@@ -379,7 +379,7 @@ public class PortfolioData {
 			Statement stmt = null;
 			try {
 				stmt = conn.createStatement();
-				stmt.addBatch("delete from PortfolioAsset");
+				stmt.addBatch("update PortfolioAsset set portfolioId = null");
 				stmt.addBatch("delete from Portfolio");
 				int[] recordsAffected = stmt.executeBatch();
 			} finally {
@@ -412,7 +412,7 @@ public class PortfolioData {
 			Statement stmt = null;
 			try {
 				stmt = conn.createStatement();
-				stmt.addBatch("delete from PortfolioAsset where portfolioId = (select portfolioId from Portfolio where portCode = "+portfolioCode+")");
+				stmt.addBatch("update PortfolioAsset set portfolioId = null where portfolioId = (select portfolioId from Portfolio where portCode = "+portfolioCode+")");
 				stmt.addBatch("delete from Portfolio where portCode = "+portfolioCode+"");
 				int[] recordsAffected = stmt.executeBatch();
 			} finally {
