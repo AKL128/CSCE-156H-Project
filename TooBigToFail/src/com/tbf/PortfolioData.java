@@ -135,8 +135,8 @@ public class PortfolioData {
 				stmt = conn.createStatement();
 				stmt.addBatch("insert into Address (street, city, stateId, zipCode, countryId)"
 					+"values ("+street+", "+city+", (select stateId from State where stateName = "+state+"), "+zipCode+", (select countryId from Country where countryName = "+country+"))");
-				stmt.addBatch("insert into Person (personCode, brokerData, firstName, lastName, addressId)
-					values ("+personCode+", "+brokerData+", "+firstName+", "+lastName+", (select addressId from Address where street = "+street+"))");
+				stmt.addBatch("insert into Person (personCode, brokerData, firstName, lastName, addressId)"
+					+"values ("+personCode+", "+brokerData+", "+firstName+", "+lastName+", (select addressId from Address where street = "+street+"))");
 				int[] recordsAffected = stmt.executeBatch();
 			} finally {
 				if(stmt == null) {
