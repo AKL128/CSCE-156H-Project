@@ -66,7 +66,7 @@ public class PortfolioData {
 				}
 			}
 			conn.commit();
-		} catch(Exception e) {
+		} catch(SQLException e) {
 			conn.rollback();
 		} finally {
 			if(conn == null) {
@@ -100,7 +100,7 @@ public class PortfolioData {
 				}
 			}
 			conn.commit();
-		} catch(Exception e) {
+		} catch(SQLException e) {
 			conn.rollback();
 		} finally {
 			if(conn == null) {
@@ -145,7 +145,7 @@ public class PortfolioData {
 				}
 			}
 			conn.commit();
-		} catch(Exception e) {
+		} catch(SQLException e) {
 			conn.rollback();
 		} finally {
 			if(conn == null) {
@@ -179,7 +179,7 @@ public class PortfolioData {
 				}
 			}
 			conn.commit();
-		} catch(Exception e) {
+		} catch(SQLException e) {
 			conn.rollback();
 		} finally {
 			if(conn == null) {
@@ -210,7 +210,7 @@ public class PortfolioData {
 				}
 			}
 			conn.commit();
-		} catch(Exception e) {
+		} catch(SQLException e) {
 			conn.rollback();
 		} finally {
 			if(conn == null) {
@@ -243,7 +243,7 @@ public class PortfolioData {
 				}
 			}
 			conn.commit();
-		} catch(Exception e) {
+		} catch(SQLException e) {
 			conn.rollback();
 		} finally {
 			if(conn == null) {
@@ -278,7 +278,7 @@ public class PortfolioData {
 				}
 			}
 			conn.commit();
-		} catch(Exception e) {
+		} catch(SQLException e) {
 			conn.rollback();
 		} finally {
 			if(conn == null) {
@@ -317,7 +317,7 @@ public class PortfolioData {
 						}
 					}
 					conn.commit();
-				} catch(Exception e) {
+				} catch(SQLException e) {
 					conn.rollback();
 				} finally {
 					if(conn == null) {
@@ -357,7 +357,7 @@ public class PortfolioData {
 						}
 					}
 					conn.commit();
-				} catch(Exception e) {
+				} catch(SQLException e) {
 					conn.rollback();
 				} finally {
 					if(conn == null) {
@@ -388,7 +388,7 @@ public class PortfolioData {
 				}
 			}
 			conn.commit();
-		} catch(Exception e) {
+		} catch(SQLException e) {
 			conn.rollback();
 		} finally {
 			if(conn == null) {
@@ -421,7 +421,7 @@ public class PortfolioData {
 				}
 			}
 			conn.commit();
-		} catch(Exception e) {
+		} catch(SQLException e) {
 			conn.rollback();
 		} finally {
 			if(conn == null) {
@@ -457,7 +457,7 @@ public class PortfolioData {
 				}
 			}
 			conn.commit();
-		} catch(Exception e) {
+		} catch(SQLException e) {
 			conn.rollback();
 		} finally {
 			if(conn == null) {
@@ -497,7 +497,7 @@ public class PortfolioData {
 				}
 			}
 			conn.commit();
-		} catch(Exception e) {
+		} catch(SQLException e) {
 			conn.rollback();
 		} finally {
 			if(conn == null) {
