@@ -45,34 +45,36 @@ public class PortfolioData {
 	 * Method that removes every person record from the database
 	 * @throws SQLException
 	 */
-	public static void removeAllPersons() throws SQLException {
+	public static void removeAllPersons() {
 		log.info("Removing all Persons. . .");
 		Connection conn = null;
 		conn = PortfolioData.getConnection();
- 		try {
-			conn.setAutoCommit(false);
-			Statement stmt = null;
-			try {
-				stmt = conn.createStatement();
-				stmt.addBatch("delete from State");
-				stmt.addBatch("delete from Country");
-				stmt.addBatch("delete from Address");
-				stmt.addBatch("delete from Person");
-				stmt.addBatch("delete from Email");
-				int[] recordsAffected = stmt.executeBatch();
-			} finally {
-				if(stmt == null) {
-					stmt.close();
-				}
-			}
-			conn.commit();
+		
+		String query = "delete From Email";
+		String query2 = "delete from Person";
+		PreparedStatement ps = null;
+		PreparedStatement ps2 = null;
+		try {
+			ps = conn.prepareStatement(query);
+			ps.executeUpdate();
+			ps2 = conn.prepareStatement(query2);
+			ps2.executeUpdate();
+
 		} catch(SQLException e) {
-			conn.rollback();
 			throw new RuntimeException(e);
-		} finally {
-			if(conn == null) {
+		} 
+		try {
+			if(ps2 != null && !ps2.isClosed()) {
+				ps2.close();
+			}
+			if(ps != null && !ps.isClosed()) {
+				ps.close();
+			}
+			if(conn != null && !conn.isClosed()) {
 				conn.close();
 			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
 		}
 	}
 
@@ -126,34 +128,51 @@ public class PortfolioData {
 	 * @param brokerType
 	 * @throws SQLException
 	 */
-	public static void addPerson(String personCode, String firstName, String lastName, String street, String city, String state, String zip, String country, String brokerType, String secBrokerId) throws SQLException {
+	public static void addPerson(String personCode, String firstName, String lastName, String street, String city, String state, String zip, String country, String brokerType, String secBrokerId) {
 		log.info("Adding Person . . .");
 		Connection conn = null;
 		conn = PortfolioData.getConnection();
-		String brokerData = brokerType + ", " + secBrokerId;
+		String brokerData = brokerType + "," + secBrokerId;
+		String query = "select stateId from state where stateName = (state) values (?)";
+		PreparedStatement ps = null;
+		String query2 = "select countryId from country where countryName = (country) values (?)";
+		PreparedStatement ps2 = null;
+		String query3 = "insert into Address (street, city, stateId, zipCode, countryId) values (?, ?, ?, ?, ?)";
+		PreparedStatement ps3 = null;
+		int rs = (Integer) null;
+		int rs2 = (Integer) null;
 		try {
-			conn.setAutoCommit(false);
-			Statement stmt = null;
-			try {
-				stmt = conn.createStatement();
-				stmt.addBatch("insert into Address (street, city, stateId, zipCode, countryId)"
-					+"values ("+street+", "+city+", (select stateId from State where stateName = "+state+"), "+zip+", (select countryId from Country where countryName = "+country+"))");
-				stmt.addBatch("insert into Person (personCode, brokerData, firstName, lastName, addressId)"
-					+"values ("+personCode+", "+brokerData+", "+firstName+", "+lastName+", (select addressId from Address where street = "+street+"))");
-				int[] recordsAffected = stmt.executeBatch();
-			} finally {
-				if(stmt == null) {
-					stmt.close();
-				}
-			}
-			conn.commit();
+			
+			ps = conn.prepareStatement(query);
+			ps.setString(1, state);
+			rs = ps.executeUpdate();
+			
+			ps2 = conn.prepareStatement(query2);
+			ps2.setString(1, country);
+			rs2 = ps2.executeUpdate();
+			
+			ps3.setString(1, street);
+			ps3.setString(2, city);
+			ps3.setInt(3, rs);
+			ps3.setString(4, zip);
+			ps3.setInt(5, rs2);
+			
 		} catch(SQLException e) {
-			conn.rollback();
 			throw new RuntimeException(e);
-		} finally {
-			if(conn == null) {
+		}
+		
+		try {
+			if(ps2 != null && !ps2.isClosed()) {
+				ps2.close();
+			}
+			if(ps != null && !ps.isClosed()) {
+				ps.close();
+			}
+			if(conn != null && !conn.isClosed()) {
 				conn.close();
 			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
 		}
 	}
 
@@ -196,31 +215,36 @@ public class PortfolioData {
 	 * Removes all asset records from the database
 	 * @throws SQLException
 	 */
-	public static void removeAllAssets() throws SQLException {
+	public static void removeAllAssets() {
 		log.info("Removing all Assets. . .");
 		Connection conn = null;
-		conn = PortfolioData.getConnection();
+		conn = DatabaseInfo.getConnection();
+		
+		String query = "delete from PortfolioAsset";
+		PreparedStatement ps = null;
+		String query2 = "delete from Asset";
+		PreparedStatement ps2 = null;
 		try {
-			conn.setAutoCommit(false);
-			Statement stmt = null;
-			try {
-				stmt = conn.createStatement();
-				stmt.addBatch("update PortfolioAsset set assetId = null");
-				stmt.addBatch("delete from Asset");
-				int[] recordsAffected = stmt.executeBatch();
-			} finally {
-				if(stmt == null) {
-					stmt.close();
-				}
-			}
-			conn.commit();
+			ps = conn.prepareStatement(query);
+			ps.executeUpdate();
+			ps2 = conn.prepareStatement(query2);
+			ps2.executeUpdate();
+
 		} catch(SQLException e) {
-			conn.rollback();
 			throw new RuntimeException(e);
-		} finally {
-			if(conn == null) {
+		} 
+		try {
+			if(ps2 != null && !ps2.isClosed()) {
+				ps2.close();
+			}
+			if(ps != null && !ps.isClosed()) {
+				ps.close();
+			}
+			if(conn != null && !conn.isClosed()) {
 				conn.close();
 			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
 		}
 	}
 
@@ -379,31 +403,37 @@ public class PortfolioData {
 	 * Removes all portfolio records from the database
 	 * @throws SQLException
 	 */
-	public static void removeAllPortfolios() throws SQLException {
+	public static void removeAllPortfolios() {
 		log.info("Removing all Portfolios. . .");
 		Connection conn = null;
-		conn = PortfolioData.getConnection();
+		conn = DatabaseInfo.getConnection();
+		
+		String query = "delete from PortfolioAsset";
+		PreparedStatement ps = null;
+		String query2 = "delete from Portfolio";
+		PreparedStatement ps2 = null;
+		
 		try {
-			conn.setAutoCommit(false);
-			Statement stmt = null;
-			try {
-				stmt = conn.createStatement();
-				stmt.addBatch("update PortfolioAsset set portfolioId = null");
-				stmt.addBatch("delete from Portfolio");
-				int[] recordsAffected = stmt.executeBatch();
-			} finally {
-				if(stmt == null) {
-					stmt.close();
-				}
-			}
-			conn.commit();
+			ps = conn.prepareStatement(query);
+			ps.executeUpdate();
+			ps2 = conn.prepareStatement(query2);
+			ps2.executeUpdate();
+
 		} catch(SQLException e) {
-			conn.rollback();
 			throw new RuntimeException(e);
-		} finally {
-			if(conn == null) {
+		} 
+		try {
+			if(ps2 != null && !ps2.isClosed()) {
+				ps2.close();
+			}
+			if(ps != null && !ps.isClosed()) {
+				ps.close();
+			}
+			if(conn != null && !conn.isClosed()) {
 				conn.close();
 			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
 		}
 	}
 

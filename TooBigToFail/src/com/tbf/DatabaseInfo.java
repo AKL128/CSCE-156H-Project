@@ -377,3 +377,73 @@ public class DatabaseInfo {
 	}
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//public static void removeAllPortfolios() {
+//	log.info("Removing all Portfolios. . .");
+//	Connection conn = null;
+//	conn = DatabaseInfo.getConnection();
+//	
+//	String query = "delete from PortfolioAsset";
+//	PreparedStatement ps = null;
+//	String query2 = "delete from Portfolio";
+//	PreparedStatement ps2 = null;
+//	
+//	try {
+//		ps = conn.prepareStatement(query);
+//		ps.executeUpdate();
+//		ps2 = conn.prepareStatement(query2);
+//		ps2.executeUpdate();
+//
+//	} catch(SQLException e) {
+//		throw new RuntimeException(e);
+//	} 
+//	try {
+//		if(ps2 != null && !ps2.isClosed()) {
+//			ps2.close();
+//		}
+//		if(ps != null && !ps.isClosed()) {
+//			ps.close();
+//		}
+//		if(conn != null && !conn.isClosed()) {
+//			conn.close();
+//		}
+//	} catch (SQLException e) {
+//		throw new RuntimeException(e);
+//	}
+//}
