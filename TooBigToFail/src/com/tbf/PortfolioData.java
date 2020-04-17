@@ -43,7 +43,7 @@ public class PortfolioData {
 
 	/**
 	 * Method that removes every person record from the database
-	 * @throws SQLException 
+	 * @throws SQLException
 	 */
 	public static void removeAllPersons() throws SQLException {
 		log.info("Removing all Persons. . .");
@@ -54,8 +54,12 @@ public class PortfolioData {
 			Statement stmt = null;
 			try {
 				stmt = conn.createStatement();
-				String query = "delete from Person";
-				int recordsAffected = stmt.executeUpdate(query);
+				stmt.addBatch("delete from State");
+				stmt.addBatch("delete from Country");
+				stmt.addBatch("delete from Address");
+				stmt.addBatch("delete from Person");
+				stmt.addBatch("delete from Email");
+				int[] recordsAffected = stmt.executeBatch();
 			} finally {
 				if(stmt == null) {
 					stmt.close();
@@ -75,7 +79,7 @@ public class PortfolioData {
 	 * Removes the person record from the database corresponding to the
 	 * provided <code>personCode</code>
 	 * @param personCode
-	 * @throws SQLException 
+	 * @throws SQLException
 	 */
 	public static void removePerson(String personCode) throws SQLException {
 		log.info("Removing Person . . .");
@@ -86,9 +90,10 @@ public class PortfolioData {
 			Statement stmt = null;
 			try {
 				stmt = conn.createStatement();
-				String query = "delete from Person"
-					+ "where personCode = " + personCode;
-				int recordsAffected = stmt.executeUpdate(query);
+				stmt.addBatch("delete from Email where personId = (select personId from Person where personCode = "+personCode+")");
+				stmt.addBatch("delete from Address where addressid = (select addressId from Person where personCode = "+personCode+")");
+				stmt.addBatch("delete from Person where personCode = "+personCode+"");
+				int[] recordsAffected = stmt.executeBatch();
 			} finally {
 				if(stmt == null) {
 					stmt.close();
@@ -153,7 +158,7 @@ public class PortfolioData {
 	 * provided <code>personCode</code>
 	 * @param personCode
 	 * @param email
-	 * @throws SQLException 
+	 * @throws SQLException
 	 */
 	public static void addEmail(String personCode, String email) throws SQLException {
 		log.info("Adding Email to Person. . .");
@@ -184,7 +189,7 @@ public class PortfolioData {
 
 	/**
 	 * Removes all asset records from the database
-	 * @throws SQLException 
+	 * @throws SQLException
 	 */
 	public static void removeAllAssets() throws SQLException {
 		log.info("Removing all Assets. . .");
@@ -195,8 +200,9 @@ public class PortfolioData {
 			Statement stmt = null;
 			try {
 				stmt = conn.createStatement();
-				String query = "delete from Asset";
-				int recordsAffected = stmt.executeUpdate(query);
+				stmt.addBatch("delete from PortfolioAsset");
+				stmt.addBatch("delete from Asset");
+				int[] recordsAffected = stmt.executeBatch();
 			} finally {
 				if(stmt == null) {
 					stmt.close();
@@ -216,7 +222,7 @@ public class PortfolioData {
 	 * Removes the asset record from the database corresponding to the
 	 * provided <code>assetCode</code>
 	 * @param assetCode
-	 * @throws SQLException 
+	 * @throws SQLException
 	 */
 	public static void removeAsset(String assetCode) throws SQLException {
 		log.info("Removing Asset. . .");
@@ -227,9 +233,9 @@ public class PortfolioData {
 			Statement stmt = null;
 			try {
 				stmt = conn.createStatement();
-				String query = "delete from Asset"
-					+ "where assetCode = "+assetCode;
-				int recordsAffected = stmt.executeUpdate(query);
+				stmt.addBatch("delete from PortfolioAsset where assetId = (select assetId from Asset where assetCode = "+assetCode+")");
+				stmt.addBatch("delete from Asset where assetCode = "+assetCode+"");
+				int[] recordsAffected = stmt.executeBatch();
 			} finally {
 				if(stmt == null) {
 					stmt.close();
@@ -251,7 +257,7 @@ public class PortfolioData {
 	 * @param assetCode
 	 * @param label
 	 * @param apr
-	 * @throws SQLException 
+	 * @throws SQLException
 	 */
 	public static void addDepositAccount(String assetCode, String label, double apr) throws SQLException {
 		log.info("Adding Deposit Account. . .");
@@ -289,7 +295,7 @@ public class PortfolioData {
 	 * @param baseRateOfReturn
 	 * @param baseOmega
 	 * @param totalValue
-	 * @throws SQLException 
+	 * @throws SQLException
 	 */
 	public static void addPrivateInvestment(String assetCode, String label, Double quarterlyDividend,
 			Double baseRateOfReturn, Double baseOmega, Double totalValue) throws SQLException {
@@ -329,7 +335,7 @@ public class PortfolioData {
 	 * @param beta
 	 * @param stockSymbol
 	 * @param sharePrice
-	 * @throws SQLException 
+	 * @throws SQLException
 	 */
 	public static void addStock(String assetCode, String label, Double quarterlyDividend,
 			Double baseRateOfReturn, Double beta, String stockSymbol, Double sharePrice) throws SQLException {
@@ -361,7 +367,7 @@ public class PortfolioData {
 
 	/**
 	 * Removes all portfolio records from the database
-	 * @throws SQLException 
+	 * @throws SQLException
 	 */
 	public static void removeAllPortfolios() throws SQLException {
 		log.info("Removing all Portfolios. . .");
@@ -372,8 +378,9 @@ public class PortfolioData {
 			Statement stmt = null;
 			try {
 				stmt = conn.createStatement();
-				String query = "delete from Portfolio";
-				int recordsAffected = stmt.executeUpdate(query);
+				stmt.addBatch("delete from PortfolioAsset");
+				stmt.addBatch("delete from Portfolio");
+				int[] recordsAffected = stmt.executeBatch();
 			} finally {
 				if(stmt == null) {
 					stmt.close();
@@ -393,7 +400,7 @@ public class PortfolioData {
 	 * Removes the portfolio record from the database corresponding to the
 	 * provided <code>portfolioCode</code>
 	 * @param portfolioCode
-	 * @throws SQLException 
+	 * @throws SQLException
 	 */
 	public static void removePortfolio(String portfolioCode) throws SQLException {
 		log.info("Removing Portfolio. . .");
@@ -404,9 +411,9 @@ public class PortfolioData {
 			Statement stmt = null;
 			try {
 				stmt = conn.createStatement();
-				String query = "delete from Portfolio"
-					+ "where portCode = "+portfolioCode;
-				int recordsAffected = stmt.executeUpdate(query);
+				stmt.addBatch("delete from PortfolioAsset where portfolioId = (select portfolioId from Portfolio where portCode = "+portfolioCode+")");
+				stmt.addBatch("delete from Portfolio where portCode = "+portfolioCode+"");
+				int[] recordsAffected = stmt.executeBatch();
 			} finally {
 				if(stmt == null) {
 					stmt.close();
@@ -429,7 +436,7 @@ public class PortfolioData {
 	 * @param ownerCode
 	 * @param managerCode
 	 * @param beneficiaryCode
-	 * @throws SQLException 
+	 * @throws SQLException
 	 */
 	public static void addPortfolio(String portfolioCode, String ownerCode, String managerCode, String beneficiaryCode) throws SQLException {
 		log.info("Adding Portfolio. . .");
@@ -469,7 +476,7 @@ public class PortfolioData {
 	 * @param portfolioCode
 	 * @param assetCode
 	 * @param value
-	 * @throws SQLException 
+	 * @throws SQLException
 	 */
 	public static void addAsset(String portfolioCode, String assetCode, double value) throws SQLException {
 		log.info("Adding Asset to Portfolio. . .");
