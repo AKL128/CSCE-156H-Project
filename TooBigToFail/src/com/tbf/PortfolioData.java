@@ -68,6 +68,7 @@ public class PortfolioData {
 			conn.commit();
 		} catch(SQLException e) {
 			conn.rollback();
+			throw new RuntimeException(e);
 		} finally {
 			if(conn == null) {
 				conn.close();
@@ -102,6 +103,7 @@ public class PortfolioData {
 			conn.commit();
 		} catch(SQLException e) {
 			conn.rollback();
+			throw new RuntimeException(e);
 		} finally {
 			if(conn == null) {
 				conn.close();
@@ -147,6 +149,7 @@ public class PortfolioData {
 			conn.commit();
 		} catch(SQLException e) {
 			conn.rollback();
+			throw new RuntimeException(e);
 		} finally {
 			if(conn == null) {
 				conn.close();
@@ -181,6 +184,7 @@ public class PortfolioData {
 			conn.commit();
 		} catch(SQLException e) {
 			conn.rollback();
+			throw new RuntimeException(e);
 		} finally {
 			if(conn == null) {
 				conn.close();
@@ -212,6 +216,7 @@ public class PortfolioData {
 			conn.commit();
 		} catch(SQLException e) {
 			conn.rollback();
+			throw new RuntimeException(e);
 		} finally {
 			if(conn == null) {
 				conn.close();
@@ -245,6 +250,7 @@ public class PortfolioData {
 			conn.commit();
 		} catch(SQLException e) {
 			conn.rollback();
+			throw new RuntimeException(e);
 		} finally {
 			if(conn == null) {
 				conn.close();
@@ -280,6 +286,7 @@ public class PortfolioData {
 			conn.commit();
 		} catch(SQLException e) {
 			conn.rollback();
+			throw new RuntimeException(e);
 		} finally {
 			if(conn == null) {
 				conn.close();
@@ -319,6 +326,7 @@ public class PortfolioData {
 					conn.commit();
 				} catch(SQLException e) {
 					conn.rollback();
+					throw new RuntimeException(e);
 				} finally {
 					if(conn == null) {
 						conn.close();
@@ -359,6 +367,7 @@ public class PortfolioData {
 					conn.commit();
 				} catch(SQLException e) {
 					conn.rollback();
+					throw new RuntimeException(e);
 				} finally {
 					if(conn == null) {
 						conn.close();
@@ -390,6 +399,7 @@ public class PortfolioData {
 			conn.commit();
 		} catch(SQLException e) {
 			conn.rollback();
+			throw new RuntimeException(e);
 		} finally {
 			if(conn == null) {
 				conn.close();
@@ -423,6 +433,7 @@ public class PortfolioData {
 			conn.commit();
 		} catch(SQLException e) {
 			conn.rollback();
+			throw new RuntimeException(e);
 		} finally {
 			if(conn == null) {
 				conn.close();
@@ -459,6 +470,7 @@ public class PortfolioData {
 			conn.commit();
 		} catch(SQLException e) {
 			conn.rollback();
+			throw new RuntimeException(e);
 		} finally {
 			if(conn == null) {
 				conn.close();
@@ -499,12 +511,14 @@ public class PortfolioData {
 			conn.commit();
 		} catch(SQLException e) {
 			conn.rollback();
+			throw new RuntimeException(e);
 		} finally {
 			if(conn == null) {
 				conn.close();
 			}
 		}
 	}
+	
 
 
 }
