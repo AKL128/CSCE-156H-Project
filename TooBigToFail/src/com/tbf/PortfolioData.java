@@ -82,6 +82,7 @@ public class PortfolioData {
 		Connection conn = null;
 		conn = DatabaseInfo.getConnection();
 		String query = "select personId from Person where personCode = (?)";
+		
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		int personId;
@@ -89,6 +90,7 @@ public class PortfolioData {
 			ps = conn.prepareStatement(query);
 			ps.setString(1, personCode);
 			rs = ps.executeQuery();
+			rs.next();
 			personId = rs.getInt("personId");
 		} catch(SQLException e) {
 			throw new RuntimeException(e);
@@ -183,6 +185,7 @@ public class PortfolioData {
 			ps = conn.prepareStatement(query);
 			ps.setString(1, stateName);
 			rs = ps.executeQuery();
+			rs.next();
 			stateId = rs.getInt("stateId");
 		} catch(SQLException e) {
 			throw new RuntimeException(e);
@@ -207,7 +210,7 @@ public class PortfolioData {
 	public static void addState(String stateName) {
 		Connection conn = null;
 		conn = DatabaseInfo.getConnection();
-		String query = "insert into State (stateName) values (?)";
+		String query = "insert ignore into State (stateName) values (?)";
 		PreparedStatement ps = null;
 		try {
 			ps = conn.prepareStatement(query);
@@ -242,6 +245,7 @@ public class PortfolioData {
 			ps = conn.prepareStatement(query);
 			ps.setString(1, countryName);
 			rs = ps.executeQuery();
+			rs.next();
 			countryId = rs.getInt("countryId");
 		} catch(SQLException e) {
 			throw new RuntimeException(e);
@@ -266,7 +270,7 @@ public class PortfolioData {
 	public static void addCountry(String countryName) {
 		Connection conn = null;
 		conn = DatabaseInfo.getConnection();
-		String query = "insert into Country (countryName) values (?)";
+		String query = "insert ignore into Country (countryName) values (?)";
 		PreparedStatement ps = null;
 		try {
 			ps = conn.prepareStatement(query);
@@ -291,7 +295,7 @@ public class PortfolioData {
 	public static void addAddress(String street, String city, int stateId, String zipCode, int countryId) {
 		Connection conn = null;
 		conn = DatabaseInfo.getConnection();
-		String query = "insert into Address (street, city, stateId, zipCode, countryId) values (?, ?, ?, ?, ?)";
+		String query = "insert ignore into Address (street, city, stateId, zipCode, countryId) values (?, ?, ?, ?, ?)";
 		PreparedStatement ps = null;
 		try {
 			ps = conn.prepareStatement(query);
@@ -323,12 +327,15 @@ public class PortfolioData {
 		String query = "select addressId from Address where street = (?)";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		int addressId;
+		int addressId = 0;
 		try {
 			ps = conn.prepareStatement(query);
 			ps.setString(1, street);
 			rs = ps.executeQuery();
-			addressId = rs.getInt("addressId");
+			while(rs.next()) {
+				addressId = rs.getInt("addressId");
+			}
+			
 		} catch(SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -356,7 +363,7 @@ public class PortfolioData {
 		conn = PortfolioData.getConnection();
 		String brokerData = brokerType + "," + secBrokerId;
 		
-		String query = "insert into Person (personCode, brokerData, firstName, lastName, addressId) values (?, ?, ?, ?, ?)";
+		String query = "insert ignore into Person (personCode, brokerData, firstName, lastName, addressId) values (?, ?, ?, ?, ?)";
 		PreparedStatement ps = null;
 		int stateId;
 		int countryId;
@@ -401,7 +408,7 @@ public class PortfolioData {
 		log.info("Adding Email to Person. . .");
 		Connection conn = null;
 		conn = DatabaseInfo.getConnection();
-		String query = "insert into Email (emailName, personId) values (?, ?)";
+		String query = "insert ignore into Email (emailName, personId) values (?, ?)";
 		PreparedStatement ps = null;
 		try {
 			
@@ -516,7 +523,7 @@ public class PortfolioData {
 		log.info("Adding Deposit Account. . .");
 		Connection conn = null;
 		conn = DatabaseInfo.getConnection();
-		String query = "insert into Asset (assetCode, assetType, assetLabel, apr) values (?, ?, ?, ?)";
+		String query = "insert ignore into Asset (assetCode, assetType, assetLabel, apr) values (?, ?, ?, ?)";
 		PreparedStatement ps = null;
 		try {
 			ps = conn.prepareStatement(query);
@@ -557,7 +564,7 @@ public class PortfolioData {
 				log.info("Adding Private Investment. . .");
 				Connection conn = null;
 				conn = PortfolioData.getConnection();
-				String query = "insert into Asset (assetCode, assetType, assetLabel, quarterlyDividend, baseRateOfReturn, baseOmegaMeasure, totalValue) "
+				String query = "insert ignore into Asset (assetCode, assetType, assetLabel, quarterlyDividend, baseRateOfReturn, baseOmegaMeasure, totalValue) "
 						+ "values (?, ?, ?, ?, ?, ?, ?)";
 				PreparedStatement ps = null;
 				try {
@@ -603,7 +610,7 @@ public class PortfolioData {
 				log.info("Adding Stock. . .");
 				Connection conn = null;
 				conn = PortfolioData.getConnection();
-				String query = "insert into Asset (assetCode, assetType, assetLabel, quarterlyDividend, baseRateOfReturn, betaMeasure, stockSymbol, sharePrice)"
+				String query = "insert ignore into Asset (assetCode, assetType, assetLabel, quarterlyDividend, baseRateOfReturn, betaMeasure, stockSymbol, sharePrice)"
 						+ "values (?, ?, ?, ?, ?, ?, ?, ?)";
 				PreparedStatement ps = null;
 				try {
@@ -724,6 +731,7 @@ public class PortfolioData {
 			ps = conn.prepareStatement(query);
 			ps.setString(1, portfolioCode);
 			rs = ps.executeQuery();
+			rs.next();
 			portfolioId = rs.getInt("portfolioId");
 		} catch(SQLException e) {
 			throw new RuntimeException(e);
@@ -756,6 +764,7 @@ public class PortfolioData {
 			ps = conn.prepareStatement(query);
 			ps.setString(1, assetCode);
 			rs = ps.executeQuery();
+			rs.next();
 			assetId = rs.getInt("assetId");
 		} catch(SQLException e) {
 			throw new RuntimeException(e);
@@ -792,7 +801,7 @@ public class PortfolioData {
 		log.info("Adding Portfolio. . .");
 		Connection conn = null;
 		conn = PortfolioData.getConnection();
-		String query = "insert into Portfolio (portCode, ownerId, managerId, beneficiaryId)"
+		String query = "insert ignore into Portfolio (portCode, ownerId, managerId, beneficiaryId)"
 				+ "values (?, ?, ?, ?)";
 		PreparedStatement ps = null;
 		
@@ -845,7 +854,7 @@ public class PortfolioData {
 		log.info("Adding Asset to Portfolio. . .");
 		Connection conn = null;
 		conn = DatabaseInfo.getConnection();
-		String query = "insert into PortfolioAsset (portfolioId, assetId, assetAmount)"
+		String query = "insert ignore into PortfolioAsset (portfolioId, assetId, assetAmount)"
 				+ "values (?, ?, ?)";
 		PreparedStatement ps = null;
 		int portfolioId;
