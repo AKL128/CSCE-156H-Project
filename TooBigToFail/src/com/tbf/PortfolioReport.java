@@ -11,6 +11,8 @@ package com.tbf;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -22,6 +24,8 @@ import org.apache.logging.log4j.core.config.DefaultConfiguration;
 public class PortfolioReport {
 	
 	public static StringBuilder portfolioSummaryReport(List<Portfolio> portfolioList) {
+		try {
+			
 		Collections.sort(portfolioList);
 		
 		StringBuilder summaryReport = new StringBuilder();
@@ -33,11 +37,10 @@ public class PortfolioReport {
 		double summaryFee = 0;
 		double summaryCommission = 0;
 		double summaryReturn = 0;
-		for(Portfolio port : portfolioList) {
-			System.out.println(port.getOwner().getLastName());
-		}
-		for(Portfolio port : portfolioList) {
 
+		for(Portfolio port : portfolioList) {
+			
+			
 			
 			port.getManager().setNumberOfAsset(port.getAssetList().size());
 			
@@ -53,13 +56,20 @@ public class PortfolioReport {
 		}
 		summaryReport.append(String.format("========================================================================================================================================\n"));
 		summaryReport.append(String.format("Totals %56.2f %16.2f %33.2f %16.2f", summaryFee, summaryCommission, summaryReturn, summaryTotal));
+		
 		return summaryReport;
+		} catch (NullPointerException e) {
+			System.out.println("Bad input portfolio: Possibly no manager input");
+			throw new RuntimeException(e);
+		}
 	}
 	
 	public static StringBuilder portfolioDetailedReport(Portfolio portfolio) {
+		try {
 		StringBuilder detailedReport = new StringBuilder();
 		detailedReport.append(String.format("Portfolio %s\n", portfolio.getPortCode()));
 		detailedReport.append(String.format("Owner: %s\n", portfolio.getOwner().getFullName()));
+		detailedReport.append(String.format("Owner Email: %s\n", portfolio.getOwner().getEmail()));
 		detailedReport.append(String.format("Manager: %s\n", portfolio.getManager().getFullName()));
 		if(portfolio.getBeneficiary() != null) {
 			detailedReport.append(String.format("Beneficiary: %s\n", portfolio.getBeneficiary().getFullName()));
@@ -79,6 +89,10 @@ public class PortfolioReport {
 		detailedReport.append(String.format("-----------------------------------------------------------------------------------------------\n"));
 		detailedReport.append(String.format("%64.5f %16.2f % 16.2f\n", portfolio.getAggregateRisk(), portfolio.getTotalAnnualReturn(), portfolio.getTotalValue()));
 		return detailedReport;
+	} catch (NullPointerException e) {
+		System.out.println("Bad input portfolio: Possibly no manager input");
+		throw new RuntimeException(e);
+	}
 	}
 
 	public static void main(String args[]) {
@@ -94,13 +108,15 @@ public class PortfolioReport {
 		List<Portfolio> portListFlat = DataConverter.parsePortfolioFile();
 		List<Asset> aListFlat = DataConverter.parseAssetFile();
 		List<Person> pListFlat = DataConverter.parsePersonFile();
+		List<Person> pList = DatabaseInfo.loadAllPersons();
 
 		List<Portfolio> portList = DatabaseInfo.loadAllPortfolios();
 		List<Asset> aList = DatabaseInfo.loadAllAssets();
-		List<Person> pList = DatabaseInfo.loadAllPersons();
-		for(Person p : pList) {
-			System.out.println(p.getFirstName());
+		
+		for(Portfolio port : portList) {
+			System.out.println(port.getAssetList());
 		}
+
 		portfolioSummaryReport(portList);
 
 		portfolioSummaryReport(portListFlat);
@@ -132,6 +148,10 @@ public class PortfolioReport {
 	}
 	}
 }
+
+
+
+
 
 
 

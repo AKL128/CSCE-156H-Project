@@ -54,7 +54,7 @@ public class PrivateInvestment extends Asset{
 	}
 
 	public double getAnnualReturn() {
-		return ((getValue() * (baseRateOfReturn / 100)) + (4 * quarterlyDividend) * (stake/100));
+		return ((getValue() * (baseRateOfReturn)) + (4 * quarterlyDividend) * (stake));
 	}
 
 	public double getReturnRate() {
@@ -70,6 +70,6 @@ public class PrivateInvestment extends Asset{
 	}
 
 	public double getValue() {
-		return totalValue * (stake / 100);
+		return totalValue * (stake);
 	}
 }

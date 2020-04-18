@@ -101,10 +101,10 @@ public class DatabaseInfo {
 
 		conn = DatabaseInfo.getConnection();
 
-		String query = "select a.assetId, a.assetCode, a.assetLabel, a.assetType, pa.assetAmount,"
-				+ " a.apr, a.quarterlyDividend, a.baseRateOfReturn, a.baseOmegaMeasure, a.totalValue"
-				+ ", a.betaMeasure, a.stockSymbol, a.sharePrice from Asset a "
-				+ "join PortfolioAsset pa on pa.assetId = a.assetId";
+		String query = "select assetId, assetCode, assetLabel, assetType,"
+				+ " apr, quarterlyDividend, baseRateOfReturn, baseOmegaMeasure, totalValue"
+				+ ", betaMeasure, stockSymbol, sharePrice from Asset a ";
+		
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
@@ -112,41 +112,36 @@ public class DatabaseInfo {
 			ps = conn.prepareStatement(query);
 			rs = ps.executeQuery();
 			while(rs.next()) {
+				int assetId = rs.getInt("assetId");
 				
-				int assetId = rs.getInt("a.assetId");
-				String assetCode = rs.getString("a.assetCode");
-				String assetLabel = rs.getString("a.assetLabel");
+				String assetCode = rs.getString("assetCode");
+				String assetLabel = rs.getString("assetLabel");
 				
-				String assetType = rs.getString("a.assetType");
-				
-				double portValue = rs.getDouble("pa.assetAmount");
+				String assetType = rs.getString("assetType");
 				
 				if(assetType.contains("D")) {
-					double apr = rs.getDouble("a.apr");
+					double apr = rs.getDouble("apr");
 					
 					a = new DepositAccount(assetId, assetCode, assetType, assetLabel, apr);
-					a.setPortValue(portValue);
 				} else if(assetType.contains("P")) {
-					double quarterlyDividend = rs.getDouble("a.quarterlyDividend");
-					double baseRateOfReturn = rs.getDouble("a.baseRateOfReturn");
-					double baseOmegaMeasure =  rs.getDouble("a.baseOmegaMeasure");
-					double totalValue = rs.getDouble("a.totalValue");
+					double quarterlyDividend = rs.getDouble("quarterlyDividend");
+					double baseRateOfReturn = rs.getDouble("baseRateOfReturn");
+					double baseOmegaMeasure =  rs.getDouble("baseOmegaMeasure");
+					double totalValue = rs.getDouble("totalValue");
 					
 					a = new PrivateInvestment(assetId, assetCode, assetType, assetLabel, quarterlyDividend, baseRateOfReturn, baseOmegaMeasure, totalValue);
-					a.setPortValue(portValue);
 				} else if(assetType.contains("S")) {
-					double quarterlyDividend = rs.getDouble("a.quarterlyDividend");
-					double baseRateOfReturn = rs.getDouble("a.baseRateOfReturn");
-					double betaMeasure = rs.getDouble("a.betaMeasure");
-					String stockSymbol = rs.getString("a.stockSymbol");
-					double sharePrice = rs.getDouble("a.sharePrice");
+					double quarterlyDividend = rs.getDouble("quarterlyDividend");
+					double baseRateOfReturn = rs.getDouble("baseRateOfReturn");
+					double betaMeasure = rs.getDouble("betaMeasure");
+					String stockSymbol = rs.getString("stockSymbol");
+					double sharePrice = rs.getDouble("sharePrice");
 					
 					a = new Stock(assetId, assetCode, assetType, assetLabel, quarterlyDividend, baseRateOfReturn, betaMeasure, stockSymbol, sharePrice);
-					a.setPortValue(portValue);
+				}
+				assets.add(a);
 				}
 				
-				assets.add(a);
-			}
 		} catch(SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -213,25 +208,22 @@ public class DatabaseInfo {
 	
 	public static List<Person> loadAllPersons() {
 		Person p = null;
- 
+
 		List<Person> persons = new ArrayList<>();
 		
 		List<Address> addressList = loadAllAddresses();
 		List<String> emailList = loadAllEmails();
- 
+
 		Connection conn = null;
- 
+
 		conn = DatabaseInfo.getConnection();
- 
-		String query = "select p.personId, p.personCode, p.brokerData, p.firstName, p.lastName, p.addressId from Person p "
-				+ "join Address a on a.addressId = p.addressId ";
-		
-		String query2 = "select emailName from Email where personId = (?)";
+
+		String query = "select p.personId, p.personCode, p.brokerData, p.firstName, p.lastName, p.addressId from Person p ";
 		PreparedStatement ps = null;
-		PreparedStatement ps2 = null;
 		ResultSet rs = null;
+		String query2 = "select emailName from Email where personId = (?)";
+		PreparedStatement ps2 = null;
 		ResultSet rs2 = null;
- 
 		try {
 			ps = conn.prepareStatement(query);
 			rs = ps.executeQuery();
@@ -239,7 +231,7 @@ public class DatabaseInfo {
 				
 				int personId = rs.getInt("p.personId");
 				String personCode = rs.getString("p.personCode");
-				String brokerData = rs.getString("p.brokerData");
+				String brokerData = rs.getString("p.brokerData"); 
 				String firstName = rs.getString("p.firstName");
 				String lastName = rs.getString("p.lastName");
 				Address address = null;
@@ -250,7 +242,6 @@ public class DatabaseInfo {
 					}
 				}
 				
-				
 				String tokens[] = null;
 				if(brokerData != null) {
 					tokens = brokerData.split(",");
@@ -258,21 +249,17 @@ public class DatabaseInfo {
 						p = new ExpertBroker(personId, personCode, brokerData, firstName, lastName, address);
 					} else if(tokens[0].contains("J")) {
 						p = new JuniorBroker(personId, personCode, brokerData, firstName, lastName, address);
+					} else {
+						p = new Person(personId, personCode, brokerData, firstName, lastName, address);
 					}
-				} else {
-					p = new Person(personId, personCode, brokerData, firstName, lastName, address);
-				}
+				} 
 				String emailTokens[] = null;
+				ps2 = conn.prepareStatement(query2);
+				ps2.setInt(1, personId);
+				rs2 = ps2.executeQuery();
 				while(rs2.next()) {
-					String e = rs2.getString("emailName");
-					p.addEmail(e);
-				}
-				for(String em : emailList) {
-					emailTokens = em.split(",");
-					int emailPersonId = Integer.parseInt(emailTokens[0]);
-					if(emailPersonId == rs.getInt("p.personId")) {
-						p.addEmail(emailTokens[1]);
-					}
+					String email = rs2.getString("emailName");
+					p.addEmail(email);
 				}
 				persons.add(p);
 			}
@@ -287,6 +274,12 @@ public class DatabaseInfo {
 			if(ps != null && !ps.isClosed()) {
 				ps.close();
 			}
+			if(rs2 != null && !rs2.isClosed()) {
+				rs2.close();
+			}
+			if(ps2 != null && !ps2.isClosed()) {
+				ps2.close();
+			}
 			if(conn != null && !conn.isClosed()) {
 				conn.close();
 			}
@@ -297,76 +290,74 @@ public class DatabaseInfo {
 	}
 	
 	public static List<Portfolio> loadAllPortfolios() {
-		log.info("Loading All Portfolios. . . . .");
+		log.info("Loading All Portfolios. . .");
 		Portfolio p = null;
 
 		List<Portfolio> portfolios = new ArrayList<>();
 		List<Person> persons = loadAllPersons();
 		List<Asset> assets = loadAllAssets();
+		
 
 		Connection conn = null;
 
 		conn = DatabaseInfo.getConnection();
 
-		String query = "select o.personId, m.personId, b.personId, po.portfolioId, po.portCode from Portfolio po "
-				+ "join Person o "
-				+ "join Person m "
-				+ "join Person b";
+		String query = "select ownerId, managerId, beneficiaryId, portfolioId, portCode from Portfolio";
+
 		PreparedStatement ps = null;
 		ResultSet rs = null;
+		PreparedStatement ps2 = null;
+		ResultSet rs2 = null;
+		String query2 = "select pa.assetId, pa.assetAmount from PortfolioAsset pa join Asset a on pa.assetId = a.assetId where pa.portfolioId = (?)";
 
 		try {
 			ps = conn.prepareStatement(query);
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				 
-				int portfolioId = rs.getInt("po.portfolioId");
-				String portCode = rs.getString("po.portCode");	
+				List<Asset> newAssets = new ArrayList<Asset>();;
+				
+				int portfolioId = rs.getInt("portfolioId");
+				
+				String portCode = rs.getString("portCode");	
 				Person owner = null;
 				Broker manager = null;
 				Person beneficiary = null;
 				
 				for(Person per : persons) {
-					int ownerId = rs.getInt("o.personId");
-					int managerId = rs.getInt("m.personId");
-					int beneficiaryId = rs.getInt("b.personId");
-					if(per.getPersonId().equals(ownerId)) {
+					
+					if(per.getPersonId().equals(rs.getInt("ownerId"))) {
 						owner = per;
-					} else if(per.getPersonId().equals(managerId)) {
+					} else if(per.getPersonId().equals(rs.getInt("managerId"))) {
 						manager = (Broker) per;
-					} else if(per.getPersonId().equals(beneficiaryId)) {
+					} else if(per.getPersonId().equals(rs.getInt("beneficiaryId"))) {
 						beneficiary = per;
 					} 
 				}
 				
-				p = new Portfolio(portfolioId, portCode, owner, manager, beneficiary);
+				ps2 = conn.prepareStatement(query2);
+				ps2.setInt(1, portfolioId);
+				rs2 = ps2.executeQuery();
 				
-				portfolios.add(p);
-			}
-		} catch(SQLException e) {
-			log.error("Failed Preparing Portfolios", e);
-			throw new RuntimeException(e);
-		}
-		
-		query = "select a.assetId, po.portfolioId from Portfolio po "
-				+ "join PortfolioAsset pa on pa.portfolioId = po.portfolioId "
-				+ "join Asset a on a.assetId = pa.assetId";
-		
-		try {
-			ps = conn.prepareStatement(query);
-			rs = ps.executeQuery();
-			while(rs.next()) {
-				for(Portfolio port : portfolios) {
+				while(rs2.next()) {
+					double assetAmount = rs2.getDouble("assetAmount");
+					int assetId = rs2.getInt("assetId");
 					for(Asset a : assets) {
-						if(a.getAssetId().equals(rs.getInt("a.assetId")) && port.getPortfolioId().equals(rs.getInt("po.portfolioId"))) {
-							port.addAsset(a);
+						if(a.getAssetId().equals(assetId)) {
+							a.setPortValue(assetAmount);
+							newAssets.add(a);
 						}
 					}
 				}
 				
+				p = new Portfolio(portfolioId, portCode, owner, manager, beneficiary);
+				p.setAssetList(newAssets);
+				portfolios.add(p);
+				
+				
 			}
-		} catch (SQLException e) {
-			log.error("Failed Preparing Portfolio's Assets", e);
+			
+		} catch(SQLException e) {
+			log.error("Failed Preparing Portfolios", e);
 			throw new RuntimeException(e);
 		}
 		
@@ -377,39 +368,19 @@ public class DatabaseInfo {
 			if(ps != null && !ps.isClosed()) {
 				ps.close();
 			}
+			if(rs2 != null && !rs2.isClosed()) {
+				rs2.close();
+			}
+			if(ps2 != null && !ps2.isClosed()) {
+				ps2.close();
+			}
 			if(conn != null && !conn.isClosed()) {
 				conn.close();
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
-		log.info("Portfolio with Asset List");
 		return portfolios;
 	}
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

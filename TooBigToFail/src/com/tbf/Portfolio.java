@@ -36,6 +36,16 @@ public class Portfolio implements Comparable<Portfolio>{
 		 this.manager = manager;
 		 this.beneficiary = beneficiary;
 	}
+	
+	public Portfolio(Integer portfolioId, String portCode, Person owner, Broker manager,
+			 Person beneficiary, List<Asset> assetList) {
+				 this.portfolioId = portfolioId;
+				 this.portCode = portCode;
+				 this.owner = owner;
+				 this.manager = manager;
+				 this.beneficiary = beneficiary;
+				 this.assetList = assetList;
+			}
 
 	public Integer getPortfolioId() {
 		return portfolioId;
@@ -89,6 +99,10 @@ public class Portfolio implements Comparable<Portfolio>{
 
 	public void addAsset(Asset a) {
 		this.assetList.add(a);
+	}
+	
+	public void setAssetList(List<Asset> assetList) {
+		this.assetList = assetList;
 	}
 
 	

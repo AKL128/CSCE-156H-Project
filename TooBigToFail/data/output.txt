@@ -1,0 +1,30 @@
+Portfolio Summary Report
+========================================================================================================================================
+Portfolio Owner                         Manager             Fees      Commissions    Weighted Risk           Return            Total
+PT1      Doe, Jane                 Smith, John             0.00             3.22          0.05210            85.96         13307.85
+PT2      Schmoe, Joe               Smith, Fred            75.00            12.16          4.30000           972.60        459264.00
+========================================================================================================================================
+Totals                                                    75.00            15.38                           1058.56        472571.85
+Portfolio PT1
+Owner: Doe, Jane
+Owner Email: []
+Manager: Smith, John
+Beneficiary: none
+Assets
+Code     Asset                     Return Rate             Risk    Annual Return            Value
+2A1B     depoacc                          0.50%             0.00            51.59         10293.20
+AB37910  PIacc                            1.14%             0.23            34.37          3014.65
+-----------------------------------------------------------------------------------------------
+                                                         0.05210            85.96         13307.85
+
+Portfolio PT2
+Owner: Schmoe, Joe
+Owner Email: [jschmoe@email.com]
+Manager: Smith, Fred
+Beneficiary: Doe, Jane
+Assets
+Code     Asset                     Return Rate             Risk    Annual Return            Value
+C34XYA   stockacc                         0.21%             4.30           972.60        459264.00
+-----------------------------------------------------------------------------------------------
+                                                         4.30000           972.60        459264.00
+

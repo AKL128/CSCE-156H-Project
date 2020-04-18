@@ -32,7 +32,7 @@ public class DepositAccount extends Asset{
 	}
 
 	public double getReturnRate() {
-		return (Math.exp(apr/100) - 1) * 100;
+		return (Math.exp(apr) - 1) * 100;
 	}
 
 	public void setPortValue(double portValue) {

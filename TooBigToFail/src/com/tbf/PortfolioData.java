@@ -422,8 +422,8 @@ public class PortfolioData {
 			personId = getPersonId(personCode);
 			
 			ps = conn.prepareStatement(query);
-			ps.setString(2, email);
-			ps.setInt(1, personId);
+			ps.setString(1, email);
+			ps.setInt(2, personId);
 			ps.executeUpdate();
 		} catch(SQLException e) {
 			throw new RuntimeException(e);
