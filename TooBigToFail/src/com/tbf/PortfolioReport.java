@@ -34,7 +34,13 @@ public class PortfolioReport {
 		double summaryCommission = 0;
 		double summaryReturn = 0;
 		for(Portfolio port : portfolioList) {
+			System.out.println(port.getOwner().getLastName());
+		}
+		for(Portfolio port : portfolioList) {
+
+			
 			port.getManager().setNumberOfAsset(port.getAssetList().size());
+			
 			port.getManager().setTotalAnnualReturn(port.getTotalAnnualReturn());
 			summaryReport.append(String.format("%-8s %-20s %16s %16.2f %16.2f %16.5f %16.2f %16.2f\n"
 				, port.getPortCode(), port.getOwner().getFullName(), port.getManager().getFullName()
@@ -92,7 +98,9 @@ public class PortfolioReport {
 		List<Portfolio> portList = DatabaseInfo.loadAllPortfolios();
 		List<Asset> aList = DatabaseInfo.loadAllAssets();
 		List<Person> pList = DatabaseInfo.loadAllPersons();
-
+		for(Person p : pList) {
+			System.out.println(p.getFirstName());
+		}
 		portfolioSummaryReport(portList);
 
 		portfolioSummaryReport(portListFlat);

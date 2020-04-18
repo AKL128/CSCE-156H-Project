@@ -213,22 +213,25 @@ public class DatabaseInfo {
 	
 	public static List<Person> loadAllPersons() {
 		Person p = null;
-
+ 
 		List<Person> persons = new ArrayList<>();
 		
 		List<Address> addressList = loadAllAddresses();
 		List<String> emailList = loadAllEmails();
-
+ 
 		Connection conn = null;
-
+ 
 		conn = DatabaseInfo.getConnection();
-
+ 
 		String query = "select p.personId, p.personCode, p.brokerData, p.firstName, p.lastName, p.addressId from Person p "
-				+ "join Address a on a.addressId = p.addressId "
-				+ "join Email e on e.personId = p.personId";
+				+ "join Address a on a.addressId = p.addressId ";
+		
+		String query2 = "select emailName from Email where personId = (?)";
 		PreparedStatement ps = null;
+		PreparedStatement ps2 = null;
 		ResultSet rs = null;
-
+		ResultSet rs2 = null;
+ 
 		try {
 			ps = conn.prepareStatement(query);
 			rs = ps.executeQuery();
@@ -260,6 +263,10 @@ public class DatabaseInfo {
 					p = new Person(personId, personCode, brokerData, firstName, lastName, address);
 				}
 				String emailTokens[] = null;
+				while(rs2.next()) {
+					String e = rs2.getString("emailName");
+					p.addEmail(e);
+				}
 				for(String em : emailList) {
 					emailTokens = em.split(",");
 					int emailPersonId = Integer.parseInt(emailTokens[0]);
@@ -290,7 +297,7 @@ public class DatabaseInfo {
 	}
 	
 	public static List<Portfolio> loadAllPortfolios() {
-		log.info("Loading All Portfolios. . .");
+		log.info("Loading All Portfolios. . . . .");
 		Portfolio p = null;
 
 		List<Portfolio> portfolios = new ArrayList<>();
@@ -302,9 +309,9 @@ public class DatabaseInfo {
 		conn = DatabaseInfo.getConnection();
 
 		String query = "select o.personId, m.personId, b.personId, po.portfolioId, po.portCode from Portfolio po "
-				+ "join Person o on o.personId = po.ownerId "
-				+ "join Person m on m.personId = po.managerId "
-				+ "join Person b on b.personId = po.beneficiaryId";
+				+ "join Person o "
+				+ "join Person m "
+				+ "join Person b";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
@@ -320,11 +327,14 @@ public class DatabaseInfo {
 				Person beneficiary = null;
 				
 				for(Person per : persons) {
-					if(per.getPersonId().equals(rs.getInt("o.personId"))) {
+					int ownerId = rs.getInt("o.personId");
+					int managerId = rs.getInt("m.personId");
+					int beneficiaryId = rs.getInt("b.personId");
+					if(per.getPersonId().equals(ownerId)) {
 						owner = per;
-					} else if(per.getPersonId().equals(rs.getInt("m.personId"))) {
+					} else if(per.getPersonId().equals(managerId)) {
 						manager = (Broker) per;
-					} else if(per.getPersonId().equals(rs.getInt("b.personId"))) {
+					} else if(per.getPersonId().equals(beneficiaryId)) {
 						beneficiary = per;
 					} 
 				}
@@ -373,6 +383,7 @@ public class DatabaseInfo {
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
+		log.info("Portfolio with Asset List");
 		return portfolios;
 	}
 	

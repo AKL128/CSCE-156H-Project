@@ -85,13 +85,15 @@ public class PortfolioData {
 		
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		int personId;
+		int personId = 0;
 		try {
 			ps = conn.prepareStatement(query);
 			ps.setString(1, personCode);
 			rs = ps.executeQuery();
-			rs.next();
-			personId = rs.getInt("personId");
+			while(rs.next()) {
+				personId = rs.getInt("personId");
+			}
+			
 		} catch(SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -180,13 +182,15 @@ public class PortfolioData {
 		String query = "select stateId from State where stateName = (?)";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		int stateId;
+		int stateId = 0;
 		try {
 			ps = conn.prepareStatement(query);
 			ps.setString(1, stateName);
 			rs = ps.executeQuery();
-			rs.next();
-			stateId = rs.getInt("stateId");
+			while(rs.next()) {
+				stateId = rs.getInt("stateId");
+			}
+			
 		} catch(SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -240,13 +244,15 @@ public class PortfolioData {
 		String query = "select countryId from Country where countryName = (?)";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		int countryId;
+		int countryId = 0;
 		try {
 			ps = conn.prepareStatement(query);
 			ps.setString(1, countryName);
 			rs = ps.executeQuery();
-			rs.next();
-			countryId = rs.getInt("countryId");
+			while(rs.next()) {
+				countryId = rs.getInt("countryId");
+			}
+			
 		} catch(SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -410,11 +416,14 @@ public class PortfolioData {
 		conn = DatabaseInfo.getConnection();
 		String query = "insert ignore into Email (emailName, personId) values (?, ?)";
 		PreparedStatement ps = null;
+		int personId;
 		try {
 			
+			personId = getPersonId(personCode);
+			
 			ps = conn.prepareStatement(query);
-			ps.setString(1, personCode);
 			ps.setString(2, email);
+			ps.setInt(1, personId);
 			ps.executeUpdate();
 		} catch(SQLException e) {
 			throw new RuntimeException(e);
@@ -726,13 +735,15 @@ public class PortfolioData {
 		String query = "select portfolioId from Portfolio where portCode = (?)";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		int portfolioId;
+		int portfolioId = 0;
 		try {
 			ps = conn.prepareStatement(query);
 			ps.setString(1, portfolioCode);
 			rs = ps.executeQuery();
-			rs.next();
-			portfolioId = rs.getInt("portfolioId");
+			while(rs.next()) {
+				portfolioId = rs.getInt("portfolioId");
+			}
+			
 		} catch(SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -759,13 +770,15 @@ public class PortfolioData {
 		String query = "select assetId from Asset where assetCode = (?)";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		int assetId;
+		int assetId = 0;
 		try {
 			ps = conn.prepareStatement(query);
 			ps.setString(1, assetCode);
 			rs = ps.executeQuery();
-			rs.next();
-			assetId = rs.getInt("assetId");
+			while(rs.next()) {
+				assetId = rs.getInt("assetId");
+			}
+			
 		} catch(SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -803,6 +816,8 @@ public class PortfolioData {
 		conn = PortfolioData.getConnection();
 		String query = "insert ignore into Portfolio (portCode, ownerId, managerId, beneficiaryId)"
 				+ "values (?, ?, ?, ?)";
+		String query2 = "insert ignore into Portfolio (portCode, ownerId, managerId)"
+				+ "values (?, ?, ?)";
 		PreparedStatement ps = null;
 		
 		int ownerId;
@@ -810,17 +825,26 @@ public class PortfolioData {
 		int beneficiaryId;
 		
 		try {
-			
 			ownerId = getPersonId(ownerCode);
 			managerId = getPersonId(managerCode);
-			beneficiaryId = getPersonId(beneficiaryCode);
 			
-			ps = conn.prepareStatement(query);
-			ps.setString(1, portfolioCode);
-			ps.setInt(2, ownerId);
-			ps.setInt(3, managerId);
-			ps.setInt(4, beneficiaryId);
-			ps.executeUpdate();
+			if(beneficiaryCode != null) {
+				beneficiaryId = getPersonId(beneficiaryCode);
+				ps = conn.prepareStatement(query);
+				ps.setString(1, portfolioCode);
+				ps.setInt(2, ownerId);
+				ps.setInt(3, managerId);
+				ps.setInt(4, beneficiaryId);
+				ps.executeUpdate();
+			} else {
+				ps = conn.prepareStatement(query2);
+				ps.setString(1, portfolioCode);
+				ps.setInt(2, ownerId);
+				ps.setInt(3, managerId);
+				ps.executeUpdate();
+			}
+			
+			
 		} catch(SQLException e) {
 			throw new RuntimeException(e);
 		}
