@@ -8,6 +8,9 @@ import java.util.Comparator;
 */
 import java.util.Iterator;
 
+import com.tbf.ComparatorMethods.valueComparator;
+
+
 public class LinkedList<T> implements Iterable<T> {
 	
 	private final Comparator<T> comparator;
@@ -23,12 +26,11 @@ public class LinkedList<T> implements Iterable<T> {
 	  
   }
   
-  public void addElementBySort(T item) {
+
+public void addElementBySort(T item) {
 	  if(item == null) {
 	      throw new IllegalArgumentException("Error: Null elements not allowed in this LinkedList");
 	    }
-	  Node<T> newNode = new Node<T>(item);
-	  Node<T> current;
 	  
 	  if(this.isEmpty()) {
 		  this.addElementToHead(item);
@@ -37,9 +39,6 @@ public class LinkedList<T> implements Iterable<T> {
 		  int rear = this.size();
 		  while(beg < rear && this.comparator.compare(item, this.getElementAtIndex(beg)) > 0) {
 			  beg++;
-			  for(int beg2 = rear; beg2 > beg; beg++) {
-				  this.insertAtIndex(this.getElementAtIndex(beg2 - 1), beg2);
-			  }
 			  this.insertAtIndex(item, beg);
 			  rear++;
 		  }
@@ -202,5 +201,10 @@ public class LinkedList<T> implements Iterable<T> {
       curr = curr.getNext();
     }
     return result;
+  }
+  
+  public static void main(String args[]) {
+	  LinkedList<Portfolio> llist = new LinkedList<Portfolio>(ComparatorMethods.valueComparator);
+	  
   }
 }
