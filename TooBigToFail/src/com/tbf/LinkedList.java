@@ -11,6 +11,14 @@ public class LinkedList<T> implements Iterable<T> {
 
   private Node<T> head = null;
   private Node<T> tail = null;
+  private int size;
+  
+  public LinkedList() {
+	  this.head = null;
+	  this.size = 0;
+  }
+  
+  
 
   public void addElementToHead(T item) {
     if(item == null) {
