@@ -1,4 +1,5 @@
 package com.tbf;
+import java.util.Comparator;
 /*
 *
 *
@@ -8,14 +9,74 @@ package com.tbf;
 import java.util.Iterator;
 
 public class LinkedList<T> implements Iterable<T> {
+	
+	private final Comparator<T> comparator;
 
-  private Node<T> head = null;
-  private Node<T> tail = null;
-  private int size;
+	private Node<T> head = null;
+	private Node<T> tail = null;
+	private int size;
   
-  public LinkedList() {
+  public LinkedList(Comparator<T> comparator) {
+	  this.comparator = comparator;
 	  this.head = null;
 	  this.size = 0;
+	  
+  }
+  
+  public void addElementBySort(T item) {
+	  if(item == null) {
+	      throw new IllegalArgumentException("Error: Null elements not allowed in this LinkedList");
+	    }
+	  Node<T> newNode = new Node<T>(item);
+	  Node<T> current;
+	  
+	  if(this.isEmpty()) {
+		  this.addElementToHead(item);
+	  } else {
+		  int beg = 0;
+		  int rear = this.size();
+		  while(beg < rear && this.comparator.compare(item, this.getElementAtIndex(beg)) > 0) {
+			  beg++;
+			  for(int beg2 = rear; beg2 > beg; beg++) {
+				  this.insertAtIndex(this.getElementAtIndex(beg2 - 1), beg2);
+			  }
+			  this.insertAtIndex(item, beg);
+			  rear++;
+		  }
+	  }
+  }
+  
+  private Node<T> getNodeAtIndex(int index) {
+	  if(index < 0 || index >= this.size) {
+		  throw new IllegalArgumentException("Index out of bounds!");
+	  }
+	  
+	  Node<T> curr = this.head;
+	  for(int i = 0; i < index; i++) {
+		  curr = curr.getNext();
+	  }
+	  return curr;
+  }
+  
+  public T getElementAtIndex(int index) {
+	  return getNodeAtIndex(index).getItem();
+  }
+  
+  public void insertAtIndex(T item, int index) {
+	  if(index < 0 || index > this.size) {
+		  throw new IllegalArgumentException("index out of bounds!");
+	  }
+	  if(index == 0) {
+		  this.addElementToHead(item);
+	  } else if(index == this.size) {
+		  this.addElementToTail(item);
+	  } else {
+		  Node<T> newNode = new Node(item);
+		  Node<T> prevNode = this.getNodeAtIndex(index-1);
+		  Node<T> currNode = this.getNodeAtIndex(index);
+		  newNode.setNext(currNode);
+		  prevNode.setNext(newNode);
+	  }
   }
   
   
