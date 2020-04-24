@@ -11,6 +11,14 @@ public class LinkedList<T> implements Iterable<T> {
 
   private Node<T> head = null;
   private Node<T> tail = null;
+  private int size;
+  
+  public LinkedList() {
+	  this.head = null;
+	  this.size = 0;
+  }
+  
+  
 
   public void addElementToHead(T item) {
     if(item == null) {
@@ -53,12 +61,12 @@ public class LinkedList<T> implements Iterable<T> {
 
   public void addElementToTail(T item) {
     if(item == null) {
-      throw new IllegalArgumentException("Error: Error: Null elements not allowed in this LinkedList")
+      throw new IllegalArgumentException("Error: Error: Null elements not allowed in this LinkedList");
     }
     Node<T> newTail = new Node<T>(item);
     if(this.tail == null) {
       this.head = newTail;
-      this.tail == newTail;
+      this.tail = newTail;
     } else {
       newTail.setPrevious(this.tail);
       this.tail.setNext(newTail);
@@ -101,6 +109,29 @@ public class LinkedList<T> implements Iterable<T> {
   public boolean isEmpty() {
     return (head == null);
   }
+  
+  public Iterator<T> iterator() {
+		return new Iterator<T>() {
+			Node<T> curr = head;
+			@Override
+			public boolean hasNext() {
+				if(curr == null)
+					return false;
+				else
+					return true;
+			}
+			@Override
+			public T next() {
+				T item = curr.getItem();
+				curr = curr.getNext();
+				return item;
+			}
+
+			@Override
+			public void remove() {
+				throw new UnsupportedOperationException("not implemented");
+			}};
+	}
 
   public String toString() {
     String result = null;
