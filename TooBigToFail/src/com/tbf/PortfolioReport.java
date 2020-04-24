@@ -26,7 +26,8 @@ public class PortfolioReport {
 	public static StringBuilder portfolioSummaryReport(List<Portfolio> portfolioList) {
 		try {
 			
-		Collections.sort(portfolioList);
+//		Collections.sort(portfolioList);
+			//TODO: Make it use ADT Linked List
 		
 		StringBuilder summaryReport = new StringBuilder();
 		summaryReport.append(String.format("Portfolio Summary Report\n"));
@@ -121,8 +122,6 @@ public class PortfolioReport {
 
 		portfolioSummaryReport(portListFlat);
 
-		Collections.sort(portList);
-		Collections.sort(portListFlat);
 		
 		for(Portfolio port : portList) {
 			portfolioDetailedReport(port);
