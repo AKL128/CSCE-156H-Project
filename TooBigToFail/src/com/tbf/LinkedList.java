@@ -111,4 +111,28 @@ public class LinkedList<T> implements Iterable<T> {
     }
     return result;
   }
+
+  public static void main(String args[]) {
+    LinkedList<Integer> llist = new LinkedList<Integer>();
+		llist.addElementToHead(10);
+		llist.addElementToHead(20);
+		llist.addElementToTail(-10);
+		llist.addElementToTail(-20);
+		System.out.println(llist);
+		System.out.println(llist.removeElementFromHead());
+		System.out.println(llist.removeElementFromTail());
+		System.out.println(llist);
+		llist.addElementToTail(-50);
+		llist.addElementToTail(-60);
+		System.out.println(llist);
+		System.out.println(llist.isEmpty());
+		System.out.println(llist.removeElementFromTail());
+		System.out.println(llist.removeElementFromTail());
+		System.out.println(llist.removeElementFromTail());
+		System.out.println(llist.removeElementFromTail());
+		System.out.println(llist.isEmpty());
+		llist.addElementToTail(-50);
+		llist.addElementToTail(-60);
+		System.out.println(llist);
+  }
 }
