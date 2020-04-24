@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class Portfolio implements Comparable<Portfolio>{
+public class Portfolio{
 	private Integer portfolioId;
 	private String portCode;
 	private Person owner;
@@ -25,9 +25,6 @@ public class Portfolio implements Comparable<Portfolio>{
 	private Person beneficiary;
 	private List<Asset> assetList = new ArrayList<Asset>();
 
-	public int compareThat(Portfolio that) {
-		return this.getOwner().getLastName().compareTo(that.getOwner().getLastName());
-	}
 	
 
 	public Portfolio(Integer portfolioId, String portCode, Person owner, Broker manager,
@@ -153,6 +150,7 @@ public class Portfolio implements Comparable<Portfolio>{
 		}
 		
 	}
+
 
 	
 
