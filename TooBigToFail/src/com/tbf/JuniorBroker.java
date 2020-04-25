@@ -9,18 +9,24 @@
 package com.tbf;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class JuniorBroker extends Broker{
 
 	private static final double feeRate = 0.0125;
 
-	public JuniorBroker(Integer brokerId, String personCode, String brokerData, String firstName, String lastName, Address address) {
-		super(brokerId, personCode, brokerData, firstName, lastName, address);
+	public JuniorBroker(Integer personId, String personCode, String brokerData, String firstName, String lastName, Address address, List<String> email) {
+		super(personId, personCode, brokerData, firstName, lastName, address, email);
 	}
 	
-	public JuniorBroker(String firstName, String lastName) {
-		this(null, null, null, firstName, lastName, null);
+
+
+	public JuniorBroker(Integer personId, String personCode, String brokerData, String firstName, String lastName,
+			Address address) {
+		super(personId, personCode, brokerData, firstName, lastName, address, null);
 	}
+
+
 
 	public double getFee() {
 		return 75.0 * numberOfAsset;

@@ -10,18 +10,22 @@
 package com.tbf;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ExpertBroker extends Broker{
 
 	private static final double feeRate = 0.0375;
 
-	public ExpertBroker(Integer brokerId, String personCode, String brokerData, String firstName, String lastName, Address address) {
-		super(brokerId, personCode, brokerData, firstName, lastName, address);
+	public ExpertBroker(Integer personId, String personCode, String brokerData, String firstName, String lastName, Address address, List<String> email) {
+		super(personId, personCode, brokerData, firstName, lastName, address, email);
 	}
 	
-	public ExpertBroker(String firstName, String lastName) {
-		this(null, null, null, firstName, lastName, null);
+
+	public ExpertBroker(Integer personId, String personCode, String brokerData, String firstName, String lastName,
+			Address address) {
+		super(personId, personCode, brokerData, firstName, lastName, address, null);
 	}
+
 
 	public double getFee() {
 		return 0.0;

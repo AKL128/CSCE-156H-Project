@@ -1,3 +1,5 @@
+use aluu;
+
 start transaction;
 
 drop table if exists PortfolioAsset;
@@ -65,7 +67,7 @@ create table if not exists Asset(
 
 create table if not exists Portfolio (
   portfolioId int not null primary key auto_increment,
-  portCode varchar(255) not null unique key,
+  beneficiaryCode varchar(255),
   ownerId int not null,
   managerId int not null,
   beneficiaryId int,
@@ -212,54 +214,53 @@ insert into Asset (assetCode, assetType, assetLabel, quarterlyDividend, baseRate
 
 
 -- Portfolios
-insert into Portfolio (portCode, ownerId, managerId, beneficiaryId) values
-	('PD111', (SELECT personId FROM Person WHERE lastName = 'Deeson' AND firstName = 'Amara'), (SELECT personId FROM Person WHERE lastName = 'Biffin' AND firstName = 'Fred'), (SELECT personId FROM Person WHERE lastName = 'McAllen' AND firstName = 'Dag')),
-    ('PT001', (SELECT personId FROM Person WHERE lastName = 'Rignoldes' AND firstName = 'Sergei'), (SELECT personId FROM Person WHERE lastName = 'Ropartz' AND firstName = 'Tamiko'), (SELECT personId FROM Person WHERE lastName = 'Deeson' AND firstName = 'Amara')),
-    ('PF001', (SELECT personId FROM Person WHERE lastName = 'Lacaze' AND firstName = 'Opaline'), (SELECT personId FROM Person WHERE lastName = 'McAllen' AND firstName = 'Dag'), (SELECT personId FROM Person WHERE lastName = 'Brant' AND firstName = 'Simona')),
-    ('PT002', (SELECT personId FROM Person WHERE lastName = 'Applegate' AND firstName = 'Glad'), (SELECT personId FROM Person WHERE lastName = 'Brant' AND firstName = 'Simona'), (SELECT personId FROM Person WHERE lastName = 'Schirach' AND firstName = 'Emera')),
-    ('PF002', (SELECT personId FROM Person WHERE lastName = 'Mansour' AND firstName = 'Barton'), (SELECT personId FROM Person WHERE lastName = 'Brant' AND firstName = 'Simona'), (SELECT personId FROM Person WHERE lastName = 'Gasson' AND firstName = 'Marco')),
-    ('PD001', (SELECT personId FROM Person WHERE lastName = 'Grevel' AND firstName = 'Alano'), (SELECT personId FROM Person WHERE lastName = 'Schirach' AND firstName = 'Emera'), (SELECT personId FROM Person WHERE lastName = 'Brant' AND firstName = 'Simona')),
-    ('PZ001', (SELECT personId FROM Person WHERE lastName = 'Calcut' AND firstName = 'Brand'), (SELECT personId FROM Person WHERE lastName = 'Gasson' AND firstName = 'Marco'), (SELECT personId FROM Person WHERE lastName = 'Calcut' AND firstName = 'Brand')),
-    ('PZ002', (SELECT personId FROM Person WHERE lastName = 'Shelborne' AND firstName = 'Ikey'), (SELECT personId FROM Person WHERE lastName = 'Calcut' AND firstName = 'Brand'), (SELECT personId FROM Person WHERE lastName = 'Shelborne' AND firstName = 'Ikey')),
-    ('PZ003', (SELECT personId FROM Person WHERE lastName = 'Shelborne' AND firstName = 'Ikey'), (SELECT personId FROM Person WHERE lastName = 'Brant' AND firstName = 'Simona'), (SELECT personId FROM Person WHERE lastName = 'Calcut' AND firstName = 'Brand'));
+-- insert into Portfolio (portCode, ownerId, managerId, beneficiaryId) values
+-- 	('PD111', (SELECT personId FROM Person WHERE lastName = 'Deeson' AND firstName = 'Amara'), (SELECT personId FROM Person WHERE lastName = 'Biffin' AND firstName = 'Fred'), (SELECT personId FROM Person WHERE lastName = 'McAllen' AND firstName = 'Dag')),
+--     ('PT001', (SELECT personId FROM Person WHERE lastName = 'Rignoldes' AND firstName = 'Sergei'), (SELECT personId FROM Person WHERE lastName = 'Ropartz' AND firstName = 'Tamiko'), (SELECT personId FROM Person WHERE lastName = 'Deeson' AND firstName = 'Amara')),
+--     ('PF001', (SELECT personId FROM Person WHERE lastName = 'Lacaze' AND firstName = 'Opaline'), (SELECT personId FROM Person WHERE lastName = 'McAllen' AND firstName = 'Dag'), (SELECT personId FROM Person WHERE lastName = 'Brant' AND firstName = 'Simona')),
+--     ('PT002', (SELECT personId FROM Person WHERE lastName = 'Applegate' AND firstName = 'Glad'), (SELECT personId FROM Person WHERE lastName = 'Brant' AND firstName = 'Simona'), (SELECT personId FROM Person WHERE lastName = 'Schirach' AND firstName = 'Emera')),
+--     ('PF002', (SELECT personId FROM Person WHERE lastName = 'Mansour' AND firstName = 'Barton'), (SELECT personId FROM Person WHERE lastName = 'Brant' AND firstName = 'Simona'), (SELECT personId FROM Person WHERE lastName = 'Gasson' AND firstName = 'Marco')),
+--     ('PD001', (SELECT personId FROM Person WHERE lastName = 'Grevel' AND firstName = 'Alano'), (SELECT personId FROM Person WHERE lastName = 'Schirach' AND firstName = 'Emera'), (SELECT personId FROM Person WHERE lastName = 'Brant' AND firstName = 'Simona')),
+--     ('PZ001', (SELECT personId FROM Person WHERE lastName = 'Calcut' AND firstName = 'Brand'), (SELECT personId FROM Person WHERE lastName = 'Gasson' AND firstName = 'Marco'), (SELECT personId FROM Person WHERE lastName = 'Calcut' AND firstName = 'Brand')),
+--     ('PZ002', (SELECT personId FROM Person WHERE lastName = 'Shelborne' AND firstName = 'Ikey'), (SELECT personId FROM Person WHERE lastName = 'Calcut' AND firstName = 'Brand'), (SELECT personId FROM Person WHERE lastName = 'Shelborne' AND firstName = 'Ikey')),
+--     ('PZ003', (SELECT personId FROM Person WHERE lastName = 'Shelborne' AND firstName = 'Ikey'), (SELECT personId FROM Person WHERE lastName = 'Brant' AND firstName = 'Simona'), (SELECT personId FROM Person WHERE lastName = 'Calcut' AND firstName = 'Brand'));
 
 -- Portfolio Assets
-insert into PortfolioAsset (portfolioId, assetId, assetAmount) values
-	((SELECT portfolioId FROM Portfolio WHERE portCode = 'PD111'), (SELECT assetId FROM Asset WHERE assetCode = 'YMj2jjQt'), 2120.23),
-    ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PD111'), (SELECT assetId FROM Asset WHERE assetCode = '89uKEpsi'), 400),
-    ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PD111'), (SELECT assetId FROM Asset WHERE assetCode = 'ZEnSzfbI'), 50),
-    ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PD111'), (SELECT assetId FROM Asset WHERE assetCode = 'FSacHJRA'), 89),
-    ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PT001'), (SELECT assetId FROM Asset WHERE assetCode = 'TTAVkJ1z'), 21.01),
-    ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PT001'), (SELECT assetId FROM Asset WHERE assetCode = '4WDyHL0t'), 98),
-    ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PT001'), (SELECT assetId FROM Asset WHERE assetCode = 'kzMLkD2z'), 64),
-    ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PT001'), (SELECT assetId FROM Asset WHERE assetCode = 's0rhIsHa'), 55),
-    ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PT001'), (SELECT assetId FROM Asset WHERE assetCode = 'fWHZRzrb'), 10),
-    ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PF001'), (SELECT assetId FROM Asset WHERE assetCode = '4agAKJEq'), 55),
-    ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PF001'), (SELECT assetId FROM Asset WHERE assetCode = '89uKEpsi'), 79),
-    ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PF001'), (SELECT assetId FROM Asset WHERE assetCode = '4WDyHL0t'), 90),
-    ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PF001'), (SELECT assetId FROM Asset WHERE assetCode = '0KZ7GLay'), 30),
-    ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PF001'), (SELECT assetId FROM Asset WHERE assetCode = 'CvGUIwRO'), 77),
-	((SELECT portfolioId FROM Portfolio WHERE portCode = 'PT002'), (SELECT assetId FROM Asset WHERE assetCode = 'N4ujtpKT'), 33),
-    ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PT002'), (SELECT assetId FROM Asset WHERE assetCode = 'OYWhU0b8'), 43),
-    ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PT002'), (SELECT assetId FROM Asset WHERE assetCode = 'zUcSIYPE'), 68),
-    ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PT002'), (SELECT assetId FROM Asset WHERE assetCode = '4agAKJEq'), 30),
-    ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PT002'), (SELECT assetId FROM Asset WHERE assetCode = 'LS30qQV5'), 203.10),
-    ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PF002'), (SELECT assetId FROM Asset WHERE assetCode = '4WDyHL0t'), 20),
-    ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PF002'), (SELECT assetId FROM Asset WHERE assetCode = 'bC51jaAV'), 44),
-    ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PF002'), (SELECT assetId FROM Asset WHERE assetCode = 'giff6C5r'), 50),
-    ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PF002'), (SELECT assetId FROM Asset WHERE assetCode = 's0rhIsHa'), 30),
-    ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PF002'), (SELECT assetId FROM Asset WHERE assetCode = 'zd68EsoK'), 10.12),
-    ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PD001'), (SELECT assetId FROM Asset WHERE assetCode = 'N4ujtpKT'), 5.00),
-    ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PD001'), (SELECT assetId FROM Asset WHERE assetCode = 'zd68EsoK'), 43.10),
-    ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PD001'), (SELECT assetId FROM Asset WHERE assetCode = 'CvGUIwRO'), 21.12),
-    ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PD001'), (SELECT assetId FROM Asset WHERE assetCode = 'TTAVkJ1z'), 765.00),
-    ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PZ001'), (SELECT assetId FROM Asset WHERE assetCode = '4WDyHL0t'), 40),
-    ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PZ001'), (SELECT assetId FROM Asset WHERE assetCode = 'TTAVkJ1z'), 20),
-    ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PZ001'), (SELECT assetId FROM Asset WHERE assetCode = 'giff6C5r'), 43),
-	((SELECT portfolioId FROM Portfolio WHERE portCode = 'PZ001'), (SELECT assetId FROM Asset WHERE assetCode = '4agAKJEq'), 63),
-    ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PZ002'), (SELECT assetId FROM Asset WHERE assetCode = 'un1qqk3u'), 23),
-    ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PZ002'), (SELECT assetId FROM Asset WHERE assetCode = 'bC51jaAV'), 43),
-	((SELECT portfolioId FROM Portfolio WHERE portCode = 'PZ002'), (SELECT assetId FROM Asset WHERE assetCode = 'tAceWN9L'), 74),
-	((SELECT portfolioId FROM Portfolio WHERE portCode = 'PZ002'), (SELECT assetId FROM Asset WHERE assetCode = 'LS30qQV5'), 123.51),
-    ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PZ003'), null, null);
-
+-- insert into PortfolioAsset (portfolioId, assetId, assetAmount) values
+-- 	((SELECT portfolioId FROM Portfolio WHERE portCode = 'PD111'), (SELECT assetId FROM Asset WHERE assetCode = 'YMj2jjQt'), 2120.23),
+--     ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PD111'), (SELECT assetId FROM Asset WHERE assetCode = '89uKEpsi'), 400),
+--     ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PD111'), (SELECT assetId FROM Asset WHERE assetCode = 'ZEnSzfbI'), 50),
+--     ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PD111'), (SELECT assetId FROM Asset WHERE assetCode = 'FSacHJRA'), 89),
+--     ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PT001'), (SELECT assetId FROM Asset WHERE assetCode = 'TTAVkJ1z'), 21.01),
+--     ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PT001'), (SELECT assetId FROM Asset WHERE assetCode = '4WDyHL0t'), 98),
+--     ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PT001'), (SELECT assetId FROM Asset WHERE assetCode = 'kzMLkD2z'), 64),
+--     ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PT001'), (SELECT assetId FROM Asset WHERE assetCode = 's0rhIsHa'), 55),
+--     ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PT001'), (SELECT assetId FROM Asset WHERE assetCode = 'fWHZRzrb'), 10),
+--     ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PF001'), (SELECT assetId FROM Asset WHERE assetCode = '4agAKJEq'), 55),
+--     ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PF001'), (SELECT assetId FROM Asset WHERE assetCode = '89uKEpsi'), 79),
+--     ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PF001'), (SELECT assetId FROM Asset WHERE assetCode = '4WDyHL0t'), 90),
+--     ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PF001'), (SELECT assetId FROM Asset WHERE assetCode = '0KZ7GLay'), 30),
+--     ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PF001'), (SELECT assetId FROM Asset WHERE assetCode = 'CvGUIwRO'), 77),
+-- 	((SELECT portfolioId FROM Portfolio WHERE portCode = 'PT002'), (SELECT assetId FROM Asset WHERE assetCode = 'N4ujtpKT'), 33),
+--     ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PT002'), (SELECT assetId FROM Asset WHERE assetCode = 'OYWhU0b8'), 43),
+--     ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PT002'), (SELECT assetId FROM Asset WHERE assetCode = 'zUcSIYPE'), 68),
+--     ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PT002'), (SELECT assetId FROM Asset WHERE assetCode = '4agAKJEq'), 30),
+--     ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PT002'), (SELECT assetId FROM Asset WHERE assetCode = 'LS30qQV5'), 203.10),
+--     ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PF002'), (SELECT assetId FROM Asset WHERE assetCode = '4WDyHL0t'), 20),
+--     ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PF002'), (SELECT assetId FROM Asset WHERE assetCode = 'bC51jaAV'), 44),
+--     ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PF002'), (SELECT assetId FROM Asset WHERE assetCode = 'giff6C5r'), 50),
+--     ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PF002'), (SELECT assetId FROM Asset WHERE assetCode = 's0rhIsHa'), 30),
+--     ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PF002'), (SELECT assetId FROM Asset WHERE assetCode = 'zd68EsoK'), 10.12),
+--     ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PD001'), (SELECT assetId FROM Asset WHERE assetCode = 'N4ujtpKT'), 5.00),
+--     ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PD001'), (SELECT assetId FROM Asset WHERE assetCode = 'zd68EsoK'), 43.10),
+--     ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PD001'), (SELECT assetId FROM Asset WHERE assetCode = 'CvGUIwRO'), 21.12),
+--     ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PD001'), (SELECT assetId FROM Asset WHERE assetCode = 'TTAVkJ1z'), 765.00),
+--     ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PZ001'), (SELECT assetId FROM Asset WHERE assetCode = '4WDyHL0t'), 40),
+--     ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PZ001'), (SELECT assetId FROM Asset WHERE assetCode = 'TTAVkJ1z'), 20),
+--     ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PZ001'), (SELECT assetId FROM Asset WHERE assetCode = 'giff6C5r'), 43),
+-- 	((SELECT portfolioId FROM Portfolio WHERE portCode = 'PZ001'), (SELECT assetId FROM Asset WHERE assetCode = '4agAKJEq'), 63),
+--     ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PZ002'), (SELECT assetId FROM Asset WHERE assetCode = 'un1qqk3u'), 23),
+--     ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PZ002'), (SELECT assetId FROM Asset WHERE assetCode = 'bC51jaAV'), 43),
+-- 	((SELECT portfolioId FROM Portfolio WHERE portCode = 'PZ002'), (SELECT assetId FROM Asset WHERE assetCode = 'tAceWN9L'), 74),
+-- 	((SELECT portfolioId FROM Portfolio WHERE portCode = 'PZ002'), (SELECT assetId FROM Asset WHERE assetCode = 'LS30qQV5'), 123.51),
+--     ((SELECT portfolioId FROM Portfolio WHERE portCode = 'PZ003'), null, null);

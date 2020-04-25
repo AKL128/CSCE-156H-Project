@@ -27,10 +27,14 @@ public class PrivateInvestment extends Asset{
 
 	PrivateInvestment(PrivateInvestment p) {
 		super(p);
-		quarterlyDividend = p.quarterlyDividend;
-		baseRateOfReturn = p.baseRateOfReturn;
-		baseOmegaMeasure = p.baseOmegaMeasure;
-		totalValue = p.totalValue;
+		this.assetId = p.assetId;
+		this.code = p.code;
+		this.id = p.id;
+		this.label = p.label;
+		this.quarterlyDividend = p.quarterlyDividend;
+		this.baseRateOfReturn = p.baseRateOfReturn;
+		this.baseOmegaMeasure = p.baseOmegaMeasure;
+		this.totalValue = p.totalValue;
 	}
 
 	public double getQuarterlyDividend() {

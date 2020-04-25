@@ -28,11 +28,15 @@ public class Stock extends Asset{
 
 	Stock(Stock s) {
 		super(s);
-		quarterlyDividend = s.quarterlyDividend;
-		baseRateOfReturn = s.baseRateOfReturn;
-		betaMeasure = s.betaMeasure;
-		stockSymbol = s.stockSymbol;
-		sharePrice = s.sharePrice;
+		this.assetId = s.assetId;
+		this.code = s.code;
+		this.id = s.id;
+		this.label = s.label;
+		this.quarterlyDividend = s.quarterlyDividend;
+		this.baseRateOfReturn = s.baseRateOfReturn;
+		this.betaMeasure = s.betaMeasure;
+		this.stockSymbol = s.stockSymbol;
+		this.sharePrice = s.sharePrice;
 	}
 
 	public double getQuarterlyDividend() {
@@ -60,7 +64,7 @@ public class Stock extends Asset{
 	}
 
 	public double getAnnualReturn() {
-		return ((getValue() * (baseRateOfReturn / 100)) + (4 * quarterlyDividend) * shareNumber);
+		return ((getValue() * (baseRateOfReturn)) + (4 * quarterlyDividend) * shareNumber);
 	}
 
 	public double getReturnRate() {

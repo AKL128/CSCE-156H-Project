@@ -105,27 +105,14 @@ public class DataConverter {
 
 				Address address = new Address(1, street, city, state, zip, country);
 				if(brokerToken[0].contains("E")) {
-					b = new ExpertBroker(1, personCode, brokerData, firstName, lastName, address);
-					if(email != null) {
-						for(String e : email) {
-							b.addEmail(e);
-						}
-					}
+					b = new ExpertBroker(1, personCode, brokerData, firstName, lastName, address, email);
 					
 				} else if(brokerToken[0].contains("J")) {
-					b = new JuniorBroker(1, personCode, brokerData, firstName, lastName, address);
-					if(email != null) {
-						for(String e : email) {
-							b.addEmail(e);
-						}
-					}
+					b = new JuniorBroker(1, personCode, brokerData, firstName, lastName, address, email);
+
 				} else {
-					b = new Person(1, personCode, brokerData, firstName, lastName, address);
-					if(email != null) {
-						for(String e : email) {
-							b.addEmail(e);
-						}
-					}
+					b = new Person(1, personCode, brokerData, firstName, lastName, address, email);
+
 				}
 				
 				result.add(b);

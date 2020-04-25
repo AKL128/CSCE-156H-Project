@@ -35,7 +35,7 @@ public class Person {
 //	protected double numberOfAsset;
 //	protected double totalAnnualReturn;
 
-	public Person(Integer personId, String personCode, String brokerData, String firstName, String lastName, Address address) {
+	public Person(Integer personId, String personCode, String brokerData, String firstName, String lastName, Address address, List<String> email) {
 		super();
 		this.personId = personId;
 		this.personCode = personCode;
@@ -43,15 +43,35 @@ public class Person {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;
+		this.email = email;
 
 		this.portList = new ArrayList<Portfolio>();
 	}
 	
-	public Person(String firstName, String lastName) {
-		this(null, null, null, firstName, lastName, null);
+	public Person(Integer personId, String personCode, String firstName, String lastName, Address address, List<String> email) {
+		super();
+		this.personId = personId;
+		this.personCode = personCode;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.address = address;
+		this.email = email;
+		
+		this.portList = new ArrayList<Portfolio>();
 	}
 
 
+
+	public Person(Integer personId, String personCode, String firstName, String lastName, Address address) {
+		super();
+		this.personId = personId;
+		this.personCode = personCode;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.address = address;
+		
+		this.portList = new ArrayList<Portfolio>();
+	}
 
 	public void addPortfolio(Portfolio portfolio) {
 		this.portList.add(portfolio);

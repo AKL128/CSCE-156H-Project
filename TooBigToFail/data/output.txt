@@ -1,30 +1,120 @@
-Portfolio Summary Report
-========================================================================================================================================
-Portfolio Owner                         Manager             Fees      Commissions    Weighted Risk           Return            Total
-PT1      Doe, Jane                 Smith, John             0.00             3.22          0.05210            85.96         13307.85
-PT2      Schmoe, Joe               Smith, Fred            75.00            12.16          4.30000           972.60        459264.00
-========================================================================================================================================
-Totals                                                    75.00            15.38                           1058.56        472571.85
-Portfolio PT1
-Owner: Doe, Jane
+Portfolio PT001
+Owner: Castro, Starlin
+Owner Email: [scastro@cubs.com, starlin_castro13@gmail.com]
+Manager: Gekko, Gordon
+Beneficiary: Sveum, Dale
+Assets
+Code     Asset                     Return Rate             Risk    Annual Return            Value
+AGTSAV   Savings Account                  0.00%             0.00            66.42         26534.20
+BX001-23 Money Market Savings             0.01%             0.00            25.37          2403.32
+B0oWM    Costco                          39.94%             0.13          5298.49         13266.25
+-----------------------------------------------------------------------------------------------
+                                                         0.04086          5390.28         42203.77
+
+Portfolio PF001
+Owner: O'Brien, Miles
 Owner Email: []
-Manager: Smith, John
+Manager: Gekko, Gordon
 Beneficiary: none
 Assets
 Code     Asset                     Return Rate             Risk    Annual Return            Value
-2A1B     depoacc                          0.50%             0.00            51.59         10293.20
-AB37910  PIacc                            1.14%             0.23            34.37          3014.65
+BX001-23 Money Market Savings             0.01%             0.00             1.31           124.32
+BERK-B   Berkshire Hathaway               7.20%            -0.10          8092.22        112392.00
 -----------------------------------------------------------------------------------------------
-                                                         0.05210            85.96         13307.85
+                                                        -0.09989          8093.54        112516.32
 
-Portfolio PT2
-Owner: Schmoe, Joe
-Owner Email: [jschmoe@email.com]
-Manager: Smith, Fred
-Beneficiary: Doe, Jane
+Portfolio PD102
+Owner: Baker, C.
+Owner Email: [dr@baker.com]
+Manager: Fox, Bud
+Beneficiary: Gekko, Gordon
 Assets
 Code     Asset                     Return Rate             Risk    Annual Return            Value
-C34XYA   stockacc                         0.21%             4.30           972.60        459264.00
+RENT445  Rental Property                  8.25%             0.50          9900.00        120000.00
+FOOD12   Cluckin's restaurant chain            14.55%             1.22         61731.25        424375.00
 -----------------------------------------------------------------------------------------------
-                                                         4.30000           972.60        459264.00
+                                                         1.06290         71631.25        544375.00
+
+Portfolio PF002
+Owner: Smith, Matt
+Owner Email: [msmith@who.com, thedoc@cse.unl.edu]
+Manager: Baker, Tom
+Beneficiary: McCoy, Sylvester
+Assets
+Code     Asset                     Return Rate             Risk    Annual Return            Value
+321CC    Coca-Cola                       56.17%             0.08           588.37          1047.54
+-----------------------------------------------------------------------------------------------
+                                                         0.07500           588.37          1047.54
+
+Portfolio PF003
+Owner: Tennant, David
+Owner Email: [actor@shakespeare.com, tdavid@unl.edu]
+Manager: Baker, Tom
+Beneficiary: McCoy, Sylvester
+Assets
+Code     Asset                     Return Rate             Risk    Annual Return            Value
+N0TPIX   3D Systems                       1.25%             0.08             9.29           743.40
+-----------------------------------------------------------------------------------------------
+                                                         0.08000             9.29           743.40
+
+Portfolio PF004
+Owner: Tennant, David
+Owner Email: [actor@shakespeare.com, tdavid@unl.edu]
+Manager: Hurndall, Richard
+Beneficiary: Ehrmantraut, Kaylee
+Assets
+Code     Asset                     Return Rate             Risk    Annual Return            Value
+RIRA01   Roth IRA                         0.03%             0.00            35.70          1032.12
+-----------------------------------------------------------------------------------------------
+                                                         0.00000            35.70          1032.12
+
+Portfolio PF006
+Owner: McCoy, Sylvester
+Owner Email: [slyguy@hotmail.com, mccoy@whofan.com]
+Manager: Baker, Tom
+Beneficiary: none
+Assets
+Code     Asset                     Return Rate             Risk    Annual Return            Value
+-----------------------------------------------------------------------------------------------
+                                                         0.00000             0.00             0.00
+
+Portfolio PF007
+Owner: Baker, Tom
+Owner Email: [famousdoc@who.com, tbaker@cse.unl.edu, mostfamous@whovian.com, thedoctor@bbc.com]
+Manager: Baker, Tom
+Beneficiary: Ehrmantraut, Kaylee
+Assets
+Code     Asset                     Return Rate             Risk    Annual Return            Value
+321CC    Coca-Cola                       56.17%             0.08        230734.80        410800.00
+wOOWoo1S Canadian National Railway            15.85%             0.12           774.83          4887.50
+CMPROP0121 Commercial Property-Red Oaks Mall             5.89%             1.24        144843.66       2457160.00
+REALStr12 Fred's Fabulous Hardware Store            10.31%             0.23           671.51          6516.00
+-----------------------------------------------------------------------------------------------
+                                                         1.06795        377024.79       2879363.50
+
+Portfolio PF200
+Owner: Hurndall, Richard
+Owner Email: [rhurndall@cse.unl.edu, richard@unl.edu]
+Manager: Eccleston, Chris
+Beneficiary: Ehrmantraut, Kaylee
+Assets
+Code     Asset                     Return Rate             Risk    Annual Return            Value
+-----------------------------------------------------------------------------------------------
+                                                         0.00000             0.00             0.00
+
+Portfolio PF300
+Owner: McCoy, Sylvester
+Owner Email: [slyguy@hotmail.com, mccoy@whofan.com]
+Manager: Hurndall, Richard
+Beneficiary: none
+Assets
+Code     Asset                     Return Rate             Risk    Annual Return            Value
+CD1Y3X   1-year Rollover CD               0.03%             0.00          6970.40        250000.00
+RIRA01   Roth IRA                         0.03%             0.00          4150.15        120000.00
+GOOG001  Google Inc.                      5.60%            -0.05          4562.36         81470.80
+123APP   Apple                           27.10%            -0.07        116481.40        429800.00
+IND321   Industrial Widget Manufacturers Inc.             3.00%             1.12         31566.65       1053332.50
+RSTOR322 7" Vinyl Records                74.79%             0.54         10096.34         13500.00
+-----------------------------------------------------------------------------------------------
+                                                         0.59214        173827.31       1948103.30
 

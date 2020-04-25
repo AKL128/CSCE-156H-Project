@@ -37,10 +37,10 @@ public abstract class Asset{
 	}
 
 	Asset(Asset a) {
-		assetId = a.assetId;
-		code = a.code;
-		id = a.id;
-		label = a.label;
+		this.assetId = a.assetId;
+		this.code = a.code;
+		this.id = a.id;
+		this.label = a.label;
 	}
 
 	public Integer getAssetId() {

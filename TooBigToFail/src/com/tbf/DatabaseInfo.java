@@ -218,10 +218,10 @@ public class DatabaseInfo {
 
 		conn = DatabaseInfo.getConnection();
 
-		String query = "select p.personId, p.personCode, p.brokerData, p.firstName, p.lastName, p.addressId from Person p ";
+		String query = "select personId, personCode, brokerData, firstName, lastName, addressId from Person";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String query2 = "select emailName from Email where personId = (?)";
+		
 		PreparedStatement ps2 = null;
 		ResultSet rs2 = null;
 		try {
@@ -229,39 +229,48 @@ public class DatabaseInfo {
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				
-				int personId = rs.getInt("p.personId");
-				String personCode = rs.getString("p.personCode");
-				String brokerData = rs.getString("p.brokerData"); 
-				String firstName = rs.getString("p.firstName");
-				String lastName = rs.getString("p.lastName");
-				Address address = null;
-				ArrayList<String> emails = new ArrayList<String>();
+				int personId = rs.getInt("personId");
+				String personCode = rs.getString("personCode");
+				String brokerData = rs.getString("brokerData"); 
+				String firstName = rs.getString("firstName");
+				String lastName = rs.getString("lastName");
+				Address address = null;		
+				
 				for(Address a : addressList) {
-					if(a.getAddressId() == rs.getInt("p.addressId")) {
+					if(a.getAddressId() == rs.getInt("addressId")) {
 						address = a;
 					}
 				}
 				
-				String tokens[] = null;
-				if(brokerData != null) {
-					tokens = brokerData.split(",");
-					if(tokens[0].contains("E")) {
-						p = new ExpertBroker(personId, personCode, brokerData, firstName, lastName, address);
-					} else if(tokens[0].contains("J")) {
-						p = new JuniorBroker(personId, personCode, brokerData, firstName, lastName, address);
-					} else {
-						p = new Person(personId, personCode, brokerData, firstName, lastName, address);
-					}
-				} 
+				List<String> emails = new ArrayList<String>();
 				String emailTokens[] = null;
+				
+			try {
+				String query2 = "select emailName from Email where personId = (?)";
 				ps2 = conn.prepareStatement(query2);
-				ps2.setInt(1, personId);
+				ps2.setString(1, Integer.toString(personId));
 				rs2 = ps2.executeQuery();
 				while(rs2.next()) {
 					String email = rs2.getString("emailName");
-					p.addEmail(email);
+					emails.add(email);
 				}
-				persons.add(p);
+			} catch (SQLException e) {
+				throw new RuntimeException(e);
+			}
+				
+				String tokens[] = null;
+				
+					tokens = brokerData.split(",");
+					if(tokens[0].contains("E")) {
+						p = new ExpertBroker(personId, personCode, brokerData, firstName, lastName, address, emails);
+						persons.add(p);
+					} else if(tokens[0].contains("J")) {
+						p = new JuniorBroker(personId, personCode, brokerData, firstName, lastName, address, emails);
+						persons.add(p);
+					} else {
+						p = new Person(personId, personCode, firstName, lastName, address, emails);
+						persons.add(p);
+					}
 			}
 		} catch(SQLException e) {
 			throw new RuntimeException(e);
@@ -308,6 +317,8 @@ public class DatabaseInfo {
 		ResultSet rs = null;
 		PreparedStatement ps2 = null;
 		ResultSet rs2 = null;
+		PreparedStatement ps3 = null;
+		ResultSet rs3 = null;
 		String query2 = "select pa.assetId, pa.assetAmount from PortfolioAsset pa join Asset a on pa.assetId = a.assetId where pa.portfolioId = (?)";
 
 		try {
@@ -317,42 +328,72 @@ public class DatabaseInfo {
 				List<Asset> newAssets = new ArrayList<Asset>();;
 				
 				int portfolioId = rs.getInt("portfolioId");
+				int ownerId = rs.getInt("ownerId");
+				int managerId = rs.getInt("managerId");
+				int beneficiaryId = rs.getInt("beneficiaryId");
 				
 				String portCode = rs.getString("portCode");	
 				Person owner = null;
 				Broker manager = null;
 				Person beneficiary = null;
+				Person m = null;
+				
+				
+			
+				
 				
 				for(Person per : persons) {
 					
-					if(per.getPersonId().equals(rs.getInt("ownerId"))) {
+					
+					if(per.getPersonId().equals(ownerId)) {
 						owner = per;
-					} else if(per.getPersonId().equals(rs.getInt("managerId"))) {
-						manager = (Broker) per;
-					} else if(per.getPersonId().equals(rs.getInt("beneficiaryId"))) {
+					}
+					if(per.getPersonId().equals(managerId)) {
+						String tokens[] = null;
+						String brokerData = per.getBrokerData();
+							tokens = brokerData.split(",");
+							if(tokens[0].contains("E")) {
+								m = new ExpertBroker(per.getPersonId(), per.getPersonCode(), per.getBrokerData(), per.getFirstName(), per.getLastName(), per.getAddress());
+							} else if(tokens[0].contains("J")) {
+								m = new JuniorBroker(per.getPersonId(), per.getPersonCode(), per.getBrokerData(), per.getFirstName(), per.getLastName(), per.getAddress());
+							}  else {
+							m = new Person(per.getPersonId(), per.getPersonCode(), per.getFirstName(), per.getLastName(), per.getAddress());
+						}
+						manager = (Broker) m;
+					}
+					if(per.getPersonId().equals(beneficiaryId)) {
 						beneficiary = per;
 					} 
 				}
 				
+				
 				ps2 = conn.prepareStatement(query2);
-				ps2.setInt(1, portfolioId);
+				ps2.setString(1, Integer.toString(portfolioId));
 				rs2 = ps2.executeQuery();
 				
 				while(rs2.next()) {
 					double assetAmount = rs2.getDouble("assetAmount");
 					int assetId = rs2.getInt("assetId");
 					for(Asset a : assets) {
-						if(a.getAssetId().equals(assetId)) {
-							a.setPortValue(assetAmount);
-							newAssets.add(a);
+						Asset newAsset = null;
+						if(a.getId().contains("D")) {
+							newAsset = new DepositAccount((DepositAccount) a);
+						} else if(a.getId().contains("P")) {
+							newAsset = new PrivateInvestment((PrivateInvestment) a);
+						} else if(a.getId().contains("S")){
+							newAsset = new Stock((Stock) a);
+						}
+						if(newAsset.getAssetId().equals(assetId)) {
+							newAsset.setPortValue(assetAmount);
+							newAssets.add(newAsset);
 						}
 					}
 				}
 				
+				
 				p = new Portfolio(portfolioId, portCode, owner, manager, beneficiary);
 				p.setAssetList(newAssets);
 				portfolios.add(p);
-				
 				
 			}
 			

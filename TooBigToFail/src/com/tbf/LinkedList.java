@@ -1,19 +1,19 @@
 package com.tbf;
 import java.util.Comparator;
-/*
-*
-*
-*
-*
-*/
+/**
+ * Author: Anthony luu, and Brett Berg
+ * Date: 2020/4/20
+ *
+ * This is the ADT Linked List class that is used to handle our data 
+ *
+ */
 import java.util.Iterator;
 
-import com.tbf.ComparatorMethods.valueComparator;
 
 
 public class LinkedList<T> implements Iterable<T> {
 	
-	private final Comparator<T> comparator;
+	private Comparator<T> comparator;
 
 	private Node<T> head = null;
 	private Node<T> tail = null;
@@ -27,21 +27,21 @@ public class LinkedList<T> implements Iterable<T> {
   }
   
 
-public void addElementBySort(T item) {
+  public void addElementBySort(T item) {
 	  if(item == null) {
 	      throw new IllegalArgumentException("Error: Null elements not allowed in this LinkedList");
 	    }
 	  
 	  if(this.isEmpty()) {
-		  this.addElementToHead(item);
+		  addElementToHead(item);
 	  } else {
 		  int beg = 0;
 		  int rear = this.size();
 		  while(beg < rear && this.comparator.compare(item, this.getElementAtIndex(beg)) > 0) {
 			  beg++;
-			  this.insertAtIndex(item, beg);
-			  rear++;
 		  }
+		  this.size++;
+		  this.insertAtIndex(item, beg);
 	  }
   }
   
@@ -75,6 +75,7 @@ public void addElementBySort(T item) {
 		  Node<T> currNode = this.getNodeAtIndex(index);
 		  newNode.setNext(currNode);
 		  prevNode.setNext(newNode);
+		  this.size++;
 	  }
   }
   
@@ -84,15 +85,10 @@ public void addElementBySort(T item) {
     if(item == null) {
       throw new IllegalArgumentException("Error: Null elements not allowed in this LinkedList");
     }
-    Node<T> newHead = new Node<T>(item);
-    if(this.tail == null) {
-      this.head = newHead;
-      this.tail = newHead;
-    } else {
-      newHead.setNext(this.head);
-      this.head.setPrevious(newHead);
-      this.head = newHead;
-    }
+    Node<T> newHead = new Node<>(item);
+    newHead.setNext(this.head);
+    this.head = newHead;
+    this.size++;
   }
 
   public T removeElementFromHead() {
@@ -103,10 +99,11 @@ public void addElementBySort(T item) {
       item = this.head.getItem();
       this.head = null;
       this.tail = null;
+      this.size--;
     } else {
       item = this.head.getItem();
       this.head = this.head.getNext();
-			this.head.setPrevious(null);
+      this.head.setPrevious(null);
     }
     return item;
   }
@@ -123,15 +120,18 @@ public void addElementBySort(T item) {
     if(item == null) {
       throw new IllegalArgumentException("Error: Error: Null elements not allowed in this LinkedList");
     }
-    Node<T> newTail = new Node<T>(item);
-    if(this.tail == null) {
-      this.head = newTail;
-      this.tail = newTail;
-    } else {
-      newTail.setPrevious(this.tail);
-      this.tail.setNext(newTail);
-      this.tail = newTail;
+    
+    if(this.isEmpty()) {
+    	addElementToHead(item);
+    	return;
     }
+    Node<T> curr = this.head;
+    while(curr.getNext() != null) {
+    	curr = curr.getNext();
+    }
+    Node<T> newTail = new Node<T>(item);
+    curr.setNext(newTail);
+    this.size++;
   }
 
   public T removeElementFromTail() {
@@ -194,17 +194,20 @@ public void addElementBySort(T item) {
 	}
 
   public String toString() {
-    String result = null;
-    Node<T> curr = head;
-    while(curr != null) {
-      result += curr.getItem() + "\n";
-      curr = curr.getNext();
-    }
-    return result;
-  }
-  
-  public static void main(String args[]) {
-	  LinkedList<Portfolio> llist = new LinkedList<Portfolio>(ComparatorMethods.valueComparator);
-	  
-  }
+		if(this.head == null) {
+			return "[empty]";
+		}
+		StringBuilder sb = new StringBuilder();
+		sb.append("[");
+		Node<T> curr = head;
+		while(curr != null) {
+			sb.append(curr.getItem());
+			if(curr.getNext() != null)
+				sb.append(", ");
+			curr = curr.getNext();
+		}
+		sb.append("]");
+		return sb.toString();
+	}
+ 
 }

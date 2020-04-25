@@ -15,6 +15,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.apache.logging.log4j.Level;
@@ -23,11 +24,13 @@ import org.apache.logging.log4j.core.config.DefaultConfiguration;
 
 public class PortfolioReport {
 	
-	public static StringBuilder portfolioSummaryReport(List<Portfolio> portfolioList) {
+	public static StringBuilder portfolioSummaryReport(List<Portfolio> portfolioList, Comparator<Portfolio> comparator) {
 		try {
-			
-//		Collections.sort(portfolioList);
-			//TODO: Make it use ADT Linked List
+		
+		LinkedList<Portfolio> linkedPort = new LinkedList<Portfolio>(comparator);
+		for(Portfolio p : portfolioList) {
+			linkedPort.addElementBySort(p);
+		}
 		
 		StringBuilder summaryReport = new StringBuilder();
 		summaryReport.append(String.format("Portfolio Summary Report\n"));
@@ -39,9 +42,7 @@ public class PortfolioReport {
 		double summaryCommission = 0;
 		double summaryReturn = 0;
 
-		for(Portfolio port : portfolioList) {
-			
-			
+		for(Portfolio port : linkedPort) {
 			
 			port.getManager().setNumberOfAsset(port.getAssetList().size());
 			
@@ -57,7 +58,7 @@ public class PortfolioReport {
 		}
 		summaryReport.append(String.format("========================================================================================================================================\n"));
 		summaryReport.append(String.format("Totals %56.2f %16.2f %33.2f %16.2f", summaryFee, summaryCommission, summaryReturn, summaryTotal));
-		
+		System.out.println(summaryReport);
 		return summaryReport;
 		} catch (NullPointerException e) {
 			System.out.println("Bad input portfolio: Possibly no manager input");
@@ -91,7 +92,7 @@ public class PortfolioReport {
 		detailedReport.append(String.format("%64.5f %16.2f % 16.2f\n", portfolio.getAggregateRisk(), portfolio.getTotalAnnualReturn(), portfolio.getTotalValue()));
 		return detailedReport;
 	} catch (NullPointerException e) {
-		System.out.println("Bad input portfolio: Possibly no manager input");
+		System.out.println("Bad input portfolio: Possibly no manager input DETAILED");
 		throw new RuntimeException(e);
 	}
 	}
@@ -113,14 +114,10 @@ public class PortfolioReport {
 
 		List<Portfolio> portList = DatabaseInfo.loadAllPortfolios();
 		List<Asset> aList = DatabaseInfo.loadAllAssets();
-		
-		for(Portfolio port : portList) {
-			System.out.println(port.getAssetList());
-		}
 
-		portfolioSummaryReport(portList);
-
-		portfolioSummaryReport(portListFlat);
+		portfolioSummaryReport(portList, ComparatorMethods.ownerComparator);
+		portfolioSummaryReport(portList, ComparatorMethods.valueComparator);
+		portfolioSummaryReport(portList, ComparatorMethods.managerComparator);
 
 		
 		for(Portfolio port : portList) {
@@ -130,9 +127,7 @@ public class PortfolioReport {
 		for(Portfolio port : portListFlat) {
 			portfolioDetailedReport(port);
 		}
-		
-		pwR.println(portfolioSummaryReport(portList));
-		System.out.println(portfolioSummaryReport(portList));
+	
 		for(Portfolio port : portList) {
 			pwR.println(portfolioDetailedReport(port));
 			System.out.println(portfolioDetailedReport(port));

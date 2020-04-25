@@ -20,7 +20,11 @@ public class DepositAccount extends Asset{
 
 	DepositAccount(DepositAccount d) {
 		super(d);
-		apr = d.apr;
+		this.apr = d.apr;
+		this.assetId = d.assetId;
+		this.code = d.code;
+		this.id = d.id;
+		this.label = d.label;
 	}
 
 	public double getApr() {
@@ -28,11 +32,11 @@ public class DepositAccount extends Asset{
 	}
 
 	public double getAnnualReturn() {
-		return (getReturnRate()/100) * totalBalance;
+		return (Math.exp(apr) - 1) * totalBalance;
 	}
 
 	public double getReturnRate() {
-		return (Math.exp(apr) - 1) * 100;
+		return getAnnualReturn()/totalBalance;
 	}
 
 	public void setPortValue(double portValue) {

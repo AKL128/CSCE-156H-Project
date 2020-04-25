@@ -1,11 +1,11 @@
 package com.tbf;
-/*
-*
-*
-*
-*
-*
-*/
+/**
+ * Author: Anthony luu, and Brett Berg
+ * Date: 2020/4/20
+ *
+ * This is a Node class that is part of the ADT implementation of Linked List class
+ *
+ */
 
 public class Node<T> {
 
